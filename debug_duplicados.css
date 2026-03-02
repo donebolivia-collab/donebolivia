@@ -1,0 +1,17 @@
+/* DEBUG - Resaltar duplicados */
+.product-card {
+    border: 2px solid red !important;
+    position: relative;
+}
+
+.product-card::before {
+    content: attr(data-product-id) " - " attr(class);
+    position: absolute;
+    top: -20px;
+    left: 0;
+    background: red;
+    color: white;
+    font-size: 10px;
+    padding: 2px 5px;
+    z-index: 9999;
+}

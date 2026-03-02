@@ -701,7 +701,18 @@ if (!empty($tienda['menu_items'])) {
             <?php endif; ?>
             
             <?php if (!empty($productos)): ?>
-                <?php foreach ($productos as $producto): ?>
+                <!-- DEBUG: CONTADOR DE PRODUCTOS -->
+                <div style="background: yellow; padding: 10px; margin: 10px 0;">
+                    <strong>DEBUG:</strong> 
+                    PHP encontró <?php echo count($productos); ?> productos | 
+                    IDs: <?php echo implode(', ', array_column($productos, 'id')); ?>
+                </div>
+                
+                <?php foreach ($productos as $index => $producto): ?>
+                    <!-- DEBUG: ÍNDICE Y ID -->
+                    <div style="background: #f0f0f0; padding: 5px; margin: 5px 0; font-size: 12px;">
+                        PRODUCTO #<?php echo $index; ?> | ID: <?php echo $producto['id']; ?> | <?php echo htmlspecialchars($producto['titulo']); ?>
+                    </div>
                     <!-- ENLACE SPA -->
                     <a href="/tienda_producto.php?slug=<?php echo htmlspecialchars($tienda['slug']); ?>&producto_id=<?php echo $producto['id']; ?>" 
                        class="product-card" 
