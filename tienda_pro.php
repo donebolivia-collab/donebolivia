@@ -124,9 +124,9 @@ try {
         $stmt_visitas->execute([$tienda['id']]);
     }
 
-    // 4. Obtener productos (Lógica 11:30 PM - Mantenemos mejoras de ordenamiento)
+    // 4. Obtener productos (SIN DUPLICADOS - VERSIÓN CORREGIDA)
     $stmt_productos = $db->prepare("
-        SELECT p.*,
+        SELECT DISTINCT p.*,
                (SELECT nombre_archivo FROM producto_imagenes
                 WHERE producto_id = p.id
                 ORDER BY es_principal DESC, orden ASC
@@ -135,6 +135,7 @@ try {
                 WHERE producto_id = p.id) AS badges
         FROM productos p
         WHERE p.usuario_id = ? AND p.activo = 1
+        GROUP BY p.id
         ORDER BY p.destacado DESC, p.fecha_publicacion DESC
     ");
     $stmt_productos->execute([$tienda['usuario_id']]);

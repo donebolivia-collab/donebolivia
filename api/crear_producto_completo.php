@@ -218,7 +218,7 @@ try {
                 throw new Exception('Imagen muy pesada: ' . $archivo['name'] . ' (máx 5MB)');
             }
 
-            $resultado = subirImagen($archivo, 'productos');
+            $resultado = subirImagen($archivo, 'productos', null, $producto_id);
 
             if (isset($resultado['success'])) {
                 $stmt = $db->prepare("
@@ -260,8 +260,8 @@ try {
         $stmt_del_imgs_ant = $db->prepare("DELETE FROM producto_imagenes WHERE producto_id = ?");
         $stmt_del_imgs_ant->execute([$producto_id_edicion]);
         
-        // Actualizar el producto_id para las nuevas imágenes
-        $producto_id = $producto_id_edicion;
+        // CORRECCIÓN: Mantener el producto_id correcto para las nuevas imágenes
+        // No sobreescribir $producto_id con $producto_id_edicion
         
         // Actualizar datos del producto existente
         $stmt_update = $db->prepare("
