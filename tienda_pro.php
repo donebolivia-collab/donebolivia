@@ -721,6 +721,14 @@ if (!empty($tienda['menu_items'])) {
                     <div style="background: #f0f0f0; padding: 5px; margin: 5px 0; font-size: 12px;">
                         PRODUCTO #<?php echo $index; ?> | ID: <?php echo $producto['id']; ?> | <?php echo htmlspecialchars($producto['titulo']); ?>
                     </div>
+                    
+                    <!-- FORZAR LIMPIEZA DE VARIABLE -->
+                    <?php 
+                        $producto_actual = $producto; // Copia explícita
+                        unset($producto); // Limpiar referencia
+                        $producto = $producto_actual; // Restaurar
+                    ?>
+                    
                     <!-- ENLACE SPA -->
                     <a href="/tienda_producto.php?slug=<?php echo htmlspecialchars($tienda['slug']); ?>&producto_id=<?php echo $producto['id']; ?>" 
                        class="product-card" 
