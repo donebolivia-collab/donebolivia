@@ -141,6 +141,14 @@ try {
     $stmt_productos->execute([$tienda['usuario_id']]);
     $productos = $stmt_productos->fetchAll();
     
+    // DEBUG: Mostrar array completo antes de procesar
+    echo "<div style='background: orange; padding: 10px; margin: 10px 0;'>";
+    echo "<strong>DEBUG ARRAY COMPLETO:</strong><br>";
+    echo "<pre>";
+    var_dump($productos);
+    echo "</pre>";
+    echo "</div>";
+    
     // Procesar badges para cada producto
     foreach ($productos as &$producto) {
         if (!empty($producto['badges'])) {
