@@ -1147,6 +1147,9 @@ if (!empty($tienda['menu_items'])) {
 
     <!-- SCRIPT WIDGET -->
     <script src="/assets/js/tienda-pro.js?v=<?php echo time(); ?>"></script>
+    
+    <!-- COMENTADO main.js PARA EVITAR CONFLICTO -->
+    <!-- <script src="/assets/js/main.js?v=fix-validation-2" defer></script> -->
 
     <script>
         // --- LÓGICA DE NAVBAR STYLE (PÚBLICA Y EDITOR) ---
