@@ -32,17 +32,55 @@ if (!$own) {
 
 $done = false;
 try {
-    // Realizar HARD DELETE directamente
-    // Paso 1: Eliminar imágenes relacionadas con la publicación
-    $db->prepare("DELETE FROM producto_imagenes WHERE producto_id=?")->execute([$id]);
-
-    // Paso 2: Eliminar la publicación de la tabla 'productos'
-    $db->prepare("DELETE FROM productos WHERE id=? AND usuario_id=?")->execute([$id, $_SESSION['usuario_id']]);
-    $done = true; // Si llegamos aquí, la eliminación fue exitosa
+    $db->beginTransaction();
+    
+    // PASO 1: Obtener todas las imágenes asociadas ANTES de eliminar registros
+    $stmt_imgs = $db->prepare("SELECT nombre_archivo FROM producto_imagenes WHERE producto_id = ?");
+    $stmt_imgs->execute([$id]);
+    $imagenes = $stmt_imgs->fetchAll(PDO::FETCH_COLUMN);
+    
+    // PASO 2: Eliminar archivos físicos del servidor
+    $imagenes_eliminadas = 0;
+    foreach ($imagenes as $imagen) {
+        $ruta_completa = __DIR__ . '/../uploads/' . $imagen;
+        if (file_exists($ruta_completa)) {
+            if (unlink($ruta_completa)) {
+                $imagenes_eliminadas++;
+            } else {
+                error_log("No se pudo eliminar archivo: " . $ruta_completa);
+            }
+        }
+    }
+    
+    // PASO 3: Eliminar registros de base de datos en orden correcto (respetando FK)
+    // 3.1 Eliminar imágenes de la BD
+    $stmt_del_imgs = $db->prepare("DELETE FROM producto_imagenes WHERE producto_id = ?");
+    $stmt_del_imgs->execute([$id]);
+    
+    // 3.2 Eliminar badges asociados
+    $stmt_del_badges = $db->prepare("DELETE FROM producto_badges WHERE producto_id = ?");
+    $stmt_del_badges->execute([$id]);
+    
+    // 3.3 Eliminar reportes asociados
+    $stmt_del_reports = $db->prepare("DELETE FROM denuncias WHERE producto_id = ?");
+    $stmt_del_reports->execute([$id]);
+    
+    // 3.4 Eliminar el producto final
+    $stmt_del_producto = $db->prepare("DELETE FROM productos WHERE id = ? AND usuario_id = ?");
+    $stmt_del_producto->execute([$id, $_SESSION['usuario_id']]);
+    
+    $db->commit();
+    $done = true;
+    
+    // Auditoría de eliminación para monitoreo
+    error_log("Producto ID $id eliminado completamente por usuario {$_SESSION['usuario_id']}. Imágenes físicas eliminadas: $imagenes_eliminadas");
+    
 } catch (Exception $e) {
-    // Manejar cualquier error de la base de datos durante la eliminación
-    // Puedes agregar un error_log aquí para registrar el error si lo deseas
-    // error_log("Error al eliminar publicación ID " . $id . ": " . $e->getMessage());
+    if ($db->inTransaction()) {
+        $db->rollBack();
+    }
+    error_log("Error CRÍTICO eliminando publicación ID $id: " . $e->getMessage());
+    $done = false;
 }
 
 redireccionar('/mi/publicaciones.php?msg=' . ($done ? 'deleted' : 'fail'));

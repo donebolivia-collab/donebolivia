@@ -72,8 +72,8 @@ function verificarPassword($password, $hash) {
     return password_verify($password, $hash);
 }
 
-// Subir imagen (OPTIMIZADA PROFESIONALMENTE A WEBP)
-function subirImagen($archivo, $carpeta = 'productos', $rutaBase = null) {
+// Subir imagen (OPTIMIZADA PROFESIONALMENTE A WEBP - CON DETECCIÓN DE DUPLICADOS)
+function subirImagen($archivo, $carpeta = 'productos', $rutaBase = null, $producto_id = null) {
     // Si no se define ruta base, usar UPLOAD_PATH por defecto
     $base = $rutaBase ?? UPLOAD_PATH;
     
@@ -100,6 +100,30 @@ function subirImagen($archivo, $carpeta = 'productos', $rutaBase = null) {
     $limitSize = 20 * 1024 * 1024; // 20MB Límite duro
     if ($archivo['size'] > $limitSize) {
         return ['error' => "El archivo es demasiado grande (Máximo 20MB)"];
+    }
+    
+    // NUEVO: Calcular hash del archivo para detectar duplicados
+    $hash_archivo = hash_file('sha256', $archivo['tmp_name']);
+    
+    // NUEVO: Verificar si ya existe un archivo con el mismo hash
+    if ($carpeta === 'productos' && $producto_id) {
+        $stmt = getDB()->prepare("
+            SELECT pi.nombre_archivo 
+            FROM producto_imagenes pi 
+            JOIN productos p ON pi.producto_id = p.id
+            WHERE p.usuario_id = ? AND pi.hash_archivo = ?
+        ");
+        $stmt->execute([$_SESSION['usuario_id'] ?? 0, $hash_archivo]);
+        $duplicado = $stmt->fetch();
+        
+        if ($duplicado) {
+            return [
+                'success' => true, 
+                'archivo' => $duplicado['nombre_archivo'],
+                'duplicado' => true,
+                'mensaje' => 'Imagen ya existente (reutilizada)'
+            ];
+        }
     }
     
     // Generar nombre único .webp
@@ -170,22 +194,39 @@ function subirImagen($archivo, $carpeta = 'productos', $rutaBase = null) {
             imagedestroy($imagenOriginal);
             imagedestroy($imagenFinal);
             
-            return ['success' => true, 'archivo' => $subcarpeta . $nombreArchivo];
+            // NUEVO: Guardar hash en la base de datos para futuras detecciones
+            if ($carpeta === 'productos' && $producto_id) {
+                try {
+                    $db = getDB();
+                    $stmt = $db->prepare("
+                        UPDATE producto_imagenes 
+                        SET hash_archivo = ? 
+                        WHERE nombre_archivo = ? AND producto_id = ?
+                    ");
+                    $stmt->execute([$hash_archivo, $subcarpeta . $nombreArchivo, $producto_id]);
+                } catch (Exception $e) {
+                    error_log("Error guardando hash de imagen: " . $e->getMessage());
+                }
+            }
+            
+            return [
+                'success' => true, 
+                'archivo' => $subcarpeta . $nombreArchivo,
+                'hash' => $hash_archivo,
+                'duplicado' => false
+            ];
         } else {
-            throw new Exception("Error al guardar WebP.");
+            throw new Exception("Error al guardar la imagen como WebP.");
         }
 
     } catch (Exception $e) {
-        // Fallback: Si falla la conversión, intentamos mover el original tal cual (mejor eso que nada)
-        // Log del error para admin
-        error_log("Error conversión WebP: " . $e->getMessage());
+        // Limpiar memoria en caso de error
+        if (isset($imagenOriginal)) imagedestroy($imagenOriginal);
+        if (isset($imagenFinal)) imagedestroy($imagenFinal);
         
-        $extensionOriginal = pathinfo($archivo['name'], PATHINFO_EXTENSION);
-        $nombreFallback = $nombreBase . '.' . $extensionOriginal;
-        $rutaFallback = $directorioDestino . $nombreFallback;
-        
-        if (move_uploaded_file($archivo['tmp_name'], $rutaFallback)) {
-            return ['success' => true, 'archivo' => $subcarpeta . $nombreFallback];
+        // Eliminar archivo temporal si se creó
+        if (file_exists($rutaCompleta)) {
+            unlink($rutaCompleta);
         } else {
             return ['error' => 'Error crítico al subir el archivo'];
         }

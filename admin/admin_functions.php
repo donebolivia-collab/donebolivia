@@ -239,17 +239,86 @@ function cambiarEstadoProducto($producto_id, $activo) {
     return $result;
 }
 
-// Eliminar producto
+// Eliminar producto (COMPLETO - Archivos + BD)
 function eliminarProducto($producto_id) {
     $db = getDB();
-    $stmt = $db->prepare("DELETE FROM productos WHERE id = ?");
-    $result = $stmt->execute([$producto_id]);
-
-    if ($result) {
-        registrarAccionAdmin('eliminar_producto', 'productos', $producto_id);
+    
+    try {
+        $db->beginTransaction();
+        
+        // PASO 1: Obtener información del producto para auditoría
+        $stmt_info = $db->prepare("SELECT titulo, usuario_id FROM productos WHERE id = ?");
+        $stmt_info->execute([$producto_id]);
+        $producto_info = $stmt_info->fetch();
+        
+        if (!$producto_info) {
+            throw new Exception("Producto no encontrado");
+        }
+        
+        // PASO 2: Obtener y eliminar imágenes físicas
+        $stmt_imgs = $db->prepare("SELECT nombre_archivo FROM producto_imagenes WHERE producto_id = ?");
+        $stmt_imgs->execute([$producto_id]);
+        $imagenes = $stmt_imgs->fetchAll(PDO::FETCH_COLUMN);
+        
+        $imagenes_eliminadas = 0;
+        foreach ($imagenes as $imagen) {
+            $ruta_completa = UPLOAD_PATH . $imagen;
+            if (file_exists($ruta_completa)) {
+                if (unlink($ruta_completa)) {
+                    $imagenes_eliminadas++;
+                } else {
+                    error_log("Admin: No se pudo eliminar archivo: " . $ruta_completa);
+                }
+            }
+        }
+        
+        // PASO 3: Eliminar registros en orden correcto (respetando integridad referencial)
+        // 3.1 Eliminar imágenes de BD
+        $stmt_del_imgs = $db->prepare("DELETE FROM producto_imagenes WHERE producto_id = ?");
+        $stmt_del_imgs->execute([$producto_id]);
+        
+        // 3.2 Eliminar badges asociados
+        $stmt_del_badges = $db->prepare("DELETE FROM producto_badges WHERE producto_id = ?");
+        $stmt_del_badges->execute([$producto_id]);
+        
+        // 3.3 Eliminar reportes asociados
+        $stmt_del_reports = $db->prepare("DELETE FROM denuncias WHERE producto_id = ?");
+        $stmt_del_reports->execute([$producto_id]);
+        
+        // 3.4 Eliminar favoritos asociados
+        $stmt_del_favs = $db->prepare("DELETE FROM favoritos WHERE producto_id = ?");
+        $stmt_del_favs->execute([$producto_id]);
+        
+        // 3.5 Eliminar registro de visitas asociadas
+        $stmt_del_visitas = $db->prepare("DELETE FROM visitas WHERE pagina LIKE ?");
+        $stmt_del_visitas->execute(["%producto_id={$producto_id}%"]);
+        
+        // 3.6 Eliminar el producto final
+        $stmt_del_producto = $db->prepare("DELETE FROM productos WHERE id = ?");
+        $result = $stmt_del_producto->execute([$producto_id]);
+        
+        $db->commit();
+        
+        // Registrar acción administrativa con detalles completos
+        registrarAccionAdmin(
+            'eliminar_producto_completo', 
+            'productos', 
+            $producto_id, 
+            "Producto: '{$producto_info['titulo']}' | Usuario ID: {$producto_info['usuario_id']} | Imágenes eliminadas: {$imagenes_eliminadas}"
+        );
+        
+        // Auditoría detallada
+        error_log("ADMIN: Producto ID {$producto_id} eliminado completamente. Imágenes físicas eliminadas: {$imagenes_eliminadas}");
+        
+        return $result;
+        
+    } catch (Exception $e) {
+        if ($db->inTransaction()) {
+            $db->rollBack();
+        }
+        error_log("ADMIN: Error CRÍTICO eliminando producto {$producto_id}: " . $e->getMessage());
+        return false;
     }
-
-    return $result;
 }
 
 // Obtener configuración

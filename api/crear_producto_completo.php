@@ -90,6 +90,27 @@ try {
         throw new Exception('Máximo 5 imágenes permitidas');
     }
 
+    // NUEVO: Detectar si es edición o creación para limpiar imágenes anteriores
+    $es_edicion = false;
+    $imagenes_anteriores = [];
+    
+    // Verificar si viene de un formulario de edición (campo oculto producto_id)
+    $producto_id_edicion = isset($_POST['producto_id_edicion']) ? (int)$_POST['producto_id_edicion'] : 0;
+    
+    if ($producto_id_edicion > 0) {
+        // ES EDICIÓN - Obtener imágenes existentes para eliminarlas
+        $stmt_check = $db->prepare("SELECT id FROM productos WHERE id = ? AND usuario_id = ?");
+        $stmt_check->execute([$producto_id_edicion, $usuario_id]);
+        if ($stmt_check->fetch()) {
+            $es_edicion = true;
+            
+            // Obtener imágenes existentes
+            $stmt_imgs_ant = $db->prepare("SELECT nombre_archivo FROM producto_imagenes WHERE producto_id = ?");
+            $stmt_imgs_ant->execute([$producto_id_edicion]);
+            $imagenes_anteriores = $stmt_imgs_ant->fetchAll(PDO::FETCH_COLUMN);
+        }
+    }
+
     // Obtener nombres de ubicación
     $departamentos = obtenerDepartamentosBolivia();
     $todosMunicipios = obtenerTodosMunicipiosConCodigos();
@@ -221,13 +242,62 @@ try {
         throw new Exception('No se pudo subir ninguna imagen');
     }
 
+    // NUEVO: Eliminar imágenes antiguas si es edición
+    if ($es_edicion && !empty($imagenes_anteriores)) {
+        $imagenes_eliminadas_old = 0;
+        foreach ($imagenes_anteriores as $img_antigua) {
+            $ruta_antigua = __DIR__ . '/../uploads/' . $img_antigua;
+            if (file_exists($ruta_antigua)) {
+                if (unlink($ruta_antigua)) {
+                    $imagenes_eliminadas_old++;
+                } else {
+                    error_log("Edición: No se pudo eliminar imagen antigua: " . $ruta_antigua);
+                }
+            }
+        }
+        
+        // Eliminar registros de imágenes antiguas de BD
+        $stmt_del_imgs_ant = $db->prepare("DELETE FROM producto_imagenes WHERE producto_id = ?");
+        $stmt_del_imgs_ant->execute([$producto_id_edicion]);
+        
+        // Actualizar el producto_id para las nuevas imágenes
+        $producto_id = $producto_id_edicion;
+        
+        // Actualizar datos del producto existente
+        $stmt_update = $db->prepare("
+            UPDATE productos SET 
+                categoria_id = ?, subcategoria_id = ?, categoria_tienda = ?,
+                titulo = ?, descripcion = ?, precio = ?, estado = ?,
+                departamento_codigo = ?, municipio_codigo = ?,
+                departamento_nombre = ?, municipio_nombre = ?,
+                fecha_actualizacion = NOW()
+            WHERE id = ? AND usuario_id = ?
+        ");
+        
+        $stmt_update->execute([
+            $categoria_id, $subcategoria_id, $categoria_tienda,
+            $titulo, $descripcion, $precio, $estado,
+            $departamento_codigo, $municipio_codigo,
+            $departamento_nombre, $municipio_nombre,
+            $producto_id, $usuario_id
+        ]);
+        
+        // Eliminar badges antiguos
+        $stmt_del_badges_ant = $db->prepare("DELETE FROM producto_badges WHERE producto_id = ?");
+        $stmt_del_badges_ant->execute([$producto_id]);
+        
+        error_log("Edición producto {$producto_id}: Imágenes antiguas eliminadas: {$imagenes_eliminadas_old}");
+    }
+
     $db->commit();
 
     echo json_encode([
         'success' => true,
-        'message' => 'Producto creado correctamente',
+        'message' => $es_edicion ? 'Producto actualizado correctamente' : 'Producto creado correctamente',
         'producto_id' => $producto_id,
-        'imagenes_subidas' => $imagenes_subidas
+        'imagenes_subidas' => $imagenes_subidas,
+        'es_edicion' => $es_edicion,
+        'imagenes_eliminadas' => $es_edicion ? ($imagenes_eliminadas_old ?? 0) : 0
     ]);
 
 } catch (Exception $e) {
