@@ -149,6 +149,8 @@ window.toggleAccordion = function(header) {
         item.classList.add('open');
         syncAllSettings();
         setTimeout(syncAllSettings, 150);
+    } else {
+        item.classList.remove('open');
     }
 };
 
