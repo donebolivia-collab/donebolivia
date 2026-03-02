@@ -1,0 +1,53 @@
+# Archivos de configuración sensibles
+.env
+.env.local
+.env.production
+
+# Archivos subidos por usuarios
+uploads/*
+!uploads/.htaccess
+
+# Cache
+cache/*
+!cache/.gitkeep
+!cache/index.php
+
+# Logs
+*.log
+logs/*
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Composer
+vendor/
+composer.lock
+
+# Node modules
+node_modules/
+package-lock.json
+
+# Temporales
+tmp/*
+temp/*
+*.tmp
+*.bak
+*_backup.*
+*_old.*
+
+# Backups de base de datos
+*.sql
+!sql/schema.sql
+
+# Archivos de configuración locales
+config/local.php
+.claude/

@@ -1,0 +1,99 @@
+# Done! Bolivia - Configuración PRO (Rendimiento + SEO + Seguridad)
+
+# Habilitar RewriteEngine
+Options -MultiViews
+RewriteEngine On
+RewriteBase /
+
+# ----------------------------------------------------------------------
+# | RENDIMIENTO PRO (Compresión y Caché)                               |
+# ----------------------------------------------------------------------
+
+# 1. Habilitar Compresión GZIP (Reduce tamaño hasta 70%)
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE application/javascript
+  AddOutputFilterByType DEFLATE application/rss+xml
+  AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
+  AddOutputFilterByType DEFLATE application/x-font
+  AddOutputFilterByType DEFLATE application/x-font-opentype
+  AddOutputFilterByType DEFLATE application/x-font-otf
+  AddOutputFilterByType DEFLATE application/x-font-truetype
+  AddOutputFilterByType DEFLATE application/x-font-ttf
+  AddOutputFilterByType DEFLATE application/x-javascript
+  AddOutputFilterByType DEFLATE application/xhtml+xml
+  AddOutputFilterByType DEFLATE application/xml
+  AddOutputFilterByType DEFLATE font/opentype
+  AddOutputFilterByType DEFLATE font/otf
+  AddOutputFilterByType DEFLATE font/ttf
+  AddOutputFilterByType DEFLATE image/svg+xml
+  AddOutputFilterByType DEFLATE image/x-icon
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE text/html
+  AddOutputFilterByType DEFLATE text/javascript
+  AddOutputFilterByType DEFLATE text/plain
+  AddOutputFilterByType DEFLATE text/xml
+</IfModule>
+
+# 2. Caché del Navegador (Evita re-descargas innecesarias)
+<IfModule mod_expires.c>
+  ExpiresActive On
+  
+  # Imágenes: 1 año (larga duración)
+  ExpiresByType image/jpg "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
+  
+  # CSS y JS: 1 mes (se actualizan vía versión ?v=...)
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType text/javascript "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  
+  # Fuentes: 1 año
+  ExpiresByType application/vnd.ms-fontobject "access plus 1 year"
+  ExpiresByType application/x-font-ttf "access plus 1 year"
+  ExpiresByType application/x-font-opentype "access plus 1 year"
+  ExpiresByType application/x-font-woff "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  
+  # HTML: 0 segundos (siempre fresco para validar sesión)
+  ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
+
+# ----------------------------------------------------------------------
+# | RUTAS AMIGABLES                                                    |
+# ----------------------------------------------------------------------
+
+# 1. Quitar extensión .php (Redirección externa 301 para SEO)
+# IMPORTANTE: Solo redirigir si es método GET/HEAD para no perder datos POST
+RewriteCond %{REQUEST_METHOD} ^(GET|HEAD)$ [NC]
+RewriteCond %{THE_REQUEST} \s/+(.+?)\.php[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L,NE]
+
+# 2. Añadir extensión .php internamente (Invisible)
+# Si el usuario pide /ruta/archivo y existe /ruta/archivo.php
+RewriteCond %{DOCUMENT_ROOT}/$1.php -f
+RewriteRule ^(.+?)/?$ $1.php [L]
+
+# URLs amigables para productos de tienda: /tienda/slug/producto/123 -> /tienda_producto.php?slug=slug&producto_id=123
+RewriteRule ^tienda/([a-z0-9\-]+)/producto/([0-9]+)/?$ tienda_producto.php?slug=$1&producto_id=$2 [L,QSA]
+
+# URLs amigables para tiendas: /tienda/slug -> /tienda_pro.php?slug=slug
+RewriteRule ^tienda/([a-z0-9\-]+)/?$ tienda_pro.php?slug=$1 [L,QSA]
+
+# ----------------------------------------------------------------------
+# | SEGURIDAD                                                          |
+# ----------------------------------------------------------------------
+
+# Prevenir acceso directo a archivos sensibles
+<FilesMatch "\.(env|sql|md)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Proteger carpetas sensibles
+RedirectMatch 403 ^/config/
+RedirectMatch 403 ^/sql/

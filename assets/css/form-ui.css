@@ -1,0 +1,72 @@
+.form-section{background:#fff;padding:1.25rem 1.25rem;border:1px solid var(--border-color);border-radius:12px;margin-bottom:1rem}
+.form-section h4{color:var(--secondary-color);margin-bottom:1rem;font-weight:600;border:none;padding:0}
+.image-upload-container{position:relative;border:2px dashed #d6d6d6 !important;border-radius:12px;padding:2.5rem 2rem;text-align:center;transition:var(--transition);cursor:pointer;min-height:200px;background:#fafafa;display:flex;align-items:center;justify-content:center}
+.image-upload-container:hover{border-color:var(--brand) !important;background:#fff5ed}
+.image-upload-container.drag-over{border-color:var(--brand) !important;background-color:rgba(255,106,0,.08);transform:scale(1.01)}
+.image-upload-container input[type="file"]{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:2}
+.upload-help{pointer-events:none;z-index:1;position:relative}
+.upload-help i{font-size:3.5rem;color:var(--brand);margin-bottom:1rem;display:block;opacity:.7}
+.upload-help p{font-size:1.05rem;margin-bottom:.5rem;color:var(--secondary-color);font-weight:500}
+.upload-help small{color:#6c757d;font-size:.875rem}
+.image-preview{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1rem;margin-top:1rem}
+.preview-image{position:relative;border-radius:var(--border-radius);overflow:hidden;box-shadow:var(--shadow);cursor:move}
+.preview-image.dragging{opacity:.6}
+.preview-image .cover{position:absolute;top:6px;left:6px;background:var(--brand);color:#fff;border-radius:6px;padding:2px 6px;font-size:.75rem}
+.preview-image img{width:100%;height:150px;object-fit:cover}
+.btn-remove-image{position:absolute;top:5px;right:5px;background:var(--danger);color:var(--white);border:none;border-radius:50%;width:25px;height:25px;display:flex;align-items:center;justify-content:center;font-size:.8rem;cursor:pointer}
+.form-actions{display:flex;gap:1rem;justify-content:center;margin-top:2rem}
+@media(max-width:768px){.form-actions{flex-direction:column}.form-actions .btn{width:100%}.image-preview{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}}
+
+/* Wizard */
+.wizard-steps{display:flex;gap:6px;justify-content:flex-start;margin:.25rem 0 1rem}
+.wizard-step{padding:0;border:none;background:transparent;color:var(--gray);font-weight:500}
+.wizard-step .num{display:none}
+.wizard-step.active{color:var(--secondary-color)}
+.wizard-nav{display:flex;justify-content:flex-end;gap:.75rem;margin-top:1rem}
+
+/* Hero icon above titles - same pattern as registro: sin fondo, color brand */
+.form-hero-icon{display:inline-block;color:var(--brand);margin:0 auto .5rem auto;line-height:1}
+.form-hero-icon i{font-size:34px}
+.form-hero-icon svg{width:34px;height:34px;display:block}
+
+/* Ritmo vertical tipo Registro */
+.form-title{margin-bottom:12px}
+.form-group{margin-bottom:12px}
+.form-group .form-label{margin-bottom:6px}
+textarea.form-control{min-height:140px}
+
+/* ===== Wizard: pulcritud global ===== */
+/* Alturas uniformes en todos los pasos (sin afectar textarea) */
+.form-section .form-control:not(textarea),
+.form-section .form-select,
+.form-section .input-group-text{ height:42px; padding:8px 12px; line-height:1.2; }
+.form-section .input-group .form-control:not(textarea){ height:42px; }
+
+/* Ritmo vertical coherente */
+.form-section .form-text{ display:block; margin:6px 0 10px; }
+.form-section label + .form-select,
+.form-section label + .form-control{ margin-top:0; }
+.form-section label[for="ciudad_id"]{ margin-top:6px; }
+.contact-note{ color:#666; font-size:.925rem; margin:.4rem 0 1rem; }
+
+/* Foco consistente (accesible) */
+.form-section .form-control:focus,
+.form-section .form-select:focus{ box-shadow:0 0 0 0.2rem rgba(255,106,0,.18); border-color: var(--brand); outline: none; }
+
+/* Reservar espacio para feedback en todo el wizard (evita saltos) */
+/* Por defecto oculto pero ocupando espacio; visible solo en error */
+.form-section .invalid-feedback{ display:block; height:18px; line-height:18px; margin:4px 0 0; visibility:hidden; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; }
+/* Mostrar cuando el campo es inválido y el form fue validado o el campo tiene .is-invalid */
+.was-validated .form-section .form-control:invalid ~ .invalid-feedback,
+.was-validated .form-section .form-select:invalid ~ .invalid-feedback,
+.form-section .is-invalid ~ .invalid-feedback{ visibility:visible; }
+/* Checkbox (todos los pasos) */
+.form-section .form-check .invalid-feedback{ display:block; min-height:18px; margin:4px 0 0; visibility:hidden; }
+.was-validated .form-section .form-check-input:invalid ~ .invalid-feedback,
+.form-section .form-check-input.is-invalid ~ .invalid-feedback{ visibility:visible; }
+
+/* Alineación perfecta de la fila Precio/Estado cuando aparece error */
+.form-section[data-step="4"] .row.align-items-end .form-group{ position:relative; padding-bottom:22px; }
+.form-section[data-step="4"] .row.align-items-end .form-group .invalid-feedback{
+  position:absolute; left:0; right:0; bottom:0; margin:0; height:18px; line-height:18px;
+}

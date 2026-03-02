@@ -1,0 +1,112 @@
+/* assets/css/home.css - Tarjetas de categorías con imagen de fondo y etiqueta sobrepuesta */
+.yx-cats{ 
+  display: grid; 
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+  gap: 16px; 
+  padding: 16px; 
+  margin: 0 auto; /* centrar sección */
+}
+.yx-cats.yx-cats--compact{
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)) !important;
+  gap: 12px !important;
+}
+/* Desktop: exactamente 4 columnas (4x2) */
+@media (min-width: 992px){
+  .yx-cats.yx-cats--compact{ grid-template-columns: repeat(4, minmax(0, 1fr)) !important; max-width: 800px; }
+}
+@media (max-width: 992px){
+  .yx-cats.yx-cats--compact{ grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)) !important; }
+}
+@media (max-width: 480px){
+  .yx-cats.yx-cats--compact{ grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
+}
+.yx-card { 
+  position: relative; 
+  display: flex; 
+  align-items: flex-end; 
+  justify-content: center; 
+  aspect-ratio: 4 / 3; 
+  border-radius: 14px; 
+  overflow: hidden; 
+  text-decoration: none; 
+  background: #f6f6f6; 
+  box-shadow: 0 1px 2px rgba(0,0,0,.05); 
+  transition: transform .12s ease, box-shadow .12s ease; 
+  background-image: var(--bg, none); 
+  background-size: cover; 
+  background-position: center; 
+}
+.yx-card::before{ /* velo suave */
+  content: ""; 
+  position: absolute; inset: 0; 
+  background: linear-gradient(180deg, rgba(255,255,255,.55) 0%, rgba(0,0,0,.18) 100%);
+}
+.yx-card .ico { display: none; }
+.yx-card .lbl { 
+  position: relative; 
+  z-index: 1; 
+  margin: 10px 12px; 
+  font-weight: 600; 
+  color: #1f2328; 
+  background: rgba(255,255,255,.82); 
+  padding: 6px 10px; 
+  border-radius: 10px; 
+  line-height: 1; 
+}
+.yx-card:hover{ transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.08); }
+
+/* Responsive tweaks */
+@media (max-width: 480px){
+  .yx-cats{ grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 12px; }
+}
+
+/* ===== Modo caption (solo Electrodomésticos) ===== */
+.yx-card.yx-card--caption{
+  position: relative;
+  background: #fff;           /* fondo blanco detrás de PNG */
+  background-image: none;     /* sin fondo */
+}
+.yx-card.yx-card--caption::before{ display: none; }
+.yx-card.yx-card--caption .ico{ display: none; }
+.yx-card.yx-card--caption .lbl{ display: none; }
+
+/* Layout determinista: zona de imagen (arriba) y zona de texto (abajo) */
+.yx-card.yx-card--caption .cap-thumb{
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 38px; /* altura fija para la banda del texto */
+  display: flex;
+  align-items: flex-end;      /* la base de la imagen se alinea con el borde inferior de cap-thumb */
+  justify-content: center;
+  padding: 6px;               /* respiración uniforme */
+}
+.yx-card.yx-card--bg-gray{ background: #F2F3F5; }
+.yx-card.yx-card--caption .cap-img{
+  max-width: 100%;
+  max-height: 100%;           /* ocupa toda la zona disponible hasta la base */
+  object-fit: contain;
+  display: block;
+}
+.yx-card.yx-card--caption .cap-label{
+  position: absolute;
+  left: 0; right: 0; bottom: 8px; /* banda inferior fija */
+  text-align: center;
+  font-weight: 600;
+  color: #1f2328;
+}
+
+/* Etiquetas un poco más compactas cuando el grid es compacto */
+.yx-cats.yx-cats--compact .yx-card.yx-card--caption .cap-label{
+  font-size: 13px;
+  padding: 5px 6px;
+}
+
+/* Ajuste específico: Vehículos (caption + fondo gris) */
+.yx-card.yx-card--caption.yx-card--bg-gray .cap-thumb{ padding: 4px; }
+.yx-card.yx-card--caption.yx-card--bg-gray .cap-label{ bottom: 10px; }
+
+/* Ajuste específico: Prendas (caption + fondo gris) */
+.yx-card.yx-card--caption.yx-card--bg-gray.yx-card--prendas .cap-thumb{ padding: 4px; }
+.yx-card.yx-card--caption.yx-card--bg-gray.yx-card--prendas .cap-label{ bottom: 10px; }
+
+/* Ajuste específico: Dispositivos (8px a los costados, centrado) */
+.yx-card.yx-card--caption.yx-card--bg-gray.yx-card--dispositivos .cap-thumb{ padding: 6px 8px; }

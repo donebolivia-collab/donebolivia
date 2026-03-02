@@ -1,0 +1,157 @@
+/* IMAGE UPPLIER UNIVERSAL - Estilo dropdowns */
+.image-uploader {
+    position: relative;
+    border: 2px dashed #cbd5e1;
+    border-radius: 8px;
+    background: #f8fafc;
+    cursor: pointer;
+    transition: all 0.2s;
+    overflow: hidden;
+}
+
+.image-uploader:hover {
+    border-color: var(--primary, #22226B);
+    background: #f0f9ff;
+}
+
+.image-uploader.has-image {
+    border-style: solid;
+    border-color: var(--primary, #22226B);
+    background: white;
+}
+
+.image-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+}
+
+.image-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    color: #94a3b8;
+    transition: opacity 0.2s;
+}
+
+.image-placeholder i {
+    font-size: 32px; /* Aumentado ligeramente para mayor protagonismo */
+    color: var(--primary, #22226B);
+    margin-bottom: 0; /* Eliminado margen inferior innecesario */
+}
+
+.image-placeholder span {
+    font-size: 13px;
+    font-weight: 500;
+    color: #475569;
+}
+
+.btn-delete-image {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 28px;
+    height: 28px;
+    background: #ef4444;
+    color: white;
+    border: 2px solid white;
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.2s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.btn-delete-image:hover {
+    background: #dc2626;
+    transform: scale(1.1);
+}
+
+.image-uploader.has-image .btn-delete-image {
+    display: flex;
+}
+
+.image-uploader.has-image .image-placeholder {
+    display: none;
+}
+
+.image-uploader.has-image .image-preview {
+    display: block;
+}
+
+/* Variantes de tamaño */
+.image-uploader.small {
+    width: 80px;
+    height: 80px;
+}
+
+.image-uploader.medium {
+    width: 200px;
+    height: 120px;
+}
+
+.image-uploader.large {
+    width: 100%;
+    height: 200px;
+}
+
+.image-uploader.square {
+    aspect-ratio: 1/1;
+}
+
+/* Mixin visual para fondo cuadriculado (DRY) */
+.image-uploader.landscape,
+.image-uploader.wide,
+.image-uploader.square {
+    background-image: 
+        linear-gradient(45deg, #f0f0f0 25%, transparent 25%), 
+        linear-gradient(-45deg, #f0f0f0 25%, transparent 25%), 
+        linear-gradient(45deg, transparent 75%, #f0f0f0 75%), 
+        linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    background-color: #ffffff;
+}
+
+.image-uploader.landscape {
+    width: 100%;
+    height: 90px;
+}
+
+.image-uploader.wide {
+    width: 100%;
+    height: 100px;
+}
+
+/* Aumento de tamaño para el Logo de Feria (Square) */
+.image-uploader.small {
+    width: 120px; /* Aumentado de 80px a 120px */
+    height: 120px; /* Aumentado de 80px a 120px */
+}
+
+.image-uploader.contain-mode .image-preview {
+    object-fit: contain;
+    background-color: transparent;
+    padding: 0; /* Sin padding, imagen al borde si es necesario */
+    box-sizing: border-box;
+}
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.image-uploader.loading .image-placeholder i {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}

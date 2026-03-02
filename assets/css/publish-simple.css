@@ -1,0 +1,326 @@
+/* CAMBALACHE - Formulario Simple */
+/* Ultra minimalista, sin ruido visual */
+
+.publish-container {
+    max-width: 680px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.publish-header {
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.publish-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #222;
+    margin: 0;
+}
+
+/* ALERTAS SIMPLES */
+.alert {
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    font-size: 14px;
+}
+
+.alert-error {
+    background: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+}
+
+/* SECCIONES */
+.form-section {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.form-section h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #222;
+    margin: 0 0 20px 0;
+}
+
+/* GRID DE FOTOS - ESTILO AVITO */
+.photo-upload {
+    width: 100%;
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.photo-add {
+    aspect-ratio: 1;
+    border: 2px dashed #d0d0d0;
+    border-radius: 8px;
+    background: #fafafa;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s;
+    color: #666;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.photo-add:hover {
+    border-color: #ff6b1a;
+    background: #fff8f5;
+    color: #ff6b1a;
+}
+
+.photo-add svg {
+    width: 32px;
+    height: 32px;
+}
+
+.photo-item {
+    aspect-ratio: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    border: 2px solid #e5e5e5;
+}
+
+.photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.photo-item .photo-remove {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 28px;
+    height: 28px;
+    background: rgba(0,0,0,0.7);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: all 0.2s;
+}
+
+.photo-item .photo-remove:hover {
+    background: #dc2626;
+    transform: scale(1.1);
+}
+
+.photo-item .photo-badge {
+    position: absolute;
+    bottom: 6px;
+    left: 6px;
+    background: #22c55e;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.photo-hint {
+    font-size: 13px;
+    color: #666;
+    margin: 0;
+}
+
+/* INPUTS SIMPLES */
+.input-group {
+    margin-bottom: 16px;
+}
+
+.input-group:last-child {
+    margin-bottom: 0;
+}
+
+.input-text,
+.input-select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1.5px solid #d0d0d0;
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: inherit;
+    transition: all 0.2s;
+    background: white;
+}
+
+.input-text:focus,
+.input-select:focus {
+    outline: none;
+    border-color: #ff6b1a;
+    box-shadow: 0 0 0 3px rgba(255, 107, 26, 0.1);
+}
+
+.input-text::placeholder {
+    color: #999;
+}
+
+textarea.input-text {
+    resize: vertical;
+    min-height: 120px;
+    font-family: inherit;
+}
+
+/* INPUT CON PREFIJO */
+.input-with-prefix {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-with-prefix .prefix {
+    position: absolute;
+    left: 16px;
+    font-weight: 600;
+    color: #666;
+    pointer-events: none;
+}
+
+.input-with-prefix input {
+    padding-left: 48px;
+}
+
+/* ROW DE INPUTS (2 columnas) */
+.input-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+/* BOTONES DE ACCIÓN */
+.form-actions {
+    margin-top: 24px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.btn-publish {
+    flex: 1;
+    padding: 16px 32px;
+    background: #ff6b1a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-publish:hover {
+    background: #e85e00;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 107, 26, 0.3);
+}
+
+.btn-publish:active {
+    transform: translateY(0);
+}
+
+.btn-cancel {
+    padding: 16px 24px;
+    color: #666;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    transition: color 0.2s;
+}
+
+.btn-cancel:hover {
+    color: #222;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .publish-container {
+        margin: 20px auto;
+        padding: 0 16px;
+    }
+
+    .publish-header h1 {
+        font-size: 24px;
+    }
+
+    .form-section {
+        padding: 20px 16px;
+        border-radius: 0;
+        box-shadow: none;
+        border-top: 1px solid #e5e5e5;
+        margin-bottom: 0;
+    }
+
+    .form-section h2 {
+        font-size: 16px;
+    }
+
+    .photo-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .input-row {
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .btn-cancel {
+        order: -1;
+    }
+}
+
+@media (max-width: 480px) {
+    .photo-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ESTADOS DE VALIDACIÓN */
+.input-text:invalid:not(:placeholder-shown),
+.input-select:invalid {
+    border-color: #fca5a5;
+}
+
+.input-text:valid:not(:placeholder-shown) {
+    border-color: #86efac;
+}
+
+/* ANIMACIONES SUAVES */
+.form-section {
+    animation: fadeInUp 0.3s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

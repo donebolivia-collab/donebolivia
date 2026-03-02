@@ -1,0 +1,10 @@
+# Esta carpeta está lista para badges personalizados
+# Coloca aquí tus archivos .png o .svg para personalizar los badges del sistema
+# 
+# Archivos esperados:
+# - envio_gratis.png (reemplaza badge de envío gratis)
+# - oferta.png (reemplaza badge de oferta)
+# - novedad.png (reemplaza badge de novedad)
+#
+# El sistema detectará automáticamente estos archivos y los usará
+# Si no existen, usará los diseños por defecto con FontAwesome

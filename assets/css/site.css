@@ -1,0 +1,48 @@
+/* Estilos base del sitio */
+:root{--brand:#ff6a00}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:#fff;color:#222}
+.topbar{background:var(--brand);padding:.6rem 0}
+.btn-top{background:#fff;color:var(--brand);font-weight:600;border:none;border-radius:.65rem;padding:.42rem .95rem;text-decoration:none}
+.user-name{color:#fff;font-weight:600;margin-right:.5rem}
+.hero{display:flex;flex-direction:column;align-items:center;margin-top:1.3rem;margin-bottom:1.2rem}
+.hero img{max-width:380px;height:auto}
+.search-hero{max-width:900px;margin-inline:auto}
+.search-hero input{border:2px solid var(--brand);border-radius:2rem;padding:.9rem 1.2rem}
+.category-card{border:1px solid rgba(255,106,0,.25);border-radius:1rem;padding:1.6rem;text-align:center;transition:transform .12s,box-shadow .12s}
+.category-card:hover{transform:translateY(-2px);box-shadow:0 4px 18px rgba(0,0,0,.06)}
+
+
+
+/* === Greeting Fix (CSS-only, profile-based selectors) ===
+   Aplica SOLO al saludo dentro del header (.topbar).
+   Detecta el enlace al perfil por href (mi/perfil/profile/account) o clases típicas.
+   NO afecta logo ni otros botones.
+*/
+:root{
+  --greet-bg: rgba(255,255,255,.96);
+  --greet-text: #ff7a00;
+  --greet-border: rgba(255,255,255,.85);
+  --greet-radius: 16px;
+}
+header .topbar a[href*="/mi"],
+header .topbar a[href^="mi"],
+header .topbar a[href*="mi/"],
+header .topbar a[href*="perfil"],
+header .topbar a[href*="profile"],
+header .topbar a[href*="account"],
+header .topbar .user,
+header .topbar .username,
+header .topbar .greeting,
+header .topbar span[title*="perfil"],
+header .topbar span[class*="user"]{
+  background: var(--greet-bg) !important;
+  color: var(--greet-text) !important;
+  border: 1px solid var(--greet-border) !important;
+  border-radius: var(--greet-radius) !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,.06) !important;
+  text-shadow: none !important;
+  padding: 0 .9rem !important;
+  height: 44px !important;
+  line-height: 1 !important;
+}
+

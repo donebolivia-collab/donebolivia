@@ -1,0 +1,637 @@
+/* =========================================
+   FERIA VIRTUAL DONE! - BENTO GRID UI 2026
+   ========================================= */
+
+:root {
+    --bg-app: #FFFFFF; /* Fondo Blanco Puro (antes gris Apple) */
+    --card-bg: #FFFFFF;
+    --text-primary: #1D1D1F;
+    --text-secondary: #86868B;
+    --accent-orange: #FF6B35;
+    
+    --radius-xl: 24px;  /* Borde de los Bloques Grandes */
+    --radius-md: 12px;  /* Borde de las Tiendas */
+    
+    --shadow-card: 0 4px 24px rgba(0,0,0,0.04);
+    --shadow-hover: 0 8px 32px rgba(0,0,0,0.08);
+}
+
+.feria-layout {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 20px 40px 60px 40px;
+}
+
+/* =========================================
+   0. TARJETA CENTRAL PRO (Inspiración One Key)
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+.feria-pro-card-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 20px 0 30px 0; /* Reducido drásticamente de 40px/60px */
+    padding: 0 20px;
+    margin-top: 0 !important; /* Forzar eliminación de margen superior */
+}
+
+.feria-pro-card {
+    background-color: #F1F5F9; 
+    border-radius: 20px;
+    padding: 24px 32px; /* Reducido aún más */
+    text-align: center;
+    max-width: 800px;
+    width: 100%;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0; /* Asegurar que no empuje hacia abajo */
+}
+
+/* Icono Principal ELIMINADO */
+.pro-card-icon {
+    display: none;
+}
+
+/* Título Serif Elegante */
+.pro-card-title {
+    font-family: 'Playfair Display', serif; /* Tipografía Serif elegante */
+    font-size: 2rem; /* Reducido de 2.5rem */
+    font-weight: 700;
+    color: #1e293b; /* Azul marino oscuro (Slate-800) */
+    margin: 0 0 8px 0; /* Reducido de 12px */
+    line-height: 1.2;
+}
+
+/* Descripción */
+.pro-card-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem; /* Reducido levemente */
+    color: black; /* Texto negro solicitado */
+    margin: 0 0 24px 0; /* Reducido de 36px */
+    max-width: 500px;
+    line-height: 1.5;
+}
+
+/* Barra de Herramientas Unificada */
+.pro-unified-bar {
+    background: white;
+    border-radius: 999px; /* Píldora */
+    display: flex;
+    align-items: center;
+    padding: 6px; /* Reducido de 8px */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    width: 100%;
+    max-width: 600px;
+    border: 1px solid #e2e8f0;
+    transition: all 0.2s ease;
+    position: relative; /* Contexto para el dropdown */
+    z-index: 50; /* Elevar sobre contenido */
+}
+
+.pro-unified-bar:focus-within {
+    border-color: var(--accent-orange); /* CAMBIO: Azul a Naranja */
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.15); /* CAMBIO: Sombra naranja suave */
+}
+
+/* Selector de Departamento */
+.pro-dept-wrapper {
+    position: relative;
+    height: 100%;
+}
+
+.pro-dept-trigger {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    cursor: pointer;
+    border-radius: 999px;
+    transition: background 0.2s;
+    user-select: none;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #334155; /* Slate-700 */
+}
+
+.pro-dept-trigger:hover {
+    background: #f8fafc;
+}
+
+.pro-dept-icon {
+    color: var(--accent-orange);
+    font-size: 1.1rem;
+}
+
+.pro-chevron {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    margin-left: 2px;
+}
+
+/* Separador Vertical */
+.pro-divider {
+    width: 1px;
+    height: 24px;
+    background: #cbd5e1;
+    margin: 0 8px;
+}
+
+/* Buscador */
+.pro-search-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 20px 0 12px;
+}
+
+.pro-search-icon {
+    color: #94a3b8;
+    font-size: 1rem;
+}
+
+.pro-search-input {
+    width: 100%;
+    border: none !important;
+    background: transparent !important;
+    outline: none !important;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    color: #1e293b;
+    padding: 8px 0;
+    flex: 1; /* Ocupar espacio disponible */
+}
+
+/* Estilos Micrófono Search (Clonado de index.php) */
+.voice-search-btn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #999;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.voice-search-btn:hover {
+    color: var(--accent-orange);
+    background-color: rgba(255, 107, 26, 0.1);
+}
+
+.voice-search-btn.listening {
+    color: var(--accent-orange);
+    background-color: rgba(255, 107, 26, 0.1);
+}
+
+.voice-ripple {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid var(--accent-orange);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.voice-search-btn.listening .voice-ripple {
+    animation: ripple-effect 1.5s infinite;
+}
+
+@keyframes ripple-effect {
+    0% {
+        width: 100%;
+        height: 100%;
+        opacity: 0.8;
+    }
+    100% {
+        width: 180%;
+        height: 180%;
+        opacity: 0;
+    }
+}
+
+.pro-search-input::placeholder {
+    color: #94a3b8;
+}
+
+/* Menú Dropdown (Heredado pero ajustado) */
+.dept-menu {
+    top: calc(100% + 12px);
+    border-radius: 16px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+    z-index: 9999 !important; /* Z-Index nuclear para forzar visibilidad */
+    background: white; 
+    text-align: left; 
+    display: none; /* Oculto por defecto */
+    position: absolute;
+    min-width: 220px; 
+    left: 0; 
+    overflow: visible; 
+    padding: 8px 0; 
+}
+
+/* Clase para mostrar el menú desde JS */
+.dept-menu.show-menu {
+    display: block !important;
+    animation: popIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+    from { opacity: 0; transform: translateY(-10px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.dept-item {
+    display: block;
+    padding: 10px 20px;
+    color: #334155;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: background 0.1s ease;
+    white-space: nowrap; /* Evitar saltos de línea */
+    cursor: pointer;
+}
+
+.dept-item:hover {
+    background-color: #f1f5f9;
+    color: var(--accent-orange);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .feria-pro-card {
+        padding: 32px 24px;
+    }
+    
+    .pro-card-title {
+        font-size: 2rem;
+    }
+    
+    .pro-unified-bar {
+        flex-direction: column;
+        border-radius: 20px;
+        padding: 12px;
+        gap: 12px;
+    }
+    
+    .pro-dept-wrapper, .pro-search-wrapper {
+        width: 100%;
+    }
+    
+    .pro-divider {
+        width: 100%;
+        height: 1px;
+        margin: 4px 0;
+    }
+    
+    .pro-dept-trigger {
+        justify-content: space-between;
+        width: 100%;
+    }
+}
+
+/* 2. BENTO GRID (El Layout Maestro) */
+.bento-grid {
+    display: grid;
+    /* Columnas flexibles pero con base sólida */
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    gap: 30px;
+}
+
+/* Bloques Grandes (Sectores) */
+.sector-block {
+    background: var(--card-bg);
+    border-radius: var(--radius-xl);
+    padding: 0;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    /* Borde Naranja Sólido Fino (1px) */
+    border: 1px solid var(--accent-orange); 
+    min-height: 400px;
+    overflow: hidden;
+}
+
+/* Header Híbrido: Texto + Imagen Lateral */
+.sector-header-split {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    background: white; /* Fondo blanco estable */
+    border-bottom: 1px solid var(--accent-orange); /* Borde NARANJA corporativo */
+    height: 140px; 
+    transition: background 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+/* Efecto Hover Moderno: Solo brillo sutil y Naranja Corporativo */
+.sector-block:hover {
+    transform: translateY(-4px); /* Elevación ligera */
+    box-shadow: 0 12px 40px rgba(0,0,0,0.12); /* Sombra difusa */
+    border-color: var(--accent-orange); /* Borde SIEMPRE NARANJA */
+}
+
+/* El header se mantiene blanco */
+.sector-block:hover .sector-header-split {
+    background: white;
+}
+
+.split-text-col {
+    flex: 1; 
+    width: 50%;
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+}
+
+.sector-title-pro {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.1;
+    transition: color 0.3s ease;
+}
+
+.sector-desc-pro {
+    font-size: 0.85rem;
+    color: var(--text-primary); /* Texto negro (antes gris) */
+    margin: 0;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    transition: color 0.3s ease;
+}
+
+/* Al hover, el título se mantiene sólido y profesional */
+.sector-block:hover .sector-title-pro {
+    color: var(--text-primary); /* ANTES: var(--accent-orange) -> AHORA: Fijo */
+}
+/* La descripción se mantiene gris para legibilidad */
+.sector-block:hover .sector-desc-pro {
+    color: var(--text-primary);
+}
+
+.split-image-col {
+    width: 50%; 
+    position: relative;
+    overflow: hidden;
+    /* Diseño Cuadrado Limpio (Sin recorte diagonal) */
+    /* clip-path: none; Eliminado */
+}
+
+.image-box {
+    width: 100%;
+    height: 100%;
+    overflow: hidden; 
+    position: relative;
+    background: #eff1f3; /* Gris 10% más oscuro para mejor contraste */
+    transition: transform 0.5s ease; /* Transición suave */
+}
+
+.image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    object-position: center;
+    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Movimiento cinematográfico lento */
+    will-change: transform;
+    display: block;
+    /* Truco 1: Ajuste SUAVE para no quemar la foto (solo limpieza ligera) */
+    filter: brightness(1.02) contrast(1.02);
+    /* Truco 2: Elimina el blanco de la foto y deja ver el gris de fondo */
+    mix-blend-mode: multiply; 
+}
+
+/* Efecto Hover: Imagen ESTÁTICA (Sin Zoom) */
+.sector-block:hover .image-box img {
+    transform: none; /* Eliminamos el zoom */
+}
+
+/* Eliminamos el zoom de la caja contenedora para evitar "tembleque" */
+.sector-block:hover .image-box {
+    transform: none; 
+}
+
+.view-all-pill {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(30, 41, 59, 0.7); /* Azul pizarra oscuro semitransparente (Slate 800) */
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: all 0.2s ease;
+    backdrop-filter: blur(4px);
+    z-index: 10;
+}
+
+.view-all-pill svg {
+    /* SVG hereda color automáticamente de currentColor */
+    transition: transform 0.2s ease;
+}
+
+/* Efecto Hover Bloque: Botón aparece */
+.sector-block:hover .view-all-pill {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Efecto Hover Botón: Se vuelve más oscuro */
+.view-all-pill:hover {
+    background: rgba(15, 23, 42, 0.9); /* Slate 900 casi sólido */
+    transform: scale(1.05);
+}
+
+/* Rejilla Interna con Padding */
+.stores-inner-grid {
+    padding: 0 24px 24px 24px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.store-item {
+    aspect-ratio: 1;
+    background: #FAFAFA;
+    border-radius: var(--radius-md);
+    border: 1px solid transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    text-decoration: none;
+    transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Tienda Ocupada (Real) */
+.store-item.real {
+    background: #fff;
+    border: 1px solid var(--accent-orange); /* BORDE NARANJA SIEMPRE */
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0; /* Eliminamos padding para que ocupe todo */
+    width: 100%;
+    height: 100%;
+    transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    overflow: hidden; /* Evitar desbordes */
+    cursor: pointer;
+    position: relative;
+}
+
+/* Efecto Hover Symbaloo: Elevación y Borde */
+.store-item.real:hover {
+    transform: translateY(-4px); /* Solo elevación vertical, SIN escala */
+    box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+    border-color: var(--accent-orange); /* MANTENER BORDE NARANJA AL HOVER */
+    z-index: 2; /* Sobreponerse a vecinos */
+}
+
+/* Click Activo */
+.store-item.real:active {
+    transform: scale(0.98);
+}
+
+.store-logo-wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 0; /* Eliminado padding para que ocupe todo */
+    overflow: hidden; /* Asegurar recorte */
+}
+
+.store-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Llenar todo el espacio disponible */
+    border-radius: 0; /* El borde lo da el contenedor */
+    /* Eliminada transición de transform para evitar zoom */
+}
+
+.store-item.real:hover .store-img {
+    transform: none; /* ELIMINADO ZOOM DE IMAGEN */
+}
+
+.store-label {
+    font-size: 0.75rem; /* Texto un poco más grande */
+    font-weight: 700;
+    color: #4b5563;
+    text-align: center;
+    line-height: 1.1;
+    width: 100%;
+    padding: 0 4px 8px 4px; /* Espacio abajo */
+    transition: color 0.3s;
+}
+
+.store-item.real:hover .store-label {
+    color: var(--accent-orange);
+}
+
+/* Estado Vacío: Disponible */
+.store-item.empty {
+    background-color: #ffffff; 
+    border: 1px solid rgba(255, 107, 53, 0.4); /* Borde SÓLIDO (antes dashed) */
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.empty-plus {
+    display: none; /* OCULTAR CRUZ */
+}
+
+.empty-text {
+    font-size: 0.75rem; /* Un poco más grande para llenar */
+    font-weight: 700;
+    color: #9ca3af; 
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.store-item.empty:hover {
+    background: #FFF;
+    border-color: var(--accent-orange);
+    border-style: solid;
+    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.15);
+}
+
+/* Animación de carga optimizada (Sin JS) */
+.fade-in-fast {
+    animation: fadeInImage 0.3s ease-out forwards;
+}
+
+@keyframes fadeInImage {
+    0% { opacity: 0; transform: scale(1.02); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .feria-layout { padding: 20px; }
+    .sector-block.wide { grid-column: span 1; }
+}
+
+@media (max-width: 768px) {
+    .feria-topbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 20px;
+    }
+    
+    .mini-search { width: 100%; }
+    
+    .bento-grid {
+        grid-template-columns: 1fr; /* Una columna en móvil */
+    }
+    
+    .stores-inner-grid {
+        grid-template-columns: repeat(4, 1fr); /* 4 tiendas por fila dentro del bloque */
+    }
+}
