@@ -224,8 +224,13 @@ try {
         $stmt_count->execute([$producto_id]);
         $total_actuales = $stmt_count->fetchColumn();
         
-        if ($total_actuales + $num_nuevas > 5) {
-            throw new Exception("Límite excedido: El producto tendría más de 5 imágenes");
+        // Restar las imágenes que se van a eliminar
+        $imagenes_a_eliminar = count($imagenes_eliminar);
+        $total_despues_de_eliminar = $total_actuales - $imagenes_a_eliminar;
+        
+        // Verificar límite
+        if ($total_despues_de_eliminar + $num_nuevas > 5) {
+            throw new Exception("Límite excedido: El producto tendría más de 5 imágenes (actuales: $total_actuales, eliminar: $imagenes_a_eliminar, nuevas: $num_nuevas, total: " . ($total_despues_de_eliminar + $num_nuevas) . ")");
         }
 
         for ($i = 0; $i < $num_nuevas; $i++) {
@@ -241,16 +246,31 @@ try {
                 $resultado = subirImagen($archivo, 'productos', null, $producto_id, false);
 
                 if (isset($resultado['success'])) {
+                    echo json_encode([
+                        'debug' => 'Procesando imagen nueva',
+                        'resultado' => $resultado
+                    ]);
+                    
+                    $hash_archivo = hash_file('sha256', $archivo['tmp_name']);
+                    
                     $stmt_ins = $db->prepare("
                         INSERT INTO producto_imagenes (producto_id, nombre_archivo, es_principal, orden, hash_archivo)
                         VALUES (?, ?, 0, 99, ?)
                     ");
-                    $hash_archivo = hash_file('sha256', $archivo['tmp_name']);
-                    $stmt_ins->execute([
+                    
+                    $execute_result = $stmt_ins->execute([
                         $producto_id,
                         $resultado['archivo'],
                         $hash_archivo
                     ]);
+                    
+                    if (!$execute_result) {
+                        echo json_encode([
+                            'success' => false,
+                            'message' => 'Error al insertar imagen: ' . implode(' - ', $stmt_ins->errorInfo())
+                        ]);
+                        exit;
+                    }
                 }
             }
         }
