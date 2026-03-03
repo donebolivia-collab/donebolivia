@@ -73,7 +73,7 @@ function verificarPassword($password, $hash) {
 }
 
 // Subir imagen (OPTIMIZADA PROFESIONALMENTE A WEBP - CON DETECCIÓN DE DUPLICADOS)
-function subirImagen($archivo, $carpeta = 'productos', $rutaBase = null, $producto_id = null) {
+function subirImagen($archivo, $carpeta = 'productos', $rutaBase = null, $producto_id = null, $permitir_duplicados = true) {
     // Si no se define ruta base, usar UPLOAD_PATH por defecto
     $base = $rutaBase ?? UPLOAD_PATH;
     
@@ -106,7 +106,8 @@ function subirImagen($archivo, $carpeta = 'productos', $rutaBase = null, $produc
     $hash_archivo = hash_file('sha256', $archivo['tmp_name']);
     
     // NUEVO: Verificar si ya existe un archivo con el mismo hash
-    if ($carpeta === 'productos' && $producto_id) {
+    // SOLO si se permite verificar duplicados (false en edición)
+    if ($carpeta === 'productos' && $producto_id && $permitir_duplicados) {
         $stmt = getDB()->prepare("
             SELECT pi.nombre_archivo 
             FROM producto_imagenes pi 

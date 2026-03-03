@@ -238,7 +238,7 @@ try {
                     'size' => $_FILES['imagenes_nuevas']['size'][$i]
                 ];
 
-                $resultado = subirImagen($archivo, 'productos', null, $producto_id);
+                $resultado = subirImagen($archivo, 'productos', null, $producto_id, false);
 
                 if (isset($resultado['success'])) {
                     $stmt_ins = $db->prepare("
