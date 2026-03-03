@@ -718,9 +718,13 @@ if (!empty($tienda['menu_items'])) {
                     <!-- ENLACE SPA -->
                     <a href="/tienda_producto.php?slug=<?php echo htmlspecialchars($tienda['slug']); ?>&producto_id=<?php echo $producto['id']; ?>" 
                        class="product-card" 
+                       id="product-card-<?php echo $producto['id']; ?>-<?php echo $index; ?>"
                        data-estado="<?php echo htmlspecialchars($producto['estado']); ?>" 
                        data-categoria="<?php echo htmlspecialchars($producto['categoria_id'] ?? 'sin-categoria'); ?>" 
                        data-categoria-tienda="<?php echo htmlspecialchars(strtolower($producto['categoria_tienda'] ?? '')); ?>"
+                       data-debug-id="<?php echo $producto['id']; ?>"
+                       data-debug-index="<?php echo $index; ?>"
+                       data-debug-titulo="<?php echo htmlspecialchars($producto['titulo']); ?>"
                        onclick="openProductModal('<?php echo htmlspecialchars($tienda['slug']); ?>', <?php echo $producto['id']; ?>); return false;">
                         
                         <div class="product-image-container">
@@ -734,10 +738,10 @@ if (!empty($tienda['menu_items'])) {
 
                             <!-- METRICS PILLS -->
                             <div class="product-metrics">
-                                <div class="metric-pill" id="grid-views-<?php echo $producto['id']; ?>">
+                                <div class="metric-pill" id="grid-views-<?php echo $producto['id']; ?>-<?php echo $index; ?>">
                                     <i class="fas fa-eye"></i> <?php echo number_format($producto['visitas'] ?? 0); ?>
                                 </div>
-                                <div class="metric-pill likes" id="grid-likes-<?php echo $producto['id']; ?>">
+                                <div class="metric-pill likes" id="grid-likes-<?php echo $producto['id']; ?>-<?php echo $index; ?>">
                                     <i class="fas fa-heart"></i> <?php echo number_format($producto['likes'] ?? 0); ?>
                                 </div>
                             </div>
