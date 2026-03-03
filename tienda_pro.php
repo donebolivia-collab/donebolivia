@@ -710,10 +710,8 @@ if (!empty($tienda['menu_items'])) {
             
             <?php if (!empty($productos)): ?>
                 <?php 
-                // Usar array_keys para evitar bug de foreach
-                $productos_keys = array_keys($productos);
-                foreach ($productos_keys as $index):
-                    $producto = $productos[$index];
+                // CORRECCIÓN: Usar foreach normal para evitar bug de índice
+                foreach ($productos as $index => $producto):
                 ?>
                     <!-- ENLACE SPA -->
                     <a href="/tienda_producto.php?slug=<?php echo htmlspecialchars($tienda['slug']); ?>&producto_id=<?php echo $producto['id']; ?>" 
