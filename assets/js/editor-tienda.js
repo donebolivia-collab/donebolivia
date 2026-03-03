@@ -737,7 +737,10 @@ async function populateDrawerForEdit(p) {
     currentCategoryTienda = p.categoria_tienda || '';
 
     // Cargar imágenes existentes
-    if (p.imagenes) {
+    if (p.imagen_principal) {
+        existingProductImages = [p.imagen_principal];
+        renderProductImagePreview();
+    } else if (p.imagenes) {
         existingProductImages = p.imagenes;
         renderProductImagePreview();
     }
@@ -828,7 +831,7 @@ window.openProductDrawer = async (id = null) => {
     // 2. Determinar modo (Crear o Editar)
     if (id) {
         // MODO EDICIÓN
-        const productData = window.tiendaState.inventario.find(item => item.id == id);
+        const productData = window.allProducts.find(item => item.id == id);
         if (productData) {
             await populateDrawerForEdit(productData);
         } else {
