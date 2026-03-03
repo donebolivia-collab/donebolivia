@@ -77,9 +77,28 @@ function subirImagen($archivo, $carpeta = 'productos', $rutaBase = null, $produc
     // Si no se define ruta base, usar UPLOAD_PATH por defecto
     $base = $rutaBase ?? UPLOAD_PATH;
     
-    // Si la carpeta es vacía, no añadir barra extra
-    $subcarpeta = $carpeta ? $carpeta . '/' : '';
-    $directorioDestino = $base . $subcarpeta;
+    // NUEVO: Si es una imagen de producto, organizar por tienda
+    if ($carpeta === 'productos' && $producto_id) {
+        // Obtener la tienda del producto
+        $stmt = getDB()->prepare("SELECT t.id as tienda_id, t.nombre_tienda FROM productos p JOIN tiendas t ON p.usuario_id = t.usuario_id WHERE p.id = ?");
+        $stmt->execute([$producto_id]);
+        $tienda = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if ($tienda) {
+            // Crear carpeta de la tienda: uploads/123/
+            $carpeta_tienda = $tienda['tienda_id'];
+            $subcarpeta = $carpeta_tienda . '/';
+            $directorioDestino = $base . $subcarpeta;
+        } else {
+            // Fallback: usar carpeta genérica si no encuentra tienda
+            $subcarpeta = $carpeta ? $carpeta . '/' : '';
+            $directorioDestino = $base . $subcarpeta;
+        }
+    } else {
+        // Para otros casos, usar la lógica original
+        $subcarpeta = $carpeta ? $carpeta . '/' : '';
+        $directorioDestino = $base . $subcarpeta;
+    }
     
     // Crear directorio si no existe
     if (!file_exists($directorioDestino)) {
@@ -130,7 +149,15 @@ function subirImagen($archivo, $carpeta = 'productos', $rutaBase = null, $produc
     // Generar nombre único .webp
     $nombreBase = uniqid() . '_' . time();
     $nombreArchivo = $nombreBase . '.webp';
-    $rutaCompleta = $directorioDestino . $nombreArchivo;
+    
+    // NUEVO: Incluir la carpeta de la tienda en el nombre guardado
+    if ($carpeta === 'productos' && $producto_id && isset($tienda)) {
+        $rutaCompleta = $directorioDestino . $nombreArchivo;
+        $nombreGuardado = $tienda['tienda_id'] . '/' . $nombreArchivo;
+    } else {
+        $rutaCompleta = $directorioDestino . $nombreArchivo;
+        $nombreGuardado = $subcarpeta . $nombreArchivo;
+    }
     
     // PROCESAMIENTO DE IMAGEN (GD LIBRARY)
     try {
@@ -204,7 +231,7 @@ function subirImagen($archivo, $carpeta = 'productos', $rutaBase = null, $produc
                         SET hash_archivo = ? 
                         WHERE nombre_archivo = ? AND producto_id = ?
                     ");
-                    $stmt->execute([$hash_archivo, $subcarpeta . $nombreArchivo, $producto_id]);
+                    $stmt->execute([$hash_archivo, $nombreGuardado, $producto_id]);
                 } catch (Exception $e) {
                     error_log("Error guardando hash de imagen: " . $e->getMessage());
                 }
@@ -212,7 +239,7 @@ function subirImagen($archivo, $carpeta = 'productos', $rutaBase = null, $produc
             
             return [
                 'success' => true, 
-                'archivo' => $subcarpeta . $nombreArchivo,
+                'archivo' => $nombreGuardado, // NUEVO: Usar $nombreGuardado con la carpeta de la tienda
                 'hash' => $hash_archivo,
                 'duplicado' => false
             ];
