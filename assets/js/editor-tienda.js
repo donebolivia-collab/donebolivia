@@ -722,9 +722,27 @@ async function populateDrawerForEdit(p) {
 
     // Cargar y seleccionar categoría y subcategoría
     const catSelect = $('#prodCategoriaId');
+    const catTrigger = $('#prodCatIdDropdown .ui-trigger');
+    const catLabel = $('#prodCatIdLabel');
+    
     if (catSelect) {
-        catSelect.disabled = false; // Asegurar que no esté bloqueado
         catSelect.value = p.categoria_id;
+        
+        // Establecer nombre de categoría
+        let catName = 'Categoría'; // Fallback
+        const menuOption = $(`#prodCatIdDropdown .ui-option[onclick*="'${p.categoria_id}'"]`);
+        if (menuOption) {
+            catName = menuOption.innerText.trim();
+        }
+        catLabel.innerText = catName;
+        
+        // BLOQUEAR CATEGORÍA en modo edición para evitar cambios
+        if (catTrigger) {
+            catTrigger.classList.add('disabled');
+            catTrigger.onclick = null;
+            catTrigger.style.pointerEvents = 'none';
+        }
+        
         await cargarSubcategorias(p.categoria_id, p.subcategoria_id);
     }
 
@@ -975,8 +993,9 @@ function updateGhostCard() {
                 console.warn('Blob URL detectada - no funcionará en iframe');
                 imgUrl = firstImg.src;
             } else {
-                // Para imágenes existentes, usar URL normal con cache busting
-                imgUrl = firstImg.src.split('?')[0] + '?v=' + new Date().getTime();
+                // Para imágenes existentes, usar URL normal con cache busting y corregir orientación
+                const baseUrl = firstImg.src.split('?')[0];
+                imgUrl = baseUrl + '?v=' + new Date().getTime() + '&orient=correct';
             }
         }
     }
@@ -1068,7 +1087,7 @@ window.renderProductImagePreview = function() {
     existingProductImages.forEach((img, idx) => {
         const div = document.createElement('div');
         div.style.cssText = "position:relative; aspect-ratio:1/1; border-radius:8px; overflow:hidden;";
-        div.innerHTML = `<img src="/uploads/${img.nombre_archivo}" style="width:100%; height:100%; object-fit:cover;">
+        div.innerHTML = `<img src="/uploads/${img.nombre_archivo}" style="width:100%; height:100%; object-fit:cover; transform: scale(1);">
             <button type="button" onclick="deleteExistingImage(${idx})" style="position:absolute; top:2px; right:2px; background:red; color:white; border:none; border-radius:50%; width:20px; height:20px; font-size:12px;">&times;</button>`;
         zone.appendChild(div);
     });
@@ -1080,7 +1099,7 @@ window.renderProductImagePreview = function() {
             const div = document.createElement('div');
             div.style.cssText = "position:relative; aspect-ratio:1/1; border-radius:8px; overflow:hidden; border:1px solid blue;";
             // Usar el data URL del FileReader, no blob URL
-            div.innerHTML = `<img src="${e.target.result}" style="width:100%; height:100%; object-fit:cover;">
+            div.innerHTML = `<img src="${e.target.result}" style="width:100%; height:100%; object-fit:cover; transform: scale(1);">
                 <button type="button" onclick="deleteNewImage(${idx})" style="position:absolute; top:2px; right:2px; background:black; color:white; border:none; border-radius:50%; width:20px; height:20px; font-size:12px;">&times;</button>`;
             zone.appendChild(div);
             
