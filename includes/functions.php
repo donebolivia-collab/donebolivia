@@ -316,7 +316,7 @@ function obtenerCategorias() {
     }, 3600); // Caché por 1 hora
 }
 
-// Obtener subcategorías por categoría (SIN caché temporalmente para debug)
+// Obtener subcategorías por categoría
 function obtenerSubcategorias($categoria_id) {
     // Caché deshabilitado temporalmente para asegurar datos frescos
     $db = getDB();
@@ -575,7 +575,7 @@ function mostrarMensaje($tipo, $mensaje) {
 
 // Imprime los estilos para los badges (para usar en el <head> de la página)
 function imprimirEstilosBadges() {
-    // comentado para debug
+    // Función vacía - estilos manejados por CSS
 }
 
 // Renderiza los badges de un producto y devuelve el HTML
@@ -711,10 +711,8 @@ function processStoreLogo($logoPath) {
 
     if (file_exists($phys_path)) {
         // Si existe, retornamos con timestamp para evitar caché agresivo en cambios
-        return $candidate_rel; // . '?v=' . time(); // Comentado para mejor caché del navegador
+        return $candidate_rel;
     } else {
-        // Log opcional para debug (invisible al usuario)
-        // error_log("Imagen no encontrada: " . $phys_path);
         return $defaultLogo;
     }
 }

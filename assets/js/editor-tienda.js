@@ -755,23 +755,16 @@ async function populateDrawerForEdit(p) {
     currentCategoryTienda = p.categoria_tienda || '';
 
     // Cargar imágenes existentes
-    console.log('🔍 DEBUG: Datos del producto:', p);
-    console.log('🔍 DEBUG: p.imagen_principal:', p.imagen_principal);
-    console.log('🔍 DEBUG: p.imagenes:', p.imagenes);
-    
     if (p.imagen_principal) {
-        // TEMPORAL: Como no tenemos ID, usamos el nombre como referencia
         existingProductImages = [{ 
-            id: p.imagen_principal, // Usamos el nombre como ID temporal
+            id: p.imagen_principal,
             nombre_archivo: p.imagen_principal 
         }];
-        console.log('🔍 DEBUG: existingProductImages después de imagen_principal:', existingProductImages);
         renderProductImagePreview();
     } else if (p.imagenes && Array.isArray(p.imagenes)) {
         existingProductImages = p.imagenes.map(img => 
             typeof img === 'string' ? { nombre_archivo: img } : img
         );
-        console.log('🔍 DEBUG: existingProductImages después de p.imagenes:', existingProductImages);
         renderProductImagePreview();
     }
 }
@@ -1126,16 +1119,8 @@ window.renderProductImagePreview = function() {
 };
 
 window.deleteExistingImage = (idx) => {
-    console.log('🔍 DEBUG: Eliminando imagen existente - idx:', idx);
-    console.log('🔍 DEBUG: existingProductImages antes:', existingProductImages);
-    console.log('🔍 DEBUG: Imagen a eliminar:', existingProductImages[idx]);
-    
     if(confirm('¿Borrar?')) {
-        // SIMPLIFICACIÓN: Solo eliminar del array, no agregar a imagesToDelete
-        // La eliminación real se hará en el servidor (borrar todo y subir nuevo)
         existingProductImages.splice(idx, 1);
-        console.log('🔍 DEBUG: existingProductImages después:', existingProductImages);
-        
         renderProductImagePreview();
     }
 };
@@ -1196,42 +1181,33 @@ window.initBadgesMultiSelect = function() {
 // Initialize badges multiselect
 initBadgesMultiSelect();
 
-
 window.guardarProducto = async function() {
-    console.log('🔍 DEBUG: Iniciando guardarProducto...');
-    
     const formData = new FormData();
     const id = document.getElementById('prodId').value;
-    console.log('🔍 DEBUG: ID del producto:', id);
     
     if(id) formData.append('id', id);
 
     const titulo = document.getElementById('prodTitulo').value.trim();
     const descripcion = document.getElementById('prodDescripcion').value.trim();
     const precio = document.getElementById('prodPrecio').value;
-    
-    console.log('🔍 DEBUG: Datos del formulario:', { titulo, descripcion, precio });
 
     // Validaciones mejoradas
     if(!titulo) {
-        console.log('❌ ERROR: Título vacío');
         showNotif('El título es requerido', 'error');
         return;
     }
     if(titulo.length < 10) {
-        console.log('❌ ERROR: Título muy corto');
         showNotif('El título debe tener al menos 10 caracteres', 'error');
         return;
     }
     if(!precio || parseFloat(precio) <= 0) {
-        console.log('❌ ERROR: Precio inválido');
         showNotif('Precio inválido', 'error');
         return;
     }
 
     formData.append('titulo', titulo);
-    formData.append('precio', precio);
     formData.append('descripcion', descripcion);
+    formData.append('precio', precio);
     formData.append('estado', document.getElementById('prodCondicion').value);
     
     // Leer badges del UIMultiSelect en lugar de checkboxes
@@ -1253,8 +1229,6 @@ window.guardarProducto = async function() {
     if(id && imagesToDelete.length > 0) formData.append('imagenes_eliminar', JSON.stringify(imagesToDelete));
 
     const btn = document.getElementById('btnGuardarProducto');
-    console.log('🔍 DEBUG: Botón encontrado:', btn);
-    
     if(btn) {
         btn.textContent = 'Guardando...';
         btn.disabled = true;
@@ -1262,20 +1236,11 @@ window.guardarProducto = async function() {
 
     try {
         const endpoint = id ? '/api/editar_producto_completo.php' : '/api/crear_producto_completo.php';
-        console.log('🔍 DEBUG: Endpoint:', endpoint);
-        console.log('🔍 DEBUG: FormData contenido:');
-        for (let [key, value] of formData.entries()) {
-            console.log(`  ${key}:`, value);
-        }
         
         const res = await fetch(endpoint, { method: 'POST', body: formData });
-        console.log('🔍 DEBUG: Response status:', res.status);
-        
         const result = await res.json();
-        console.log('🔍 DEBUG: Response result:', result);
         
         if(result.success) {
-            console.log('✅ SUCCESS: Producto guardado');
             showNotif('Producto guardado');
             closeProductDrawer();
             
@@ -1288,11 +1253,9 @@ window.guardarProducto = async function() {
             // Refresh local list
             location.reload(); 
         } else {
-            console.log('❌ ERROR: Respuesta del servidor:', result);
             showNotif(result.message || 'Error al guardar', 'error');
         }
     } catch(e) { 
-        console.log('❌ ERROR: Excepción:', e);
         showNotif('Error de conexión', 'error');
         console.error(e);
     } finally {
