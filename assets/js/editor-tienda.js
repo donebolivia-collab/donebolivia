@@ -1116,9 +1116,23 @@ window.renderProductImagePreview = function() {
 };
 
 window.deleteExistingImage = (idx) => {
+    console.log('🔍 DEBUG: Eliminando imagen existente - idx:', idx);
+    console.log('🔍 DEBUG: existingProductImages antes:', existingProductImages);
+    console.log('🔍 DEBUG: Imagen a eliminar:', existingProductImages[idx]);
+    
     if(confirm('¿Borrar?')) {
-        imagesToDelete.push(existingProductImages[idx].id);
+        // Agregar a la lista de imágenes a eliminar en el servidor
+        if (existingProductImages[idx] && existingProductImages[idx].id) {
+            imagesToDelete.push(existingProductImages[idx].id);
+            console.log('🔍 DEBUG: Agregado a imagesToDelete:', existingProductImages[idx].id);
+            console.log('🔍 DEBUG: imagesToDelete completo:', imagesToDelete);
+        } else {
+            console.log('🔍 ERROR: La imagen no tiene ID:', existingProductImages[idx]);
+        }
+        
         existingProductImages.splice(idx, 1);
+        console.log('🔍 DEBUG: existingProductImages después:', existingProductImages);
+        
         renderProductImagePreview();
     }
 };

@@ -33,6 +33,14 @@ try {
     
     // Imágenes a eliminar (JSON array de IDs)
     $imagenes_eliminar = isset($_POST['imagenes_eliminar']) ? json_decode($_POST['imagenes_eliminar'], true) : [];
+    
+    // DEBUG: Mostrar imágenes a eliminar
+    echo json_encode([
+        'debug' => 'Imágenes a eliminar recibidas',
+        'imagenes_eliminar' => $imagenes_eliminar,
+        'producto_id' => $producto_id
+    ]);
+    exit;
 
     // Validaciones
     if ($producto_id <= 0) {
