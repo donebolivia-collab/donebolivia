@@ -974,8 +974,8 @@ body.modal-open .kommo-widget-container {
 /* Badges completos SVG */
 .badge-completo {
     width: auto;
-    height: 24px;
-    max-width: 100px;
+    height: 30px;
+    max-width: 125px;
     display: block;
 }
 
@@ -983,9 +983,9 @@ body.modal-open .kommo-widget-container {
     position: relative; /* Cambiado de absolute a relative */
     background-color: rgba(255, 255, 255, 0.95);
     color: #2E7D32;
-    font-size: 11px;
+    font-size: 14px;
     font-weight: 700;
-    padding: 3px 8px;
+    padding: 4px 10px;
     border-radius: 6px;
     display: flex;
     align-items: center;
@@ -997,8 +997,8 @@ body.modal-open .kommo-widget-container {
 
 .badge-shein-floating img.truck-icon,
 .badge-shein-floating img.custom-badge-icon {
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     object-fit: contain;
     filter: invert(34%) sepia(96%) saturate(394%) hue-rotate(94deg) brightness(92%) contrast(90%);
 }
