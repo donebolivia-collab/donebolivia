@@ -242,12 +242,14 @@ try {
 
                 if (isset($resultado['success'])) {
                     $stmt_ins = $db->prepare("
-                        INSERT INTO producto_imagenes (producto_id, nombre_archivo, es_principal, orden)
-                        VALUES (?, ?, 0, 99)
+                        INSERT INTO producto_imagenes (producto_id, nombre_archivo, es_principal, orden, hash_archivo)
+                        VALUES (?, ?, 0, 99, ?)
                     ");
+                    $hash_archivo = hash_file('sha256', $archivo['tmp_name']);
                     $stmt_ins->execute([
                         $producto_id,
-                        $resultado['archivo']
+                        $resultado['archivo'],
+                        $hash_archivo
                     ]);
                 }
             }
