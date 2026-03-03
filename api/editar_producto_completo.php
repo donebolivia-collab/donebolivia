@@ -219,18 +219,9 @@ try {
     if (isset($_FILES['imagenes_nuevas']) && !empty($_FILES['imagenes_nuevas']['name'][0])) {
         $num_nuevas = count($_FILES['imagenes_nuevas']['name']);
         
-        // Verificar límite total (existentes - eliminadas + nuevas <= 5)
-        $stmt_count = $db->prepare("SELECT COUNT(*) FROM producto_imagenes WHERE producto_id = ?");
-        $stmt_count->execute([$producto_id]);
-        $total_actuales = $stmt_count->fetchColumn();
-        
-        // Restar las imágenes que se van a eliminar
-        $imagenes_a_eliminar = count($imagenes_eliminar);
-        $total_despues_de_eliminar = $total_actuales - $imagenes_a_eliminar;
-        
-        // Verificar límite
-        if ($total_despues_de_eliminar + $num_nuevas > 5) {
-            throw new Exception("Límite excedido: El producto tendría más de 5 imágenes (actuales: $total_actuales, eliminar: $imagenes_a_eliminar, nuevas: $num_nuevas, total: " . ($total_despues_de_eliminar + $num_nuevas) . ")");
+        // SIMPLIFICACIÓN: Permitir hasta 5 imágenes nuevas sin límite complejo
+        if ($num_nuevas > 5) {
+            throw new Exception("No puedes subir más de 5 imágenes a la vez");
         }
 
         for ($i = 0; $i < $num_nuevas; $i++) {
