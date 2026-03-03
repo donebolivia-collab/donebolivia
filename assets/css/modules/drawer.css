@@ -1,0 +1,105 @@
+/**
+ * Drawer Module CSS
+ * Estilos completos del sistema de drawers/paneles
+ * Extraído de editor-tienda.css para mejor mantenibilidad
+ */
+
+/* ==========================================================================
+   PRODUCT DRAWER PRINCIPAL
+   ========================================================================== */
+
+.product-drawer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 40;
+    padding-top: 86px; /* 50px Header + 36px Status Bar */
+    box-sizing: border-box;
+    background: white;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    /* border-right is handled by sidebar */
+}
+
+.product-drawer.show {
+    transform: translateX(0);
+}
+
+/* ==========================================================================
+   DRAWER COMPONENTS
+   ========================================================================== */
+
+.drawer-header {
+    padding: 0 20px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border-color);
+    flex-shrink: 0;
+}
+
+.drawer-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 20px;
+}
+
+.drawer-footer {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    border-top: 1px solid var(--border-color);
+    background: white;
+    flex-shrink: 0;
+}
+
+/* ==========================================================================
+   FORM ELEMENTS EN DRAWER
+   ========================================================================== */
+
+/* Adjust form elements for narrower width */
+.modern-input-group { 
+    margin-bottom: 12px; 
+}
+
+.modern-input { 
+    padding: 8px; 
+    font-size: 13px; 
+}
+
+.drawer-footer .btn-modern { 
+    padding: 8px 12px; 
+    font-size: 13px; 
+}
+
+/* ==========================================================================
+   RESPONSIVE DRAWER
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .product-drawer { 
+        width: 100%; 
+    }
+}
+
+/* ==========================================================================
+   VARIABLES CSS (Para personalización)
+   ========================================================================== */
+
+:root {
+    --drawer-width: 100%;
+    --drawer-z-index: 40;
+    --drawer-header-height: 50px;
+    --drawer-footer-height: 60px;
+    --drawer-padding: 20px;
+    --drawer-transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    --drawer-bg-color: white;
+    --drawer-border-color: var(--border-color);
+}

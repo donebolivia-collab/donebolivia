@@ -144,6 +144,7 @@ $titulo = "Editor: " . $tienda['nombre'];
     <link href="/assets/css/buttons-pro.css?v=1.0" rel="stylesheet">
     <link href="/assets/css/image-uploader.css?v=<?php echo time(); ?>" rel="stylesheet">
     <link href="/assets/css/modules/badges.css?v=<?php echo time(); ?>" rel="stylesheet">
+    <link href="/assets/css/modules/drawer.css?v=<?php echo time(); ?>" rel="stylesheet">
     <link href="/assets/css/editor-tienda.css?v=<?php echo time(); ?>" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Plus+Jakarta+Sans:wght@400;500;700&family=Manrope:wght@400;500;700&family=Outfit:wght@300;500;700&family=Poppins:wght@300;400;500;600&family=Space+Mono&family=Roboto:wght@300;400;500;700&family=Lora:wght@400;600&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
     <script src="https://js.puter.com/v2/"></script>
