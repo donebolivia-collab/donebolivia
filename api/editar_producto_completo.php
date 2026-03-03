@@ -215,7 +215,7 @@ try {
         }
     }
 
-    // 3. Subir nuevas imágenes
+    // 4. Subir nuevas imágenes
     if (isset($_FILES['imagenes_nuevas']) && !empty($_FILES['imagenes_nuevas']['name'][0])) {
         $num_nuevas = count($_FILES['imagenes_nuevas']['name']);
         
@@ -246,11 +246,6 @@ try {
                 $resultado = subirImagen($archivo, 'productos', null, $producto_id, false);
 
                 if (isset($resultado['success'])) {
-                    echo json_encode([
-                        'debug' => 'Procesando imagen nueva',
-                        'resultado' => $resultado
-                    ]);
-                    
                     $hash_archivo = hash_file('sha256', $archivo['tmp_name']);
                     
                     $stmt_ins = $db->prepare("
@@ -265,18 +260,14 @@ try {
                     ]);
                     
                     if (!$execute_result) {
-                        echo json_encode([
-                            'success' => false,
-                            'message' => 'Error al insertar imagen: ' . implode(' - ', $stmt_ins->errorInfo())
-                        ]);
-                        exit;
+                        throw new Exception('Error al insertar imagen: ' . implode(' - ', $stmt_ins->errorInfo()));
                     }
                 }
             }
         }
     }
 
-    // 4. Reasignar imagen principal si es necesario
+    // 5. Reasignar imagen principal si es necesario
     // Verificar si hay alguna imagen principal
     $stmt_check_main = $db->prepare("SELECT id FROM producto_imagenes WHERE producto_id = ? AND es_principal = 1");
     $stmt_check_main->execute([$producto_id]);
