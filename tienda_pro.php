@@ -713,6 +713,11 @@ if (!empty($tienda['menu_items'])) {
                 // CORRECCIÓN: Usar foreach normal para evitar bug de índice
                 foreach ($productos as $index => $producto):
                 ?>
+                    <!-- DEBUG VISUAL FORZADO -->
+                    <div style="background: red; color: white; padding: 5px; margin: 5px 0; font-size: 12px;">
+                        PHP DEBUG: Index=<?php echo $index; ?> | ID=<?php echo $producto['id']; ?> | Titulo=<?php echo htmlspecialchars($producto['titulo']); ?>
+                    </div>
+                    
                     <!-- ENLACE SPA -->
                     <a href="/tienda_producto.php?slug=<?php echo htmlspecialchars($tienda['slug']); ?>&producto_id=<?php echo $producto['id']; ?>" 
                        class="product-card" 
