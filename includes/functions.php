@@ -85,9 +85,9 @@ function subirImagen($archivo, $carpeta = 'productos', $rutaBase = null, $produc
         $tienda = $stmt->fetch(PDO::FETCH_ASSOC);
         
         if ($tienda) {
-            // Crear carpeta de la tienda: uploads/123/
+            // Crear carpeta de la tienda: uploads/productos/123/
             $carpeta_tienda = $tienda['tienda_id'];
-            $subcarpeta = $carpeta_tienda . '/';
+            $subcarpeta = $carpeta . '/' . $carpeta_tienda . '/'; // productos/123/
             $directorioDestino = $base . $subcarpeta;
         } else {
             // Fallback: usar carpeta genérica si no encuentra tienda
@@ -153,7 +153,7 @@ function subirImagen($archivo, $carpeta = 'productos', $rutaBase = null, $produc
     // NUEVO: Incluir la carpeta de la tienda en el nombre guardado
     if ($carpeta === 'productos' && $producto_id && isset($tienda)) {
         $rutaCompleta = $directorioDestino . $nombreArchivo;
-        $nombreGuardado = $tienda['tienda_id'] . '/' . $nombreArchivo;
+        $nombreGuardado = $carpeta . '/' . $tienda['tienda_id'] . '/' . $nombreArchivo; // productos/123/imagen.webp
     } else {
         $rutaCompleta = $directorioDestino . $nombreArchivo;
         $nombreGuardado = $subcarpeta . $nombreArchivo;
