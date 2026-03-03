@@ -141,14 +141,6 @@ try {
     $stmt_productos->execute([$tienda['usuario_id']]);
     $productos = $stmt_productos->fetchAll();
     
-    // DEBUG: Mostrar array completo antes de procesar
-    echo "<div style='background: orange; padding: 10px; margin: 10px 0;'>";
-    echo "<strong>DEBUG ARRAY COMPLETO:</strong><br>";
-    echo "<pre>";
-    var_dump($productos);
-    echo "</pre>";
-    echo "</div>";
-    
     // Procesar badges para cada producto
     foreach ($productos as &$producto) {
         if (!empty($producto['badges'])) {
@@ -710,7 +702,7 @@ if (!empty($tienda['menu_items'])) {
             
             <?php if (!empty($productos)): ?>
                 <?php 
-                // SOLUCIÓN NUCLEAR: Reconstruir array para evitar bug de PHP
+                // SOLUCIÓN DEFINITIVA: Reconstruir array para evitar bug de PHP
                 $productos_reconstruido = [];
                 foreach ($productos as $producto_original) {
                     $productos_reconstruido[] = $producto_original;
@@ -720,10 +712,6 @@ if (!empty($tienda['menu_items'])) {
                 for ($index = 0; $index < $productos_count; $index++):
                     $producto = $productos_reconstruido[$index];
                 ?>
-                    <!-- DEBUG VISUAL FORZADO -->
-                    <div style="background: red; color: white; padding: 5px; margin: 5px 0; font-size: 12px;">
-                        PHP DEBUG: Index=<?php echo $index; ?> | ID=<?php echo $producto['id']; ?> | Titulo=<?php echo htmlspecialchars($producto['titulo']); ?>
-                    </div>
                     
                     <!-- ENLACE SPA -->
                     <a href="/tienda_producto.php?slug=<?php echo htmlspecialchars($tienda['slug']); ?>&producto_id=<?php echo $producto['id']; ?>" 
