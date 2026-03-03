@@ -710,8 +710,10 @@ if (!empty($tienda['menu_items'])) {
             
             <?php if (!empty($productos)): ?>
                 <?php 
-                // CORRECCIÓN: Usar foreach normal para evitar bug de índice
-                foreach ($productos as $index => $producto):
+                // SOLUCIÓN DEFINITIVA: Usar bucle for tradicional para evitar bug de foreach
+                $productos_count = count($productos);
+                for ($index = 0; $index < $productos_count; $index++):
+                    $producto = $productos[$index];
                 ?>
                     <!-- DEBUG VISUAL FORZADO -->
                     <div style="background: red; color: white; padding: 5px; margin: 5px 0; font-size: 12px;">
@@ -765,7 +767,7 @@ if (!empty($tienda['menu_items'])) {
                             </div>
                         </div>
                     </a>
-                <?php endforeach; ?>
+                <?php endfor; ?>
             <?php else: ?>
                 <!-- No products handled via CSS/JS usually but keeping placeholder if grid empty -->
             <?php endif; ?>
