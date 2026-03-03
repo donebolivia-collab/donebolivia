@@ -193,40 +193,29 @@ try {
         }
     }
 
-    // 3. Eliminar imágenes marcadas
-    if (!empty($imagenes_eliminar) && is_array($imagenes_eliminar)) {
-        foreach ($imagenes_eliminar as $img_id_or_name) {
-            // Si es un nombre de archivo (contiene '/'), buscar por nombre
-            if (strpos($img_id_or_name, '/') !== false) {
-                $stmt_get_img = $db->prepare("SELECT id, nombre_archivo FROM producto_imagenes WHERE producto_id = ? AND nombre_archivo = ?");
-                $stmt_get_img->execute([$producto_id, $img_id_or_name]);
-            } else {
-                // Si es un ID numérico, buscar por ID
-                $stmt_get_img = $db->prepare("SELECT id, nombre_archivo FROM producto_imagenes WHERE id = ? AND producto_id = ?");
-                $stmt_get_img->execute([$img_id_or_name, $producto_id]);
-            }
+    // 3. ELIMINACIÓN RADICAL: Borrar TODAS las imágenes del producto y subir las nuevas
+    if (isset($_FILES['imagenes_nuevas']) && !empty($_FILES['imagenes_nuevas']['name'][0])) {
+        // PRIMERO: Eliminar TODAS las imágenes existentes del producto
+        $stmt_get_all_imgs = $db->prepare("SELECT id, nombre_archivo FROM producto_imagenes WHERE producto_id = ?");
+        $stmt_get_all_imgs->execute([$producto_id]);
+        $imagenes_existentes = $stmt_get_all_imgs->fetchAll(PDO::FETCH_ASSOC);
+        
+        foreach ($imagenes_existentes as $img) {
+            // Borrar registro DB
+            $stmt_del = $db->prepare("DELETE FROM producto_imagenes WHERE id = ?");
+            $stmt_del->execute([$img['id']]);
             
-            $img_data = $stmt_get_img->fetch();
-
-            if ($img_data) {
-                // Borrar registro DB
-                $stmt_del = $db->prepare("DELETE FROM producto_imagenes WHERE id = ?");
-                $stmt_del->execute([$img_data['id']]);
-
-                // Borrar archivo físico
-                $ruta_archivo = UPLOAD_PATH . $img_data['nombre_archivo'];
-                if (file_exists($ruta_archivo)) {
-                    unlink($ruta_archivo);
-                }
+            // Borrar archivo físico
+            $ruta_archivo = UPLOAD_PATH . $img['nombre_archivo'];
+            if (file_exists($ruta_archivo)) {
+                unlink($ruta_archivo);
             }
         }
-    }
-
-    // 4. Subir nuevas imágenes
-    if (isset($_FILES['imagenes_nuevas']) && !empty($_FILES['imagenes_nuevas']['name'][0])) {
+        
+        // SEGUNDO: Subir las nuevas imágenes
         $num_nuevas = count($_FILES['imagenes_nuevas']['name']);
         
-        // SIMPLIFICACIÓN: Permitir hasta 5 imágenes nuevas sin límite complejo
+        // SIMPLIFICACIÓN: Permitir hasta 5 imágenes nuevas
         if ($num_nuevas > 5) {
             throw new Exception("No puedes subir más de 5 imágenes a la vez");
         }
@@ -246,14 +235,19 @@ try {
                 if (isset($resultado['success'])) {
                     $hash_archivo = hash_file('sha256', $archivo['tmp_name']);
                     
+                    // La primera imagen será principal (es_principal = 1)
+                    $es_principal = ($i === 0) ? 1 : 0;
+                    
                     $stmt_ins = $db->prepare("
                         INSERT INTO producto_imagenes (producto_id, nombre_archivo, es_principal, orden, hash_archivo)
-                        VALUES (?, ?, 0, 99, ?)
+                        VALUES (?, ?, ?, ?, ?)
                     ");
                     
                     $execute_result = $stmt_ins->execute([
                         $producto_id,
                         $resultado['archivo'],
+                        $es_principal,
+                        $i,
                         $hash_archivo
                     ]);
                     

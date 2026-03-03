@@ -1131,15 +1131,8 @@ window.deleteExistingImage = (idx) => {
     console.log('🔍 DEBUG: Imagen a eliminar:', existingProductImages[idx]);
     
     if(confirm('¿Borrar?')) {
-        // Agregar a la lista de imágenes a eliminar en el servidor
-        if (existingProductImages[idx] && existingProductImages[idx].id) {
-            imagesToDelete.push(existingProductImages[idx].id);
-            console.log('🔍 DEBUG: Agregado a imagesToDelete:', existingProductImages[idx].id);
-            console.log('🔍 DEBUG: imagesToDelete completo:', imagesToDelete);
-        } else {
-            console.log('🔍 ERROR: La imagen no tiene ID:', existingProductImages[idx]);
-        }
-        
+        // SIMPLIFICACIÓN: Solo eliminar del array, no agregar a imagesToDelete
+        // La eliminación real se hará en el servidor (borrar todo y subir nuevo)
         existingProductImages.splice(idx, 1);
         console.log('🔍 DEBUG: existingProductImages después:', existingProductImages);
         
