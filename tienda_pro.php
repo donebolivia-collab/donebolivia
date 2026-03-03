@@ -710,10 +710,15 @@ if (!empty($tienda['menu_items'])) {
             
             <?php if (!empty($productos)): ?>
                 <?php 
-                // SOLUCIÓN DEFINITIVA: Usar bucle for tradicional para evitar bug de foreach
-                $productos_count = count($productos);
+                // SOLUCIÓN NUCLEAR: Reconstruir array para evitar bug de PHP
+                $productos_reconstruido = [];
+                foreach ($productos as $producto_original) {
+                    $productos_reconstruido[] = $producto_original;
+                }
+                
+                $productos_count = count($productos_reconstruido);
                 for ($index = 0; $index < $productos_count; $index++):
-                    $producto = $productos[$index];
+                    $producto = $productos_reconstruido[$index];
                 ?>
                     <!-- DEBUG VISUAL FORZADO -->
                     <div style="background: red; color: white; padding: 5px; margin: 5px 0; font-size: 12px;">
