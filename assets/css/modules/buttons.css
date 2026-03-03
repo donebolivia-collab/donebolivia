@@ -1,0 +1,487 @@
+/**
+ * Buttons Module CSS
+ * Estilos completos del sistema de botones
+ * Extraído de múltiples archivos para mejor mantenibilidad
+ */
+
+/* ==========================================================================
+   BOTONES MODERNOS (Drawer y Forms)
+   ========================================================================== */
+
+.btn-modern {
+    padding: 8px 12px; 
+    font-size: 13px; 
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.btn-modern.primary {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-modern.primary:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.btn-modern.secondary {
+    background: white;
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+}
+
+.btn-modern.secondary:hover {
+    background: var(--bg-canvas);
+    border-color: var(--primary);
+}
+
+/* ==========================================================================
+   BOTONES CON ICONOS
+   ========================================================================== */
+
+.btn-icon-mini {
+    width: 24px; 
+    height: 24px;
+    border: none; 
+    background: transparent;
+    color: var(--text-muted);
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    transition: all 0.2s;
+    font-size: 14px; /* Un poco más grande para visibilidad */
+}
+
+.btn-icon-mini:hover { 
+    background: rgba(255, 255, 255, 0.1); 
+    color: white; 
+}
+
+.btn-icon-mini.delete:hover { 
+    background: #fee2e2; 
+    color: #ef4444; 
+}
+
+.btn-icon-mini-action {
+    background: transparent;
+    border: none;
+    color: #64748b;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    padding: 4px;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.btn-icon-mini-action.edit {
+    background: #f1f5f9; 
+    color: #64748b;
+}
+
+.btn-icon-mini-action.edit:hover { 
+    background: #e2e8f0; 
+    color: #22226B; 
+}
+
+.btn-icon-mini-action.delete {
+    background: #fef2f2; 
+    color: #ef4444;
+}
+
+.btn-icon-mini-action.delete:hover { 
+    background: #fee2e2; 
+    color: #dc2626; 
+}
+
+.btn-icon-mini-action.eye {
+    background: #f0f9ff; 
+    color: #0ea5e9;
+}
+
+.btn-icon-mini-action.eye:hover { 
+    background: #e0f2fe; 
+    color: #0284c7; 
+}
+
+.btn-icon-mini-action.eye.off {
+    background: #f1f5f9; 
+    color: #94a3b8; /* Gris si está off */
+}
+
+/* ==========================================================================
+   BOTONES DE ACCIÓN PRIMARIOS
+   ========================================================================== */
+
+.btn-icon-action.primary {
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.btn-icon-action.primary:hover {
+    background: var(--primary-hover);
+}
+
+.btn-icon-action.success {
+    background: #10b981; /* Verde Success */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.btn-icon-action.success:hover {
+    background: #059669; /* Verde oscuro */
+    color: white; /* Forzar color blanco */
+}
+
+/* Forzar visibilidad del icono */
+.btn-icon-action.success i {
+    color: white !important;
+}
+
+/* ==========================================================================
+   BOTONES LIVE VIEW
+   ========================================================================== */
+
+.btn-live-view {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 10px;
+    background: var(--text-main);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.btn-live-view:hover { 
+    background: #0f172a; 
+}
+
+/* ==========================================================================
+   BOTONES DE PANEL
+   ========================================================================== */
+
+.btn-panel-toggle {
+    width: 46px;
+    height: 46px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: white;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0; /* Evitar que se aplaste */
+}
+
+.btn-panel-toggle:hover {
+    border-color: #22226B;
+    color: #22226B;
+    box-shadow: 0 4px 12px rgba(34, 34, 107, 0.1);
+    transform: translateY(-2px);
+}
+
+.btn-panel-toggle:active {
+    transform: scale(0.95);
+    background: #f8fafc;
+}
+
+/* ==========================================================================
+   BOTONES DE ACCIÓN CUADRADOS
+   ========================================================================== */
+
+.btn-add-square {
+    width: 46px;
+    height: 46px;
+    border: 1px solid #22226B;
+    border-radius: 8px;
+    background: white;
+    color: #22226B;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0; /* Evitar que se aplaste */
+}
+
+.btn-add-square:hover {
+    background: #22226B;
+    color: white;
+    box-shadow: 0 4px 12px rgba(34, 34, 107, 0.2);
+    transform: translateY(-2px);
+}
+
+.btn-add-square:active {
+    transform: scale(0.95);
+}
+
+/* ==========================================================================
+   BOTONES SOCIALES
+   ========================================================================== */
+
+.btn-social-icon {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: white;
+    color: #64748b;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    position: relative;
+}
+
+.btn-social-icon:hover { 
+    border-color: #cbd5e1; 
+    color: #64748b; 
+}
+
+.btn-social-icon.active {
+    background: white;
+    border-color: transparent;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+    transition: all 0.2s;
+    border: 2px solid white;
+}
+
+.btn-social-icon.active .check-badge { 
+    opacity: 1; 
+    transform: scale(1); 
+}
+
+.btn-social-icon.facebook.active { 
+    color: #1877F2; 
+}
+
+.btn-social-icon.instagram.active { 
+    color: #E4405F; 
+}
+
+.btn-social-icon.tiktok.active { 
+    color: #000000; 
+}
+
+.btn-social-icon.telegram.active { 
+    color: #0088cc; 
+}
+
+.btn-social-icon.youtube.active {
+    color: #FF0000;
+}
+
+.btn-social-icon.maps.active {
+    color: #DB4437; /* Google's red */
+}
+
+/* ==========================================================================
+   BOTONES DE UBICACIÓN
+   ========================================================================== */
+
+.btn-location {
+    width: 100%;
+    padding: 10px;
+    background: #1e293b;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s;
+    overflow: hidden;
+}
+
+.btn-location i {
+    font-size: 18px;
+    color: #EA4335; /* Google Red */
+}
+
+.btn-location:hover {
+    background: #0f172a;
+}
+
+.btn-location.active {
+    background: #2563eb;
+}
+
+.btn-location.active i {
+    color: #EA4335; /* Keep red icon */
+}
+
+.btn-location.active .location-check-badge {
+    display: block;
+}
+
+/* ==========================================================================
+   BOTONES DE INVENTARIO
+   ========================================================================== */
+
+.btn-inv-action {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.btn-inv-action.view {
+    background: #f0f9ff; 
+    color: #0ea5e9;
+}
+
+.btn-inv-action.view:hover {
+    background: #e0f2fe; 
+    color: #0284c7;
+}
+
+.btn-inv-action.stock-in {
+    background: #f0fdf4; 
+    color: #16a34a; /* Verde stock */
+}
+
+.btn-inv-action.stock-in:hover {
+    background: #dcfce7; 
+    color: #15803d;
+}
+
+.btn-inv-action.stock-out {
+    background: #fff1f2; 
+    color: #e11d48; /* Rojo sin stock */
+}
+
+.btn-inv-action.stock-out:hover {
+    background: #ffe4e6; 
+    color: #be123c;
+}
+
+.btn-inv-action.edit {
+    background: #f8fafc; 
+    color: #64748b; 
+    border-color: #e2e8f0;
+}
+
+.btn-inv-action.edit:hover {
+    background: white; 
+    border-color: #22226B; 
+    color: #22226B;
+}
+
+.btn-inv-action.delete {
+    background: #fef2f2; 
+    color: #ef4444;
+}
+
+.btn-inv-action.delete:hover {
+    background: #fee2e2; 
+    color: #dc2626;
+}
+
+/* ==========================================================================
+   BOTONES DE LINK (OJO)
+   ========================================================================== */
+
+.btn-eye-link {
+    padding: 6px 12px;
+    border: none;
+    background: transparent !important; /* Forzar transparencia */
+    color: #64748b;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    text-decoration: none;
+}
+
+.btn-eye-link:hover {
+    opacity: 0.8;
+}
+
+/* ==========================================================================
+   RESPONSIVE BUTTONS
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .btn-modern {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+    
+    .btn-panel-toggle {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .btn-add-square {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* ==========================================================================
+   VARIABLES CSS (Para personalización)
+   ========================================================================== */
+
+:root {
+    --btn-primary-bg: var(--primary);
+    --btn-primary-hover: var(--primary-hover);
+    --btn-secondary-bg: white;
+    --btn-secondary-border: var(--border-color);
+    --btn-success-bg: #10b981;
+    --btn-success-hover: #059669;
+    --btn-danger-bg: #ef4444;
+    --btn-danger-hover: #dc2626;
+    --btn-padding: 8px 12px;
+    --btn-border-radius: 8px;
+    --btn-transition: all 0.2s ease;
+    --btn-transform: translateY(-1px);
+}
