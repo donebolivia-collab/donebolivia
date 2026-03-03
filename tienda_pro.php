@@ -722,12 +722,30 @@ if (!empty($tienda['menu_items'])) {
                         PRODUCTO #<?php echo $index; ?> | ID: <?php echo $producto['id']; ?> | <?php echo htmlspecialchars($producto['titulo']); ?>
                     </div>
                     
-                    <!-- FORZAR LIMPIEZA DE VARIABLE -->
+                    <!-- DEBUG: ESTADO DE LA VARIABLE ANTES DEL HTML -->
+                    <div style="background: red; color: white; padding: 5px; margin: 5px 0; font-size: 12px;">
+                        ANTES DE HTML: Index=<?php echo $index; ?> | ID=<?php echo $producto['id']; ?> | Titulo=<?php echo htmlspecialchars($producto['titulo']); ?>
+                    </div>
+                    
+                    <!-- DEBUG: FORZAR REASIGNACIÓN COMPLETA -->
                     <?php 
-                        $producto_actual = $producto; // Copia explícita
-                        unset($producto); // Limpiar referencia
-                        $producto = $producto_actual; // Restaurar
+                        $producto_data = [
+                            'id' => $producto['id'],
+                            'titulo' => $producto['titulo'],
+                            'precio' => $producto['precio'],
+                            'imagen_principal' => $producto['imagen_principal'],
+                            'estado' => $producto['estado'],
+                            'categoria_id' => $producto['categoria_id'],
+                            'categoria_tienda' => $producto['categoria_tienda']
+                        ];
+                        unset($producto);
+                        $producto = $producto_data;
                     ?>
+                    
+                    <!-- DEBUG: ESTADO DE LA VARIABLE DESPUÉS DE LA REASIGNACIÓN -->
+                    <div style="background: blue; color: white; padding: 5px; margin: 5px 0; font-size: 12px;">
+                        DESPUÉS DE HTML: Index=<?php echo $index; ?> | ID=<?php echo $producto['id']; ?> | Titulo=<?php echo htmlspecialchars($producto['titulo']); ?>
+                    </div>
                     
                     <!-- ENLACE SPA -->
                     <a href="/tienda_producto.php?slug=<?php echo htmlspecialchars($tienda['slug']); ?>&producto_id=<?php echo $producto['id']; ?>" 
