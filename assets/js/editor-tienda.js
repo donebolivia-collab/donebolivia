@@ -755,13 +755,19 @@ async function populateDrawerForEdit(p) {
     currentCategoryTienda = p.categoria_tienda || '';
 
     // Cargar imágenes existentes
+    console.log('🔍 DEBUG: Datos del producto:', p);
+    console.log('🔍 DEBUG: p.imagen_principal:', p.imagen_principal);
+    console.log('🔍 DEBUG: p.imagenes:', p.imagenes);
+    
     if (p.imagen_principal) {
         existingProductImages = [{ nombre_archivo: p.imagen_principal }];
+        console.log('🔍 DEBUG: existingProductImages después de imagen_principal:', existingProductImages);
         renderProductImagePreview();
     } else if (p.imagenes && Array.isArray(p.imagenes)) {
         existingProductImages = p.imagenes.map(img => 
             typeof img === 'string' ? { nombre_archivo: img } : img
         );
+        console.log('🔍 DEBUG: existingProductImages después de p.imagenes:', existingProductImages);
         renderProductImagePreview();
     }
 }
