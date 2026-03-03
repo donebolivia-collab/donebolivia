@@ -133,8 +133,7 @@ try {
                 departamento_codigo = ?,
                 municipio_codigo = ?,
                 departamento_nombre = ?,
-                municipio_nombre = ?,
-
+                municipio_nombre = ?
             WHERE id = ? AND usuario_id = ?
         ");
         $stmt->execute([
@@ -164,8 +163,7 @@ try {
                 departamento_codigo = ?,
                 municipio_codigo = ?,
                 departamento_nombre = ?,
-                municipio_nombre = ?,
-
+                municipio_nombre = ?
             WHERE id = ? AND usuario_id = ?
         ");
         $stmt->execute([

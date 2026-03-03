@@ -1181,24 +1181,33 @@ initBadgesMultiSelect();
 
 
 window.guardarProducto = async function() {
+    console.log('🔍 DEBUG: Iniciando guardarProducto...');
+    
     const formData = new FormData();
     const id = document.getElementById('prodId').value;
+    console.log('🔍 DEBUG: ID del producto:', id);
+    
     if(id) formData.append('id', id);
 
     const titulo = document.getElementById('prodTitulo').value.trim();
     const descripcion = document.getElementById('prodDescripcion').value.trim();
     const precio = document.getElementById('prodPrecio').value;
+    
+    console.log('🔍 DEBUG: Datos del formulario:', { titulo, descripcion, precio });
 
     // Validaciones mejoradas
     if(!titulo) {
+        console.log('❌ ERROR: Título vacío');
         showNotif('El título es requerido', 'error');
         return;
     }
     if(titulo.length < 10) {
+        console.log('❌ ERROR: Título muy corto');
         showNotif('El título debe tener al menos 10 caracteres', 'error');
         return;
     }
     if(!precio || parseFloat(precio) <= 0) {
+        console.log('❌ ERROR: Precio inválido');
         showNotif('Precio inválido', 'error');
         return;
     }
@@ -1227,6 +1236,8 @@ window.guardarProducto = async function() {
     if(id && imagesToDelete.length > 0) formData.append('imagenes_eliminar', JSON.stringify(imagesToDelete));
 
     const btn = document.getElementById('btnGuardarProducto');
+    console.log('🔍 DEBUG: Botón encontrado:', btn);
+    
     if(btn) {
         btn.textContent = 'Guardando...';
         btn.disabled = true;
@@ -1234,10 +1245,20 @@ window.guardarProducto = async function() {
 
     try {
         const endpoint = id ? '/api/editar_producto_completo.php' : '/api/crear_producto_completo.php';
+        console.log('🔍 DEBUG: Endpoint:', endpoint);
+        console.log('🔍 DEBUG: FormData contenido:');
+        for (let [key, value] of formData.entries()) {
+            console.log(`  ${key}:`, value);
+        }
+        
         const res = await fetch(endpoint, { method: 'POST', body: formData });
+        console.log('🔍 DEBUG: Response status:', res.status);
+        
         const result = await res.json();
+        console.log('🔍 DEBUG: Response result:', result);
         
         if(result.success) {
+            console.log('✅ SUCCESS: Producto guardado');
             showNotif('Producto guardado');
             closeProductDrawer();
             
@@ -1250,9 +1271,11 @@ window.guardarProducto = async function() {
             // Refresh local list
             location.reload(); 
         } else {
+            console.log('❌ ERROR: Respuesta del servidor:', result);
             showNotif(result.message || 'Error al guardar', 'error');
         }
     } catch(e) { 
+        console.log('❌ ERROR: Excepción:', e);
         showNotif('Error de conexión', 'error');
         console.error(e);
     } finally {
