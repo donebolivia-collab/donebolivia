@@ -760,7 +760,11 @@ async function populateDrawerForEdit(p) {
     console.log('🔍 DEBUG: p.imagenes:', p.imagenes);
     
     if (p.imagen_principal) {
-        existingProductImages = [{ nombre_archivo: p.imagen_principal }];
+        // TEMPORAL: Como no tenemos ID, usamos el nombre como referencia
+        existingProductImages = [{ 
+            id: p.imagen_principal, // Usamos el nombre como ID temporal
+            nombre_archivo: p.imagen_principal 
+        }];
         console.log('🔍 DEBUG: existingProductImages después de imagen_principal:', existingProductImages);
         renderProductImagePreview();
     } else if (p.imagenes && Array.isArray(p.imagenes)) {

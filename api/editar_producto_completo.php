@@ -195,16 +195,23 @@ try {
 
     // 3. Eliminar imágenes marcadas
     if (!empty($imagenes_eliminar) && is_array($imagenes_eliminar)) {
-        foreach ($imagenes_eliminar as $img_id) {
-            // Obtener nombre de archivo para borrar del disco
-            $stmt_get_img = $db->prepare("SELECT nombre_archivo FROM producto_imagenes WHERE id = ? AND producto_id = ?");
-            $stmt_get_img->execute([$img_id, $producto_id]);
+        foreach ($imagenes_eliminar as $img_id_or_name) {
+            // Si es un nombre de archivo (contiene '/'), buscar por nombre
+            if (strpos($img_id_or_name, '/') !== false) {
+                $stmt_get_img = $db->prepare("SELECT id, nombre_archivo FROM producto_imagenes WHERE producto_id = ? AND nombre_archivo = ?");
+                $stmt_get_img->execute([$producto_id, $img_id_or_name]);
+            } else {
+                // Si es un ID numérico, buscar por ID
+                $stmt_get_img = $db->prepare("SELECT id, nombre_archivo FROM producto_imagenes WHERE id = ? AND producto_id = ?");
+                $stmt_get_img->execute([$img_id_or_name, $producto_id]);
+            }
+            
             $img_data = $stmt_get_img->fetch();
 
             if ($img_data) {
                 // Borrar registro DB
                 $stmt_del = $db->prepare("DELETE FROM producto_imagenes WHERE id = ?");
-                $stmt_del->execute([$img_id]);
+                $stmt_del->execute([$img_data['id']]);
 
                 // Borrar archivo físico
                 $ruta_archivo = UPLOAD_PATH . $img_data['nombre_archivo'];
