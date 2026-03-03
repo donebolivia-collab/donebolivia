@@ -756,10 +756,12 @@ async function populateDrawerForEdit(p) {
 
     // Cargar imágenes existentes
     if (p.imagen_principal) {
-        existingProductImages = [p.imagen_principal];
+        existingProductImages = [{ nombre_archivo: p.imagen_principal }];
         renderProductImagePreview();
-    } else if (p.imagenes) {
-        existingProductImages = p.imagenes;
+    } else if (p.imagenes && Array.isArray(p.imagenes)) {
+        existingProductImages = p.imagenes.map(img => 
+            typeof img === 'string' ? { nombre_archivo: img } : img
+        );
         renderProductImagePreview();
     }
 }
@@ -1187,8 +1189,19 @@ window.guardarProducto = async function() {
     const descripcion = document.getElementById('prodDescripcion').value.trim();
     const precio = document.getElementById('prodPrecio').value;
 
-    if(titulo.length < 10) return showNotif('El título debe tener al menos 10 caracteres', 'error');
-    if(!precio || parseFloat(precio) <= 0) return showNotif('Precio inválido', 'error');
+    // Validaciones mejoradas
+    if(!titulo) {
+        showNotif('El título es requerido', 'error');
+        return;
+    }
+    if(titulo.length < 10) {
+        showNotif('El título debe tener al menos 10 caracteres', 'error');
+        return;
+    }
+    if(!precio || parseFloat(precio) <= 0) {
+        showNotif('Precio inválido', 'error');
+        return;
+    }
 
     formData.append('titulo', titulo);
     formData.append('precio', precio);
@@ -1214,8 +1227,10 @@ window.guardarProducto = async function() {
     if(id && imagesToDelete.length > 0) formData.append('imagenes_eliminar', JSON.stringify(imagesToDelete));
 
     const btn = document.getElementById('btnGuardarProducto');
-    btn.textContent = 'Guardando...';
-    btn.disabled = true;
+    if(btn) {
+        btn.textContent = 'Guardando...';
+        btn.disabled = true;
+    }
 
     try {
         const endpoint = id ? '/api/editar_producto_completo.php' : '/api/crear_producto_completo.php';
@@ -1227,11 +1242,12 @@ window.guardarProducto = async function() {
             closeProductDrawer();
             
             // Reload iframe to show changes
-            storeFrame.src = storeFrame.src;
+            const storeFrame = document.getElementById('storeFrame');
+            if(storeFrame) {
+                storeFrame.src = storeFrame.src;
+            }
             
-            // Refresh local list (would require re-fetch, but for now just reload page or fetch api)
-            // For simplicity, we reload the whole page or fetch updated list logic if we had an API for it.
-            // Since we are in "Editor Mode", user expects to see it in list.
+            // Refresh local list
             location.reload(); 
         } else {
             showNotif(result.message || 'Error al guardar', 'error');
@@ -1240,8 +1256,10 @@ window.guardarProducto = async function() {
         showNotif('Error de conexión', 'error');
         console.error(e);
     } finally {
-        btn.textContent = 'Guardar';
-        btn.disabled = false;
+        if(btn) {
+            btn.textContent = 'Guardar';
+            btn.disabled = false;
+        }
     }
 };
 
