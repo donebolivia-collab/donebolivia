@@ -80,7 +80,7 @@ function subirImagen($archivo, $carpeta = 'productos', $rutaBase = null, $produc
     // NUEVO: Si es una imagen de producto, organizar por tienda
     if ($carpeta === 'productos' && $producto_id) {
         // Obtener la tienda del producto
-        $stmt = getDB()->prepare("SELECT t.id as tienda_id, t.nombre_tienda FROM productos p JOIN tiendas t ON p.usuario_id = t.usuario_id WHERE p.id = ?");
+        $stmt = getDB()->prepare("SELECT t.id as tienda_id FROM productos p JOIN tiendas t ON p.usuario_id = t.usuario_id WHERE p.id = ?");
         $stmt->execute([$producto_id]);
         $tienda = $stmt->fetch(PDO::FETCH_ASSOC);
         
