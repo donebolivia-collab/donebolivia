@@ -716,35 +716,14 @@ if (!empty($tienda['menu_items'])) {
                     IDs: <?php echo implode(', ', array_column($productos, 'id')); ?>
                 </div>
                 
-                <?php foreach ($productos as $index => $producto): ?>
+                <?php 
+                // SOLUCIÓN: Usar foreach por referencia para evitar bug de PHP
+                foreach ($productos as $index => &$producto_ref): 
+                    $producto = $producto_ref; // Copiar a variable normal
+            ?>
                     <!-- DEBUG: ÍNDICE Y ID -->
                     <div style="background: #f0f0f0; padding: 5px; margin: 5px 0; font-size: 12px;">
                         PRODUCTO #<?php echo $index; ?> | ID: <?php echo $producto['id']; ?> | <?php echo htmlspecialchars($producto['titulo']); ?>
-                    </div>
-                    
-                    <!-- DEBUG: ESTADO DE LA VARIABLE ANTES DEL HTML -->
-                    <div style="background: red; color: white; padding: 5px; margin: 5px 0; font-size: 12px;">
-                        ANTES DE HTML: Index=<?php echo $index; ?> | ID=<?php echo $producto['id']; ?> | Titulo=<?php echo htmlspecialchars($producto['titulo']); ?>
-                    </div>
-                    
-                    <!-- DEBUG: FORZAR REASIGNACIÓN COMPLETA -->
-                    <?php 
-                        $producto_data = [
-                            'id' => $producto['id'],
-                            'titulo' => $producto['titulo'],
-                            'precio' => $producto['precio'],
-                            'imagen_principal' => $producto['imagen_principal'],
-                            'estado' => $producto['estado'],
-                            'categoria_id' => $producto['categoria_id'],
-                            'categoria_tienda' => $producto['categoria_tienda']
-                        ];
-                        unset($producto);
-                        $producto = $producto_data;
-                    ?>
-                    
-                    <!-- DEBUG: ESTADO DE LA VARIABLE DESPUÉS DE LA REASIGNACIÓN -->
-                    <div style="background: blue; color: white; padding: 5px; margin: 5px 0; font-size: 12px;">
-                        DESPUÉS DE HTML: Index=<?php echo $index; ?> | ID=<?php echo $producto['id']; ?> | Titulo=<?php echo htmlspecialchars($producto['titulo']); ?>
                     </div>
                     
                     <!-- ENLACE SPA -->
