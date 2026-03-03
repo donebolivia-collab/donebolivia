@@ -717,9 +717,19 @@ if (!empty($tienda['menu_items'])) {
                 </div>
                 
                 <?php 
-                // SOLUCIÓN: Usar foreach por referencia para evitar bug de PHP
-                foreach ($productos as $index => &$producto_ref): 
-                    $producto = $producto_ref; // Copiar a variable normal
+                // FORZAR LIMPIEZA COMPLETA DE CACHE Y VARIABLES
+                // Reiniciar variables del servidor
+                if (function_exists('opcache_reset')) {
+                    opcache_reset();
+                }
+                if (function_exists('apc_clear_cache')) {
+                    apc_clear_cache();
+                }
+                
+                // Usar array_keys para evitar bug de foreach
+                $productos_keys = array_keys($productos);
+                foreach ($productos_keys as $index):
+                    $producto = $productos[$index];
             ?>
                     <!-- DEBUG: ÍNDICE Y ID -->
                     <div style="background: #f0f0f0; padding: 5px; margin: 5px 0; font-size: 12px;">
