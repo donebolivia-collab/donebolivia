@@ -1094,7 +1094,7 @@ $titulo = "Editor: " . $tienda['nombre'];
             <i class="fas fa-pen"></i>
         </button>
         <div class="canvas-wrapper">
-            <iframe id="storeFrame" src="/tienda/<?php echo $tienda['slug']; ?>?editor_mode=1" class="store-iframe desktop"></iframe>
+            <iframe id="storeFrame" src="/tienda/<?php echo htmlspecialchars($tienda['slug']); ?>?editor_mode=1&v=<?php echo time(); ?>" class="store-iframe desktop"></iframe>
         </div>
     </main>
 
