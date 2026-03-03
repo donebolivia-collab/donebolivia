@@ -709,33 +709,12 @@ if (!empty($tienda['menu_items'])) {
             <?php endif; ?>
             
             <?php if (!empty($productos)): ?>
-                <!-- DEBUG: CONTADOR DE PRODUCTOS -->
-                <div style="background: yellow; padding: 10px; margin: 10px 0;">
-                    <strong>DEBUG:</strong> 
-                    PHP encontró <?php echo count($productos); ?> productos | 
-                    IDs: <?php echo implode(', ', array_column($productos, 'id')); ?>
-                </div>
-                
                 <?php 
-                // FORZAR LIMPIEZA COMPLETA DE CACHE Y VARIABLES
-                // Reiniciar variables del servidor
-                if (function_exists('opcache_reset')) {
-                    opcache_reset();
-                }
-                if (function_exists('apc_clear_cache')) {
-                    apc_clear_cache();
-                }
-                
                 // Usar array_keys para evitar bug de foreach
                 $productos_keys = array_keys($productos);
                 foreach ($productos_keys as $index):
                     $producto = $productos[$index];
-            ?>
-                    <!-- DEBUG: ÍNDICE Y ID -->
-                    <div style="background: #f0f0f0; padding: 5px; margin: 5px 0; font-size: 12px;">
-                        PRODUCTO #<?php echo $index; ?> | ID: <?php echo $producto['id']; ?> | <?php echo htmlspecialchars($producto['titulo']); ?>
-                    </div>
-                    
+                ?>
                     <!-- ENLACE SPA -->
                     <a href="/tienda_producto.php?slug=<?php echo htmlspecialchars($tienda['slug']); ?>&producto_id=<?php echo $producto['id']; ?>" 
                        class="product-card" 
@@ -1689,6 +1668,6 @@ if (!empty($tienda['menu_items'])) {
     });
 
     </script>
-    <?php endif; ?>
+<?php endif; ?>
 </body>
 </html>

@@ -111,9 +111,9 @@ function subirImagen($archivo, $carpeta = 'productos', $rutaBase = null, $produc
             SELECT pi.nombre_archivo 
             FROM producto_imagenes pi 
             JOIN productos p ON pi.producto_id = p.id
-            WHERE p.usuario_id = ? AND pi.hash_archivo = ?
+            WHERE p.usuario_id = ? AND pi.hash_archivo = ? AND p.id != ?
         ");
-        $stmt->execute([$_SESSION['usuario_id'] ?? 0, $hash_archivo]);
+        $stmt->execute([$_SESSION['usuario_id'] ?? 0, $hash_archivo, $producto_id]);
         $duplicado = $stmt->fetch();
         
         if ($duplicado) {
