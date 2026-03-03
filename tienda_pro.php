@@ -744,8 +744,8 @@ if (!empty($tienda['menu_items'])) {
                                 </div>
                             </div>
 
-                            <!-- BADGES FLOTANTES (COMENTADO TEMPORALMENTE) -->
-                            <!-- <?php echo renderizarBadgesProducto($producto); ?> -->
+                            <!-- BADGES FLOTANTES -->
+                            <?php echo renderizarBadgesProducto($producto); ?>
                         </div>
 
                         <div class="product-info">
