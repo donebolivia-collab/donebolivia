@@ -1,0 +1,285 @@
+/**
+ * Sidebar Module CSS
+ * Estilos completos del sistema de sidebar/navegación
+ * Extraído de editor-tienda.css para mejor mantenibilidad
+ */
+
+/* ==========================================================================
+   SIDEBAR PRINCIPAL
+   ========================================================================== */
+
+.editor-sidebar {
+    width: var(--sidebar-width);
+    background: white;
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    z-index: 20;
+    box-shadow: 4px 0 24px rgba(0,0,0,0.02);
+    position: absolute; /* Para permitir colapso fluido */
+    left: 0;
+    top: 0;
+}
+
+/* ==========================================================================
+   SIDEBAR COMPONENTS
+   ========================================================================== */
+
+.sidebar-header {
+    padding: 8px 16px; /* Ultra compacto */
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #22226B; /* Fondo azul oscuro solicitado */
+    height: 50px; /* Un poco más alto para respirar */
+    box-sizing: border-box;
+    position: relative;
+    z-index: 50;
+}
+
+.sidebar-header h2 {
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0;
+    color: white; /* Texto blanco */
+}
+
+.sidebar-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0;
+}
+
+.sidebar-footer {
+    padding: 10px 16px;
+    border-top: 1px solid var(--border-color);
+    background: white;
+    margin-bottom: 0;
+    flex-shrink: 0; /* EVITAR QUE SE APLASTE */
+}
+
+/* ==========================================================================
+   SIDEBAR FORM ELEMENTS
+   ========================================================================== */
+
+.sidebar-input, .sidebar-select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--text-main);
+    background: white;
+    transition: all 0.2s;
+    box-sizing: border-box;
+}
+
+.sidebar-input:hover, .sidebar-select:hover {
+    border-color: #22226B;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.sidebar-input:focus, .sidebar-select:focus {
+    border-color: #22226B; /* Color solicitado */
+    outline: none;
+    box-shadow: 0 0 0 1px #22226B; /* Sutil sombra del mismo color */
+}
+
+textarea.sidebar-input { 
+    resize: vertical; 
+    min-height: 80px; 
+}
+
+/* ==========================================================================
+   PRODUCT LIST SIDEBAR
+   ========================================================================== */
+
+.sidebar-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.sidebar-product-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    transition: border 0.2s;
+}
+
+.sidebar-product-item:hover { 
+    border-color: var(--primary); 
+}
+
+.sidebar-prod-img { 
+    width: 32px; 
+    height: 32px; 
+    border-radius: 4px; 
+    object-fit: cover; 
+    background: #f1f5f9; 
+}
+
+.sidebar-prod-info { 
+    flex: 1; 
+    min-width: 0; 
+}
+
+.sidebar-prod-title { 
+    font-size: 13px; 
+    font-weight: 500; 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    color: var(--text-main); 
+}
+
+.sidebar-prod-price { 
+    font-size: 11px; 
+    color: var(--text-muted); 
+}
+
+.sidebar-prod-actions { 
+    display: flex; 
+    gap: 4px; 
+}
+
+/* ==========================================================================
+   SIDEBAR BUTTONS
+   ========================================================================== */
+
+.btn-icon-mini {
+    width: 24px; 
+    height: 24px;
+    border: none; 
+    background: transparent;
+    color: var(--text-muted);
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.btn-icon-mini:hover { 
+    background: rgba(255, 255, 255, 0.1); 
+    color: white; 
+}
+
+.btn-icon-mini.delete:hover { 
+    background: #fee2e2; 
+    color: #ef4444; 
+}
+
+.btn-sidebar-action {
+    width: 100%;
+    padding: 10px;
+    border: 1px dashed #cbd5e1;
+    border-radius: 8px;
+    background: white;
+    color: var(--primary);
+    font-size: 13px; font-weight: 500;
+    cursor: pointer;
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 6px;
+    transition: all 0.2s;
+}
+
+.btn-sidebar-action:hover { 
+    border-color: var(--primary); 
+    background: #eff6ff; 
+}
+
+.btn-sidebar-action.secondary { 
+    color: var(--text-muted); 
+    border-color: #cbd5e1; 
+}
+
+.btn-sidebar-action.secondary:hover { 
+    color: var(--text-main); 
+    background: #f8fafc; 
+}
+
+.btn-sidebar-link {
+    background: none; 
+    border: none;
+    color: var(--primary);
+    font-size: 13px; 
+    font-weight: 500;
+    cursor: pointer;
+    display: flex; 
+    align-items: center; 
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.btn-sidebar-link:hover { 
+    text-decoration: underline; 
+}
+
+.btn-live-view {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 10px;
+    background: var(--text-main);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.btn-live-view:hover { 
+    background: #0f172a; 
+}
+
+/* ==========================================================================
+   SIDEBAR HEADER & STATUS BAR OVERRIDES
+   ========================================================================== */
+
+.sidebar-header {
+    position: relative;
+    z-index: 50;
+}
+
+/* ==========================================================================
+   RESPONSIVE SIDEBAR
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .editor-sidebar {
+        width: 100%;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+    
+    .editor-sidebar.show {
+        transform: translateX(0);
+    }
+}
+
+/* ==========================================================================
+   VARIABLES CSS (Para personalización)
+   ========================================================================== */
+
+:root {
+    --sidebar-width: 320px;
+    --sidebar-z-index: 20;
+    --sidebar-header-height: 50px;
+    --sidebar-header-bg: #22226B;
+    --sidebar-header-color: white;
+    --sidebar-border-color: var(--border-color);
+    --sidebar-transition: all 0.2s ease;
+}
