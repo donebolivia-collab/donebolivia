@@ -641,12 +641,18 @@ window.toggleFeaturedSections = function(isActive) {
         } 
     });
     
+    // 🔄 Guardar estado inmediatamente antes de recargar
+    // Esto asegura que PHP tenga el estado actualizado al generar el HTML
+    saveFeaturedSectionsState();
+    
     // 🔄 Progressive Sync Pattern con actualización forzosa
     // Forzar recarga del iframe para asegurar actualización visual
-    const storeFrame = document.getElementById('storeFrame');
-    if(storeFrame) {
-        storeFrame.src = storeFrame.src;
-    }
+    setTimeout(() => {
+        const storeFrame = document.getElementById('storeFrame');
+        if(storeFrame) {
+            storeFrame.src = storeFrame.src;
+        }
+    }, 300); // Pequeño delay para asegurar que el guardado se complete
     
     // Sincronizar con ProductSyncManager si está disponible
     if (window.ProductSyncManager) {
@@ -656,6 +662,30 @@ window.toggleFeaturedSections = function(isActive) {
     }
     
     markUnsaved();
+};
+
+// Función para guardar inmediatamente el estado de secciones destacadas
+window.saveFeaturedSectionsState = async function() {
+    try {
+        const data = {
+            secciones_destacadas_activo: window.tiendaState.seccionesDestacadas.activo,
+            secciones_destacadas_estilo: window.tiendaState.seccionesDestacadas.estilo
+        };
+        
+        const res = await fetch('/api/guardar_tienda.php', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(data)
+        });
+        
+        if (res.ok) {
+            console.log('[toggleFeaturedSections] Estado guardado exitosamente');
+        } else {
+            console.error('[toggleFeaturedSections] Error al guardar estado');
+        }
+    } catch (e) {
+        console.error('[toggleFeaturedSections] Error de conexión:', e);
+    }
 };
 
 window.setFeaturedSectionsStyle = function(style) {
