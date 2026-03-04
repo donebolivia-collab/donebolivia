@@ -1098,7 +1098,7 @@ $titulo = "Editor: " . $tienda['nombre'];
             <i class="fas fa-pen"></i>
         </button>
         <div class="canvas-wrapper">
-            <iframe id="storeFrame" src="/tienda/<?php echo htmlspecialchars($tienda['slug']); ?>?editor_mode=1&v=<?php echo time(); ?>" class="store-iframe desktop"></iframe>
+            <iframe id="storeFrame" src="/tienda/<?php echo htmlspecialchars($tienda['slug']); ?>?editor_mode=1" class="store-iframe desktop"></iframe>
         </div>
     </main>
 
@@ -1179,6 +1179,8 @@ $titulo = "Editor: " . $tienda['nombre'];
 <script src="/assets/js/modules/image-manager.js?v=<?php echo time(); ?>"></script>
 <script src="/assets/js/modules/product-editor-core.js?v=<?php echo time(); ?>"></script>
 <script src="/assets/js/editor-tienda.js?v=<?php echo time(); ?>"></script>
+<script src="/assets/js/modules/realtime-communicator.js?v=<?php echo time(); ?>"></script>
+<script src="/assets/js/modules/editor-integration.js?v=<?php echo time(); ?>"></script>
 <link rel="stylesheet" href="/assets/css/ui-multiselect.css?v=<?php echo time(); ?>">
 </body>
 </html>

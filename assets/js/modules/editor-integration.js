@@ -1,0 +1,376 @@
+/**
+ * Editor Integration - Integración del nuevo sistema de comunicación
+ * Reemplaza el sistema frágil actual por el robusto
+ */
+
+// Inicializar el nuevo sistema de comunicación
+let realtimeCommunicator = null;
+let isCommunicatorReady = false;
+
+/**
+ * Inicializa el sistema de comunicación robusto
+ */
+function initRealtimeCommunication() {
+    console.log('[EditorIntegration] Inicializando comunicación robusta');
+    
+    // Crear instancia del comunicador
+    realtimeCommunicator = new RealtimeCommunicator({
+        maxRetries: 5,
+        retryDelay: 1000,
+        handshakeTimeout: 5000,
+        heartbeatInterval: 30000
+    });
+    
+    // Configurar callbacks
+    setupCommunicatorCallbacks();
+    
+    // Marcar como listo
+    isCommunicatorReady = true;
+    
+    console.log('[EditorIntegration] Comunicación robusta inicializada');
+}
+
+/**
+ * Configura los callbacks del comunicador
+ */
+function setupCommunicatorCallbacks() {
+    // Callback de conexión exitosa
+    realtimeCommunicator.on('onConnect', (data) => {
+        console.log('[EditorIntegration] Conexión establecida', data);
+        
+        // Sincronizar estado inicial
+        syncAllSettings();
+        
+        // Actualizar indicador de estado
+        updateConnectionIndicator(true);
+    });
+    
+    // Callback de desconexión
+    realtimeCommunicator.on('onDisconnect', () => {
+        console.warn('[EditorIntegration] Conexión perdida');
+        
+        // Actualizar indicador de estado
+        updateConnectionIndicator(false);
+        
+        // Mostrar notificación al usuario
+        showNotif('Conexión con vista previa perdida. Reintentando...', 'warning');
+    });
+    
+    // Callback de mensajes
+    realtimeCommunicator.on('onMessage', (data) => {
+        console.log('[EditorIntegration] Mensaje recibido', data);
+        
+        // Manejar mensajes específicos del iframe
+        handleIframeMessage(data);
+    });
+    
+    // Callback de errores
+    realtimeCommunicator.on('onError', (data) => {
+        console.error('[EditorIntegration] Error de comunicación', data);
+        
+        // Mostrar notificación al usuario
+        showNotif('Error en la comunicación con la vista previa', 'error');
+        
+        // Actualizar indicador
+        updateConnectionIndicator(false);
+    });
+    
+    // Callback de handshake completado
+    realtimeCommunicator.on('onHandshakeComplete', (data) => {
+        console.log('[EditorIntegration] Handshake completado', data);
+        
+        // Sincronizar estado completo
+        syncCompleteState();
+    });
+}
+
+/**
+ * Maneja mensajes provenientes del iframe
+ */
+function handleIframeMessage(data) {
+    switch (data.type) {
+        case 'syncFromFrame':
+            handleSyncFromFrame(data.payload);
+            break;
+            
+        case 'iframeReady':
+            // Este mensaje ahora es manejado por el comunicador
+            console.log('[EditorIntegration] iframeReady recibido (legacy)');
+            break;
+            
+        default:
+            console.log('[EditorIntegration] Mensaje no manejado:', data.type);
+            break;
+    }
+}
+
+/**
+ * Maneja la sincronización desde el iframe
+ */
+function handleSyncFromFrame(payload) {
+    const { field, value } = payload;
+    
+    // Actualizar el campo correspondiente en el editor
+    const elementMap = {
+        'descripcion': 'storeDescription',
+        'nombre': 'storeName'
+    };
+    
+    const elementId = elementMap[field];
+    if (elementId) {
+        const element = document.getElementById(elementId);
+        if (element && element.value !== value) {
+            element.value = value;
+            markUnsaved();
+        }
+    }
+}
+
+/**
+ * Envía un mensaje al iframe usando el nuevo sistema
+ */
+function postToFrameRobust(type, payload) {
+    if (!isCommunicatorReady || !realtimeCommunicator) {
+        console.warn('[EditorIntegration] Comunicador no listo, encolando mensaje');
+        
+        // Encolar mensaje para cuando esté listo
+        setTimeout(() => {
+            postToFrameRobust(type, payload);
+        }, 100);
+        
+        return false;
+    }
+    
+    return realtimeCommunicator.sendMessage(type, payload);
+}
+
+/**
+ * Sincroniza toda la configuración inicial
+ */
+function syncCompleteState() {
+    console.log('[EditorIntegration] Sincronizando estado completo');
+    
+    // Sincronizar tema completo
+    postToFrameRobust('updateTheme', {
+        color: window.tiendaState.color,
+        fondo: window.tiendaState.estiloFondo,
+        bordes: window.tiendaState.estiloBordes,
+        fuente: window.tiendaState.tipografia,
+        tamano: window.tiendaState.tamanoTexto,
+        tarjetas: window.tiendaState.estiloTarjetas,
+        grid: window.tiendaState.gridDensity,
+        banner: window.tiendaState.banner,
+        seccionesDestacadas: window.tiendaState.seccionesDestacadas,
+        fotos: window.tiendaState.estiloFotos
+    });
+    
+    // Sincronizar texto
+    const nameInput = document.getElementById('storeName');
+    if (nameInput) {
+        postToFrameRobust('updateText', {
+            selector: '.store-name',
+            text: nameInput.value,
+            visible: window.tiendaState.mostrar_nombre
+        });
+    }
+    
+    // Sincronizar logo
+    postToFrameRobust('updateLogoState', {
+        visible: !!window.tiendaState.mostrar_logo,
+        url: window.tiendaState.logo_principal ? `/uploads/logos/${window.tiendaState.logo_principal}` : null
+    });
+    
+    // Sincronizar contacto
+    syncContact();
+    
+    // Sincronizar menú
+    if (window.menuItems) {
+        postToFrameRobust('updateMenu', { items: window.menuItems });
+    }
+}
+
+/**
+ * Actualiza el indicador de conexión
+ */
+function updateConnectionIndicator(isConnected) {
+    const indicator = document.getElementById('connectionIndicator');
+    const statusText = document.getElementById('connectionStatusText');
+    
+    if (indicator) {
+        indicator.className = isConnected ? 'connected' : 'disconnected';
+        indicator.title = isConnected ? 'Conectado con vista previa' : 'Desconectado de vista previa';
+    }
+    
+    if (statusText) {
+        statusText.textContent = isConnected ? 'Conectado' : 'Desconectado';
+        statusText.style.color = isConnected ? '#28a745' : '#dc3545';
+    }
+}
+
+/**
+ * Reemplaza las funciones antiguas por las nuevas
+ */
+function replaceLegacyFunctions() {
+    console.log('[EditorIntegration] Reemplazando funciones legacy');
+    
+    // Guardar referencia a la función original
+    const originalPostToFrame = window.postToFrame;
+    
+    // Reemplazar con la nueva función robusta
+    window.postToFrame = function(type, payload) {
+        console.log(`[EditorIntegration] postToFrame llamado: ${type}`);
+        
+        // Usar el nuevo sistema
+        if (isCommunicatorReady) {
+            return postToFrameRobust(type, payload);
+        } else {
+            // Fallback al sistema antiguo si el nuevo no está listo
+            console.warn('[EditorIntegration] Usando fallback a sistema antiguo');
+            return originalPostToFrame ? originalPostToFrame.call(this, type, payload) : false;
+        }
+    };
+    
+    // Reemplazar syncAllSettings
+    const originalSyncAllSettings = window.syncAllSettings;
+    window.syncAllSettings = function() {
+        if (isCommunicatorReady && realtimeCommunicator) {
+            syncCompleteState();
+        } else if (originalSyncAllSettings) {
+            originalSyncAllSettings.call(this);
+        }
+    };
+}
+
+/**
+ * Agrega indicador de conexión al UI
+ */
+function addConnectionIndicator() {
+    // Verificar si ya existe
+    if (document.getElementById('connectionIndicator')) {
+        return;
+    }
+    
+    // Crear indicador
+    const indicator = document.createElement('div');
+    indicator.id = 'connectionIndicator';
+    indicator.className = 'connection-indicator disconnected';
+    indicator.title = 'Estado de conexión con vista previa';
+    indicator.innerHTML = '<i class="fas fa-wifi"></i>';
+    
+    // Crear texto de estado
+    const statusText = document.createElement('span');
+    statusText.id = 'connectionStatusText';
+    statusText.textContent = 'Conectando...';
+    statusText.style.cssText = 'font-size: 11px; margin-left: 5px;';
+    
+    indicator.appendChild(statusText);
+    
+    // Agregar al header del sidebar
+    const sidebarHeader = document.querySelector('.sidebar-header');
+    if (sidebarHeader) {
+        sidebarHeader.appendChild(indicator);
+    }
+    
+    // Agregar estilos
+    const style = document.createElement('style');
+    style.textContent = `
+        .connection-indicator {
+            display: flex;
+            align-items: center;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-left: auto;
+            transition: all 0.3s ease;
+        }
+        
+        .connection-indicator.connected {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .connection-indicator.disconnected {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .connection-indicator.connecting {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        
+        .connection-indicator i {
+            animation: none;
+        }
+        
+        .connection-indicator.disconnected i {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+/**
+ * Inicializa todo el sistema de comunicación
+ */
+function initCommunicationSystem() {
+    console.log('[EditorIntegration] Inicializando sistema completo de comunicación');
+    
+    // Agregar indicador de conexión
+    addConnectionIndicator();
+    
+    // Inicializar comunicador robusto
+    initRealtimeCommunication();
+    
+    // Reemplazar funciones legacy
+    replaceLegacyFunctions();
+    
+    // Configurar fallback para el sistema antiguo
+    setupLegacyFallback();
+    
+    console.log('[EditorIntegration] Sistema de comunicación inicializado completamente');
+}
+
+/**
+ * Configura fallback al sistema antiguo
+ */
+function setupLegacyFallback() {
+    // Si después de 10 segundos el nuevo sistema no está listo, usar el antiguo
+    setTimeout(() => {
+        if (!isCommunicatorReady) {
+            console.warn('[EditorIntegration] Nuevo sistema no listo, usando fallback');
+            
+            // Usar sistema antiguo
+            const storeFrame = document.getElementById('storeFrame');
+            if (storeFrame) {
+                storeFrame.onload = function() {
+                    console.log('[EditorIntegration] Fallback: iframe cargado');
+                    window.isFrameReady = true;
+                    syncAllSettings();
+                };
+            }
+        }
+    }, 10000);
+}
+
+// Inicializar cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', function() {
+    // Esperar un poco a que el sistema principal se inicialice
+    setTimeout(initCommunicationSystem, 500);
+});
+
+// Exponer funciones globalmente
+window.initCommunicationSystem = initCommunicationSystem;
+window.postToFrameRobust = postToFrameRobust;
+window.getConnectionState = function() {
+    return realtimeCommunicator ? realtimeCommunicator.getConnectionState() : null;
+};

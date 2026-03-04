@@ -312,6 +312,8 @@ if (!empty($tienda['menu_items'])) {
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Plus+Jakarta+Sans:wght@400;500;700&family=Manrope:wght@400;500;700&family=Outfit:wght@300;500;700&family=Poppins:wght@300;400;500;600&family=Space+Mono&family=Roboto:wght@300;400;500;700&family=Lora:wght@400;600&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/modules/badges.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="/assets/css/tienda-pro.css?v=<?php echo time(); ?>">
+    <script src="/assets/js/modules/iframe-receiver.js?v=<?php echo time(); ?>"></script>
+    <script src="/assets/js/modules/iframe-integration.js?v=<?php echo time(); ?>"></script>
     <style>
         .store-header {
             display: flex;
@@ -1671,6 +1673,11 @@ if (!empty($tienda['menu_items'])) {
     });
 
     </script>
+    
+    <!-- Testing de comunicación (solo en modo editor) -->
+    <?php if (isset($_GET['editor_mode'])): ?>
+    <script src="/assets/js/modules/realtime-communication-test.js?v=<?php echo time(); ?>"></script>
+    <?php endif; ?>
 <?php endif; ?>
 </body>
 </html>
