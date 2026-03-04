@@ -640,6 +640,21 @@ window.toggleFeaturedSections = function(isActive) {
             activo: window.tiendaState.seccionesDestacadas.activo
         } 
     });
+    
+    // 🔄 Progressive Sync Pattern con actualización forzosa
+    // Forzar recarga del iframe para asegurar actualización visual
+    const storeFrame = document.getElementById('storeFrame');
+    if(storeFrame) {
+        storeFrame.src = storeFrame.src;
+    }
+    
+    // Sincronizar con ProductSyncManager si está disponible
+    if (window.ProductSyncManager) {
+        window.ProductSyncManager.sync('updateFeaturedSections', {
+            activo: window.tiendaState.seccionesDestacadas.activo
+        });
+    }
+    
     markUnsaved();
 };
 
