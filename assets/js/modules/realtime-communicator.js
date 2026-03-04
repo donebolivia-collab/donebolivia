@@ -54,7 +54,10 @@ class RealtimeCommunicator {
      * Inicializa el sistema de comunicación
      */
     init() {
-        console.log(`[RealtimeCommunicator] Inicializando conexión ${this.state.connectionId}`);
+        // Solo log en modo desarrollo
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            console.log(`[RealtimeCommunicator] Inicializando conexión ${this.state.connectionId}`);
+        }
         
         this.setupMessageListener();
         this.setupIframeDetection();

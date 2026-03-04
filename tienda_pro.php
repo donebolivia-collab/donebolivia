@@ -1714,11 +1714,6 @@ if (!empty($tienda['menu_items'])) {
     });
 
     </script>
-    
-    <!-- Testing de comunicación (solo en modo editor) -->
-    <?php if (isset($_GET['editor_mode'])): ?>
-    <script src="/assets/js/modules/realtime-communication-test.js?v=<?php echo time(); ?>"></script>
-    <?php endif; ?>
 <?php endif; ?>
 </body>
 </html>

@@ -199,21 +199,11 @@ function syncCompleteState() {
 }
 
 /**
- * Actualiza el indicador de conexión
+ * Actualiza el indicador de conexión (eliminado - sistema silencioso)
  */
 function updateConnectionIndicator(isConnected) {
-    const indicator = document.getElementById('connectionIndicator');
-    const statusText = document.getElementById('connectionStatusText');
-    
-    if (indicator) {
-        indicator.className = isConnected ? 'connected' : 'disconnected';
-        indicator.title = isConnected ? 'Conectado con vista previa' : 'Desconectado de vista previa';
-    }
-    
-    if (statusText) {
-        statusText.textContent = isConnected ? 'Conectado' : 'Desconectado';
-        statusText.style.color = isConnected ? '#28a745' : '#dc3545';
-    }
+    // Sistema funciona silenciosamente sin indicador visual
+    console.log(`[EditorIntegration] Estado de conexión: ${isConnected ? 'Conectado' : 'Desconectado'}`);
 }
 
 /**
@@ -251,91 +241,12 @@ function replaceLegacyFunctions() {
 }
 
 /**
- * Agrega indicador de conexión al UI
- */
-function addConnectionIndicator() {
-    // Verificar si ya existe
-    if (document.getElementById('connectionIndicator')) {
-        return;
-    }
-    
-    // Crear indicador
-    const indicator = document.createElement('div');
-    indicator.id = 'connectionIndicator';
-    indicator.className = 'connection-indicator disconnected';
-    indicator.title = 'Estado de conexión con vista previa';
-    indicator.innerHTML = '<i class="fas fa-wifi"></i>';
-    
-    // Crear texto de estado
-    const statusText = document.createElement('span');
-    statusText.id = 'connectionStatusText';
-    statusText.textContent = 'Conectando...';
-    statusText.style.cssText = 'font-size: 11px; margin-left: 5px;';
-    
-    indicator.appendChild(statusText);
-    
-    // Agregar al header del sidebar
-    const sidebarHeader = document.querySelector('.sidebar-header');
-    if (sidebarHeader) {
-        sidebarHeader.appendChild(indicator);
-    }
-    
-    // Agregar estilos
-    const style = document.createElement('style');
-    style.textContent = `
-        .connection-indicator {
-            display: flex;
-            align-items: center;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 12px;
-            margin-left: auto;
-            transition: all 0.3s ease;
-        }
-        
-        .connection-indicator.connected {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        
-        .connection-indicator.disconnected {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-        
-        .connection-indicator.connecting {
-            background-color: #fff3cd;
-            color: #856404;
-            border: 1px solid #ffeaa7;
-        }
-        
-        .connection-indicator i {
-            animation: none;
-        }
-        
-        .connection-indicator.disconnected i {
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
-    `;
-    document.head.appendChild(style);
-}
-
-/**
  * Inicializa todo el sistema de comunicación
  */
 function initCommunicationSystem() {
     console.log('[EditorIntegration] Inicializando sistema completo de comunicación');
     
-    // Agregar indicador de conexión
-    addConnectionIndicator();
+    // NO agregar indicador de conexión - el sistema funciona silenciosamente
     
     // Inicializar comunicador robusto
     initRealtimeCommunication();
