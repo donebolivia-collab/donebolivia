@@ -580,8 +580,8 @@ $titulo = "Editor: " . $tienda['nombre'];
                     <i class="fas fa-chevron-down arrow"></i>
                 </div>
                 <div class="accordion-body">
-                    <!-- PANELES DE ADMINISTRACIÓN -->
-                    <label style="display: block; font-size: 11px; font-weight: 700; color: #000000; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">PANELES DE ADMINISTRACIÓN</label>
+                    <!-- Preferencias -->
+                    <label style="display: block; font-size: 11px; font-weight: 700; color: #000000; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">Preferencias</label>
                     <div class="panel-toggles-row" style="display: flex; gap: 10px; margin-bottom: 20px;">
                         <!-- 1. Inicio -->
                         <button class="btn-panel-toggle" onclick="openHomeDrawer()" title="Inicio">
@@ -627,8 +627,8 @@ $titulo = "Editor: " . $tienda['nombre'];
                         </button>
                     </div>
 
-                    <!-- PANELES DE ADMINISTRACIÓN -->
-                    <label style="display: block; font-size: 11px; font-weight: 700; color: #000000; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">PANELES DE ADMINISTRACIÓN</label>
+                    <!-- Preferencias -->
+                    <label style="display: block; font-size: 11px; font-weight: 700; color: #000000; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">Preferencias</label>
                     <div class="panel-toggles-row" style="display: flex; gap: 10px; margin-bottom: 20px;">
                         <!-- 3. Inventario -->
                         <button class="btn-panel-toggle" onclick="openInventoryDrawer()" title="Inventario">
