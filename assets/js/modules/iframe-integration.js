@@ -241,8 +241,8 @@ function setupEditableElements() {
     // Agregar clases editables a elementos relevantes
     const editableSelectors = [
         '.store-name',
-        '.about-description-text',
-        '.store-navbar'
+        '.about-description-text'
+        // '.store-navbar' - Eliminado para evitar línea segmentada en hover
     ];
     
     editableSelectors.forEach(selector => {
