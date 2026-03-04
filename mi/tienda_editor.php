@@ -580,9 +580,17 @@ $titulo = "Editor: " . $tienda['nombre'];
                     <i class="fas fa-chevron-down arrow"></i>
                 </div>
                 <div class="accordion-body">
-                    <div class="control-group">
-                        <label>Inicio</label>
-                        <p style="font-size: 12px; color: #64748b; margin: 8px 0;">Configura la sección principal de tu tienda.</p>
+                    <!-- PANELES DE ADMINISTRACIÓN -->
+                    <label style="display: block; font-size: 11px; font-weight: 700; color: #000000; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">PANELES DE ADMINISTRACIÓN</label>
+                    <div class="panel-toggles-row" style="display: flex; gap: 10px; margin-bottom: 20px;">
+                        <!-- 1. Inicio -->
+                        <button class="btn-panel-toggle" onclick="openHomeDrawer()" title="Inicio">
+                            <i class="fas fa-home"></i>
+                        </button>
+                        <!-- 2. Secciones -->
+                        <button class="btn-panel-toggle" onclick="openSectionsDrawer()" title="Secciones">
+                            <i class="fas fa-cog"></i>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -622,14 +630,6 @@ $titulo = "Editor: " . $tienda['nombre'];
                     <!-- PANELES DE ADMINISTRACIÓN -->
                     <label style="display: block; font-size: 11px; font-weight: 700; color: #000000; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">PANELES DE ADMINISTRACIÓN</label>
                     <div class="panel-toggles-row" style="display: flex; gap: 10px; margin-bottom: 20px;">
-                        <!-- 1. Inicio -->
-                        <button class="btn-panel-toggle" onclick="openHomeDrawer()" title="Inicio">
-                            <i class="fas fa-home"></i>
-                        </button>
-                        <!-- 2. Secciones -->
-                        <button class="btn-panel-toggle" onclick="openSectionsDrawer()" title="Secciones">
-                            <i class="fas fa-cog"></i>
-                        </button>
                         <!-- 3. Inventario -->
                         <button class="btn-panel-toggle" onclick="openInventoryDrawer()" title="Inventario">
                             <i class="fas fa-clipboard-list"></i>
