@@ -13,6 +13,15 @@ let isCommunicatorReady = false;
 function initRealtimeCommunication() {
     console.log('[EditorIntegration] Inicializando comunicación robusta');
     
+    // SIEMPRE inicializar, sin verificar editor_mode
+    // El sistema debe funcionar siempre que esté en un iframe
+    
+    // Verificar si estamos en un iframe
+    if (window.self === window.top) {
+        console.log('[EditorIntegration] No estamos en un iframe, omitiendo comunicación');
+        return;
+    }
+    
     // Crear instancia del comunicador
     realtimeCommunicator = new RealtimeCommunicator({
         maxRetries: 5,

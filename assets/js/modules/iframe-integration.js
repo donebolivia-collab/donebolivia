@@ -301,9 +301,12 @@ function sendMessageToEditor(type, payload) {
 function initIframeSystem() {
     console.log('[IframeIntegration] Inicializando sistema completo del iframe');
     
-    // Verificar modo editor
-    if (!window.location.search.includes('editor_mode=1')) {
-        console.log('[IframeIntegration] No estamos en modo editor');
+    // SIEMPRE inicializar si estamos en un iframe
+    // No depender de editor_mode para que el sistema funcione siempre
+    
+    // Verificar si estamos en un iframe
+    if (window.self === window.top) {
+        console.log('[IframeIntegration] No estamos en un iframe');
         return;
     }
     
@@ -313,7 +316,7 @@ function initIframeSystem() {
     // Configurar elementos editables
     setupEditableElements();
     
-    // Enviar señal de listo (legacy + nuevo)
+    // Enviar señal de listo inmediatamente (no esperar)
     setTimeout(() => {
         // Señal legacy para compatibilidad
         if (window.parent && window.parent !== window.self) {
@@ -331,7 +334,7 @@ function initIframeSystem() {
                 userAgent: navigator.userAgent
             });
         }
-    }, 1000);
+    }, 500);
     
     console.log('[IframeIntegration] Sistema del iframe inicializado completamente');
 }

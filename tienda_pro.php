@@ -314,6 +314,47 @@ if (!empty($tienda['menu_items'])) {
     <link rel="stylesheet" href="/assets/css/tienda-pro.css?v=<?php echo time(); ?>">
     <script src="/assets/js/modules/iframe-receiver.js?v=<?php echo time(); ?>"></script>
     <script src="/assets/js/modules/iframe-integration.js?v=<?php echo time(); ?>"></script>
+    <script>
+        // Forzar inicialización inmediata del sistema de comunicación
+        document.addEventListener('DOMContentLoaded', function() {
+            // Esperar un poco y forzar la inicialización
+            setTimeout(function() {
+                if (typeof IframeReceiver !== 'undefined') {
+                    console.log('[Iframe] Forzando inicialización del receptor...');
+                    
+                    // Destruir instancia existente si hay
+                    if (window.iframeReceiverInstance) {
+                        window.iframeReceiverInstance.destroy();
+                    }
+                    
+                    // Crear nueva instancia
+                    window.iframeReceiverInstance = new IframeReceiver({
+                        handshakeTimeout: 5000,
+                        heartbeatInterval: 30000
+                    });
+                    
+                    // Enviar señal de listo inmediatamente
+                    setTimeout(function() {
+                        if (window.parent && window.parent !== window.self) {
+                            window.parent.postMessage({
+                                type: 'iframeReady',
+                                timestamp: Date.now()
+                            }, window.location.origin);
+                            
+                            // También enviar READY_SIGNAL del nuevo sistema
+                            if (window.iframeReceiverInstance) {
+                                window.iframeReceiverInstance.sendMessage('READY_SIGNAL', {
+                                    timestamp: Date.now(),
+                                    url: window.location.href,
+                                    userAgent: navigator.userAgent
+                                });
+                            }
+                        }
+                    }, 500);
+                }
+            }, 100);
+        });
+    </script>
     <style>
         .store-header {
             display: flex;
