@@ -196,7 +196,13 @@ body {
 }
 
 /* Excepción para títulos de preferencias */
-.control-group label.preferencias-title {
+.preferencias-title {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
     text-transform: none !important;
 }
 
