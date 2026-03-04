@@ -855,7 +855,7 @@ body.modal-open .kommo-widget-container {
 
 .menu-item:hover {
     background: var(--btn-bg-hover);
-    border-color: var(--btn-border);
+    border-color: transparent;
     box-shadow: var(--btn-shadow);
     color: var(--text-main);
 }
