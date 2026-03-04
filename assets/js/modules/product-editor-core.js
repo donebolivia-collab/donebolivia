@@ -275,14 +275,17 @@ const ProductEditorCore = (function() {
                 }
                 closeProductDrawer();
                 
-                // Reload iframe to show changes
-                const storeFrame = document.getElementById('storeFrame');
-                if(storeFrame) {
-                    storeFrame.src = storeFrame.src;
-                }
-                
-                // Refresh local list
-                location.reload(); 
+                // 🚀 Progressive Sync Pattern - Sin parpadeo
+                if (result.product) {
+                    // Usar el nuevo sistema de sincronización
+                    await window.ProductSyncManager.sync('add', result.product);
+                } else {
+                    // Fallback: Actualización local si no hay datos de producto
+                    console.warn('[ProductEditorCore] No se recibieron datos del producto, usando fallback');
+                    if (typeof renderInventoryList === 'function') {
+                        renderInventoryList();
+                    }
+                } 
             } else {
                 if (typeof showNotif === 'function') {
                     showNotif(result.message || 'Error al guardar', 'error');

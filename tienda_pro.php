@@ -1330,6 +1330,15 @@ if (!empty($tienda['menu_items'])) {
             } else {
                 console.warn('Could not find a menu button for section:', sectionName);
             }
+        } else if (data.type === 'addProduct') {
+            // Agregar nueva tarjeta de producto sin recargar
+            addProductCardToGrid(data.payload);
+        } else if (data.type === 'updateProduct') {
+            // Actualizar tarjeta de producto existente sin recargar
+            updateProductCardInGrid(data.payload);
+        } else if (data.type === 'deleteProduct') {
+            // Eliminar tarjeta de producto sin recargar
+            removeProductCardFromGrid(data.payload);
         }
 
         if (data.type === 'updateTheme') {

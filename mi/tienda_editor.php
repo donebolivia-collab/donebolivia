@@ -1180,6 +1180,7 @@ $titulo = "Editor: " . $tienda['nombre'];
 <script src="/assets/js/modules/product-editor-core.js?v=<?php echo time(); ?>"></script>
 <script src="/assets/js/editor-tienda.js?v=<?php echo time(); ?>"></script>
 <script src="/assets/js/modules/realtime-communicator.js?v=<?php echo time(); ?>"></script>
+<script src="/assets/js/modules/product-sync-manager.js?v=<?php echo time(); ?>"></script>
 <script src="/assets/js/modules/editor-integration.js?v=<?php echo time(); ?>"></script>
 <link rel="stylesheet" href="/assets/css/ui-multiselect.css?v=<?php echo time(); ?>">
 </body>
