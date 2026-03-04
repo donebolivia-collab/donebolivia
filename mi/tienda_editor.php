@@ -573,6 +573,20 @@ $titulo = "Editor: " . $tienda['nombre'];
                 </div>
             </div>
 
+            <!-- SECCIONES -->
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span><i class="fas fa-th-large"></i> Secciones</span>
+                    <i class="fas fa-chevron-down arrow"></i>
+                </div>
+                <div class="accordion-body">
+                    <div class="control-group">
+                        <label>Inicio</label>
+                        <p style="font-size: 12px; color: #64748b; margin: 8px 0;">Configura la sección principal de tu tienda.</p>
+                    </div>
+                </div>
+            </div>
+
             <!-- PRODUCTOS -->
             <div class="accordion-item">
                 <div class="accordion-header" onclick="toggleAccordion(this)">
