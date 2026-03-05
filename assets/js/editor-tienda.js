@@ -1753,7 +1753,7 @@ window.renderInventoryList = function() {
                     interactive: true,
                     hideOnClick: true,
                     appendTo: document.body,
-                    offset: [0, 15],
+                    offset: [0, 5],
                     popperOptions: {
                         fallbackPlacements: []
                     },
