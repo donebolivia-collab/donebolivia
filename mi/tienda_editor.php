@@ -622,8 +622,8 @@ $titulo = "Editor: " . $tienda['nombre'];
                                             <span style="font-weight: 500; color: #1f293b; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px;" title="Tecno Camon 18 Pro Más">Tecno Camon 18 Pro Más</span>
                                         </td>
                                         <td style="padding: 12px; vertical-align: middle; width: 60px; text-align: right; padding-right: 20px;">
-                                            <div class="dropdown-table" style="position: relative; display: inline-block; margin-right: 0px;">
-                                                <button class="dropdown-trigger-ellipsis" onclick="toggleTableDropdown('test1')" style="background: none; border: none; padding: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
+                                            <div class="dropdown-table" style="position: relative; display: inline-block; width: 100%; text-align: right;">
+                                                <button class="dropdown-trigger-ellipsis" onclick="toggleTableDropdown('test1')" style="background: none; border: none; padding: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s; margin-left: auto;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
                                                     <i class="fas fa-ellipsis-v" style="color: #64748b; font-size: 14px;"></i>
                                                 </button>
                                                 <div id="test1Dropdown" class="dropdown-menu-table" style="display: none; position: absolute; top: 100%; right: -20px; z-index: 1000; background: white; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 140px; border: 1px solid #e2e8f0;">
@@ -656,8 +656,8 @@ $titulo = "Editor: " . $tienda['nombre'];
                                             <span style="font-weight: 500; color: #1f293b; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px;" title="Beta Test v2.0">Beta Test v2.0</span>
                                         </td>
                                         <td style="padding: 12px; vertical-align: middle; width: 60px; text-align: right; padding-right: 20px;">
-                                            <div class="dropdown-table" style="position: relative; display: inline-block;">
-                                                <button class="dropdown-trigger-ellipsis" onclick="toggleTableDropdown('test2')" style="background: none; border: none; padding: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
+                                            <div class="dropdown-table" style="position: relative; display: inline-block; width: 100%; text-align: right;">
+                                                <button class="dropdown-trigger-ellipsis" onclick="toggleTableDropdown('test2')" style="background: none; border: none; padding: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s; margin-left: auto;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
                                                     <i class="fas fa-ellipsis-v" style="color: #64748b; font-size: 14px;"></i>
                                                 </button>
                                                 <div id="test2Dropdown" class="dropdown-menu-table" style="display: none; position: absolute; top: 100%; right: -20px; z-index: 1000; background: white; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 140px; border: 1px solid #e2e8f0;">
@@ -690,8 +690,8 @@ $titulo = "Editor: " . $tienda['nombre'];
                                             <span style="font-weight: 500; color: #1f293b; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px;" title="Experimento Responsive v1.5">Experimento Responsive v1.5</span>
                                         </td>
                                         <td style="padding: 12px; vertical-align: middle; width: 60px; text-align: right; padding-right: 20px;">
-                                            <div class="dropdown-table" style="position: relative; display: inline-block;">
-                                                <button class="dropdown-trigger-ellipsis" onclick="toggleTableDropdown('test3')" style="background: none; border: none; padding: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
+                                            <div class="dropdown-table" style="position: relative; display: inline-block; width: 100%; text-align: right;">
+                                                <button class="dropdown-trigger-ellipsis" onclick="toggleTableDropdown('test3')" style="background: none; border: none; padding: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s; margin-left: auto;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
                                                     <i class="fas fa-ellipsis-v" style="color: #64748b; font-size: 14px;"></i>
                                                 </button>
                                                 <div id="test3Dropdown" class="dropdown-menu-table" style="display: none; position: absolute; top: 100%; right: -20px; z-index: 1000; background: white; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 140px; border: 1px solid #e2e8f0;">
@@ -724,8 +724,8 @@ $titulo = "Editor: " . $tienda['nombre'];
                                             <span style="font-weight: 500; color: #1f293b; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px;" title="Test de Carga Optimizada">Test de Carga Optimizada</span>
                                         </td>
                                         <td style="padding: 12px; vertical-align: middle; width: 60px; text-align: right; padding-right: 20px;">
-                                            <div class="dropdown-table" style="position: relative; display: inline-block;">
-                                                <button class="dropdown-trigger-ellipsis" onclick="toggleTableDropdown('test4')" style="background: none; border: none; padding: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
+                                            <div class="dropdown-table" style="position: relative; display: inline-block; width: 100%; text-align: right;">
+                                                <button class="dropdown-trigger-ellipsis" onclick="toggleTableDropdown('test4')" style="background: none; border: none; padding: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s; margin-left: auto;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
                                                     <i class="fas fa-ellipsis-v" style="color: #64748b; font-size: 14px;"></i>
                                                 </button>
                                                 <div id="test4Dropdown" class="dropdown-menu-table" style="display: none; position: absolute; top: 100%; right: -20px; z-index: 1000; background: white; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 140px; border: 1px solid #e2e8f0;">
@@ -758,8 +758,8 @@ $titulo = "Editor: " . $tienda['nombre'];
                                             <span style="font-weight: 500; color: #1f293b; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px;" title="Experimento UI/UX Moderna">Experimento UI/UX Moderna</span>
                                         </td>
                                         <td style="padding: 12px; vertical-align: middle; width: 60px; text-align: right; padding-right: 20px;">
-                                            <div class="dropdown-table" style="position: relative; display: inline-block;">
-                                                <button class="dropdown-trigger-ellipsis" onclick="toggleTableDropdown('test5')" style="background: none; border: none; padding: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
+                                            <div class="dropdown-table" style="position: relative; display: inline-block; width: 100%; text-align: right;">
+                                                <button class="dropdown-trigger-ellipsis" onclick="toggleTableDropdown('test5')" style="background: none; border: none; padding: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s; margin-left: auto;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
                                                     <i class="fas fa-ellipsis-v" style="color: #64748b; font-size: 14px;"></i>
                                                 </button>
                                                 <div id="test5Dropdown" class="dropdown-menu-table" style="display: none; position: absolute; top: 100%; right: -20px; z-index: 1000; background: white; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 140px; border: 1px solid #e2e8f0;">
@@ -792,8 +792,8 @@ $titulo = "Editor: " . $tienda['nombre'];
                                             <span style="font-weight: 500; color: #1f293b; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px;" title="Test de Conversión Mobile First">Test de Conversión Mobile First</span>
                                         </td>
                                         <td style="padding: 12px; vertical-align: middle; width: 60px; text-align: right; padding-right: 20px;">
-                                            <div class="dropdown-table" style="position: relative; display: inline-block;">
-                                                <button class="dropdown-trigger-ellipsis" onclick="toggleTableDropdown('test6')" style="background: none; border: none; padding: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
+                                            <div class="dropdown-table" style="position: relative; display: inline-block; width: 100%; text-align: right;">
+                                                <button class="dropdown-trigger-ellipsis" onclick="toggleTableDropdown('test6')" style="background: none; border: none; padding: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s; margin-left: auto;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
                                                     <i class="fas fa-ellipsis-v" style="color: #64748b; font-size: 14px;"></i>
                                                 </button>
                                                 <div id="test6Dropdown" class="dropdown-menu-table" style="display: none; position: absolute; top: 100%; right: -20px; z-index: 1000; background: white; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 140px; border: 1px solid #e2e8f0;">
@@ -826,8 +826,8 @@ $titulo = "Editor: " . $tienda['nombre'];
                                             <span style="font-weight: 500; color: #1f293b; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px;" title="Test de Rendimiento API">Test de Rendimiento API</span>
                                         </td>
                                         <td style="padding: 12px; vertical-align: middle; width: 60px; text-align: right; padding-right: 20px;">
-                                            <div class="dropdown-table" style="position: relative; display: inline-block;">
-                                                <button class="dropdown-trigger-ellipsis" onclick="toggleTableDropdown('test7')" style="background: none; border: none; padding: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
+                                            <div class="dropdown-table" style="position: relative; display: inline-block; width: 100%; text-align: right;">
+                                                <button class="dropdown-trigger-ellipsis" onclick="toggleTableDropdown('test7')" style="background: none; border: none; padding: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s; margin-left: auto;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
                                                     <i class="fas fa-ellipsis-v" style="color: #64748b; font-size: 14px;"></i>
                                                 </button>
                                                 <div id="test7Dropdown" class="dropdown-menu-table" style="display: none; position: absolute; top: 100%; right: -20px; z-index: 1000; background: white; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 140px; border: 1px solid #e2e8f0;">
