@@ -28,7 +28,7 @@ if (!isset($_POST['tipo'])) {
 }
 
 $tipo = $_POST['tipo'];
-$allowed_types = ['logo', 'logo_principal', 'acerca_1', 'acerca_2', 'banner', 'banner_2', 'banner_3'];
+$allowed_types = ['logo', 'logo_principal', 'acerca_1', 'acerca_2', 'banner', 'banner_2', 'banner_3', 'banner_4'];
 if (!in_array($tipo, $allowed_types)) {
     echo json_encode(['success' => false, 'message' => 'Tipo de imagen no válido']);
     exit;
@@ -36,12 +36,12 @@ if (!in_array($tipo, $allowed_types)) {
 
 // Mapear tipo a columna de BD
 $column_map = [
-    'logo' => 'logo',
     'acerca_1' => 'imagen_acerca_1',
     'acerca_2' => 'imagen_acerca_2',
     'banner' => 'banner_imagen',
     'banner_2' => 'banner_imagen_2',
     'banner_3' => 'banner_imagen_3',
+    'banner_4' => 'banner_imagen_4',
     'logo_principal' => 'logo_principal'
 ];
 $columna_bd = $column_map[$tipo];
@@ -113,6 +113,7 @@ try {
         'banner' => 'banner_tienda_',
         'banner_2' => 'banner2_tienda_',
         'banner_3' => 'banner3_tienda_',
+        'banner_4' => 'banner4_tienda_',
         default => 'img_tienda_'
     };
 
@@ -132,6 +133,7 @@ try {
             'banner' => 'banner_tienda_',
             'banner_2' => 'banner2_tienda_',
             'banner_3' => 'banner3_tienda_',
+            'banner_4' => 'banner4_tienda_',
             default => 'img_tienda_'
         };
         // CAMBIO AUDITORÍA: Usar uniqid() también aquí para forzar refresco real

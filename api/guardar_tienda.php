@@ -135,6 +135,11 @@ try {
         if ($checkCol14_3->rowCount() == 0) {
             $db->exec("ALTER TABLE tiendas ADD COLUMN banner_imagen_3 VARCHAR(255) DEFAULT NULL");
         }
+        // 2.3 Banner 4
+        $checkCol14_4 = $db->query("SHOW COLUMNS FROM tiendas LIKE 'banner_imagen_4'");
+        if ($checkCol14_4->rowCount() == 0) {
+            $db->exec("ALTER TABLE tiendas ADD COLUMN banner_imagen_4 VARCHAR(255) DEFAULT NULL");
+        }
 
         // 3. Título Banner (LEGACY - Se mantiene para no romper, pero no se usa en UI nueva)
         $checkCol15 = $db->query("SHOW COLUMNS FROM tiendas LIKE 'banner_titulo'");

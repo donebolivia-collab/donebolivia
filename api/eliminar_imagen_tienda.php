@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $data = json_decode(file_get_contents('php://input'), true);
 $tipo = $data['tipo'] ?? '';
 
-$allowed_types = ['banner', 'banner_2', 'banner_3', 'logo_principal', 'logo'];
+$allowed_types = ['banner', 'banner_2', 'banner_3', 'banner_4', 'logo_principal', 'logo'];
 if (!in_array($tipo, $allowed_types)) {
     echo json_encode(['success' => false, 'message' => 'Tipo de imagen no válido']);
     exit;
@@ -32,6 +32,7 @@ $column_map = [
     'banner' => 'banner_imagen',
     'banner_2' => 'banner_imagen_2',
     'banner_3' => 'banner_imagen_3',
+    'banner_4' => 'banner_imagen_4',
     'logo_principal' => 'logo_principal',
     'logo' => 'logo' // Corregido: Agregado mapeo faltante
 ];
