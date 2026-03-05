@@ -126,20 +126,19 @@ class DropdownManager {
         // Guardar referencia
         instance._scrollHandler = closeOnScroll;
 
-        // Siempre añadir un listener de 'wheel' al documento para capturar cualquier scroll de la rueda del ratón externo
-        document.addEventListener('wheel', closeOnScroll, { passive: true });
-        instance._documentWheelListener = closeOnScroll; // Guardar referencia para removerlo después
-        
         // Buscar el contenedor scrollable más cercano para eventos de scroll específicos del elemento
         const scrollableParent = instance.reference.closest('.drawer-body, .sidebar-content');
         if (scrollableParent) {
             scrollableParent.addEventListener('scroll', closeOnScroll, { passive: true });
             instance._scrollTarget = scrollableParent;
-        } else {
-            // Si no hay un padre scrollable específico, el wheel event del documento ya cubre el caso general.
-            // No necesitamos un fallback adicional aquí.
-            instance._scrollTarget = null; // Indicar que no hay un target de scroll específico del elemento
         }
+
+        // Listener para wheel del documento, con un pequeño retraso
+        // Esto permite que el click que abre el dropdown se complete antes de que un wheel accidental lo cierre
+        instance._wheelTimeout = setTimeout(() => {
+            document.addEventListener('wheel', closeOnScroll, { passive: true });
+            instance._documentWheelListener = closeOnScroll;
+        }, 100); // Pequeño retraso de 100ms
 
     /**
      * Maneja el evento hide del dropdown
@@ -148,6 +147,12 @@ class DropdownManager {
         // Limpiar el listener de scroll específico del elemento
         if (instance._scrollHandler && instance._scrollTarget) {
             instance._scrollTarget.removeEventListener('scroll', instance._scrollHandler, { passive: true });
+        }
+
+        // Limpiar el timeout si aún no se ha ejecutado
+        if (instance._wheelTimeout) {
+            clearTimeout(instance._wheelTimeout);
+            delete instance._wheelTimeout;
         }
 
         // Limpiar el listener de wheel global del documento
