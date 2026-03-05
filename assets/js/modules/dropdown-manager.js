@@ -116,61 +116,27 @@ class DropdownManager {
             }
         });
 
-        // Configurar cierre al scroll con animación suave - versión mejorada
-        const scrollHandler = (event) => {
-            // Verificar si el dropdown está visible
-            if (instance && instance.state && instance.state.isShown) {
-                // Aplicar efecto profesional con fadeOut
-                instance.popper.style.transition = 'opacity 0.2s ease-out, transform 0.2s ease-out';
-                instance.popper.style.opacity = '0';
-                instance.popper.style.transform = 'scale(0.95) translateX(10px)';
-                
-                // Ocultar después de la animación
-                setTimeout(() => {
-                    if (instance && instance.hide) {
-                        instance.hide();
-                    }
-                    // Resetear estilos para próxima apertura
-                    if (instance.popper) {
-                        instance.popper.style.transition = '';
-                        instance.popper.style.opacity = '';
-                        instance.popper.style.transform = '';
-                    }
-                }, 200);
+        // Configurar cierre al scroll - SOLUCIÓN SIMPLE Y DIRECTA
+        const closeOnScroll = () => {
+            if (instance.state.isShown) {
+                instance.hide();
             }
         };
         
-        // Guardar referencia para poder limpiar después
-        instance._scrollHandler = scrollHandler;
+        // Guardar referencia
+        instance._scrollHandler = closeOnScroll;
         
-        // Añadir listeners con múltiples estrategias para capturar todos los scrolls
-        // 1. Document scroll (para scroll general)
-        document.addEventListener('scroll', scrollHandler, { capture: false, passive: false });
-        
-        // 2. Window scroll (para scroll de ventana)
-        window.addEventListener('scroll', scrollHandler, { capture: false, passive: false });
-        
-        // 3. Wheel events (para rueda del mouse)
-        document.addEventListener('wheel', scrollHandler, { capture: true, passive: false });
-        window.addEventListener('wheel', scrollHandler, { capture: true, passive: false });
-        
-        // 4. Touch events (para scroll táctil)
-        document.addEventListener('touchmove', scrollHandler, { capture: true, passive: false });
+        // UN SOLO EVENTO - el más efectivo para rueda del mouse
+        document.addEventListener('wheel', closeOnScroll, { passive: false });
     }
 
     /**
      * Maneja el evento hide del dropdown
      */
     handleHide(instance) {
-        // Limpiar todos los listeners de scroll cuando se cierra
+        // Limpiar el listener de scroll - SIMPLE Y DIRECTO
         if (instance._scrollHandler) {
-            // Remover todos los tipos de eventos añadidos
-            document.removeEventListener('scroll', instance._scrollHandler, { capture: false });
-            window.removeEventListener('scroll', instance._scrollHandler, { capture: false });
-            document.removeEventListener('wheel', instance._scrollHandler, { capture: true });
-            window.removeEventListener('wheel', instance._scrollHandler, { capture: true });
-            document.removeEventListener('touchmove', instance._scrollHandler, { capture: true });
-            
+            document.removeEventListener('wheel', instance._scrollHandler, { passive: false });
             delete instance._scrollHandler;
         }
     }
