@@ -607,7 +607,7 @@ $titulo = "Editor: " . $tienda['nombre'];
                         <div style="font-size: 12px; color: #000000; margin-top: 0; margin-bottom: 12px;">Tabla de pruebas para experimentos y configuraciones.</div>
                         
                         <!-- TABLA ENTERPRISE - SIN ENCABEZADO Y CON IMÁGENES -->
-                        <div class="table-tests-container" style="background: white; border-radius: 8px; overflow: hidden; border: 1px solid #e2e8f0; width: 100%;">
+                        <div class="table-tests-container" style="background: white; border-radius: 8px; overflow: hidden; border: 1px solid #e2e8f0; width: 100%; margin: 0 -12px;">
                             <table class="table-tests" style="width: 100%; border-collapse: collapse; table-layout: fixed;">
                                 <tbody id="tableTestsBody">
                                     <!-- Fila 1 - BLANCA -->
