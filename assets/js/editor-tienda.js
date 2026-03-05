@@ -1735,35 +1735,37 @@ window.renderInventoryList = function() {
     tableContainer.appendChild(table);
     list.appendChild(tableContainer);
     
-    // Inicializar Tippy.js para cada dropdown
-    products.forEach(p => {
-        const trigger = document.getElementById(`ellipsis-${p.id}`);
-        const content = document.getElementById(`dropdown-content-${p.id}`);
-        
-        if (trigger && content) {
-            tippy(trigger, {
-                content: content.innerHTML,
-                allowHTML: true,
-                trigger: 'click',
-                placement: 'bottom-end',
-                arrow: true,
-                animation: 'scale',
-                theme: 'light',
-                interactive: true,
-                hideOnClick: true,
-                appendTo: document.body,
-                offset: [10, 5],
-                onShow(instance) {
-                    // Ocultar otros tippys
-                    document.querySelectorAll('[data-tippy-root]').forEach(tippy => {
-                        if (tippy !== instance.popper) {
-                            tippy.style.display = 'none';
-                        }
-                    });
-                }
-            });
-        }
-    });
+    // Inicializar Tippy.js para cada dropdown (después de que cargue Tippy)
+    setTimeout(() => {
+        products.forEach(p => {
+            const trigger = document.getElementById(`ellipsis-${p.id}`);
+            const content = document.getElementById(`dropdown-content-${p.id}`);
+            
+            if (trigger && content && typeof tippy !== 'undefined') {
+                tippy(trigger, {
+                    content: content.innerHTML,
+                    allowHTML: true,
+                    trigger: 'click',
+                    placement: 'bottom-end',
+                    arrow: true,
+                    animation: 'scale',
+                    theme: 'light',
+                    interactive: true,
+                    hideOnClick: true,
+                    appendTo: document.body,
+                    offset: [10, 5],
+                    onShow(instance) {
+                        // Ocultar otros tippys
+                        document.querySelectorAll('[data-tippy-root]').forEach(tippy => {
+                            if (tippy !== instance.popper) {
+                                tippy.style.display = 'none';
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    }, 100);
 };
 
 window.filterInventory = function() {

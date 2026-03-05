@@ -1682,6 +1682,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <!-- Tippy.js para dropdowns perfectos -->
 <script src="https://unpkg.com/@popperjs/core@2"></script>
 <script src="https://unpkg.com/tippy.js@6"></script>
+<link rel="stylesheet" href="/assets/css/tippy-custom.css?v=<?php echo time(); ?>">
 <link rel="stylesheet" href="/assets/css/ui-multiselect.css?v=<?php echo time(); ?>">
 </body>
 </html>

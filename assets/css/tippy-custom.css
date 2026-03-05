@@ -1,0 +1,39 @@
+/* Estilos personalizados para Tippy.js */
+.tippy-box[data-theme~='light'] {
+    background-color: white;
+    color: #333;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    font-family: var(--font-ui);
+}
+
+.tippy-box[data-theme~='light'] .tippy-content {
+    padding: 0;
+}
+
+.tippy-box[data-theme~='light'] .tippy-arrow {
+    color: white;
+}
+
+.tippy-box[data-theme~='light'] .tippy-arrow::before {
+    border-top-color: white;
+    border-bottom-color: white;
+}
+
+/* Estilos para los items del dropdown */
+.tippy-item {
+    padding: 10px 12px;
+    cursor: pointer;
+    border-bottom: 1px solid #f1f5f9;
+    transition: background 0.2s;
+    font-family: inherit;
+}
+
+.tippy-item:last-child {
+    border-bottom: none;
+}
+
+.tippy-item:hover {
+    background: #f8fafc;
+}
