@@ -674,47 +674,86 @@ $titulo = "Editor: " . $tienda['nombre'];
                         <div style="font-size:11px; color:#64748b; margin-bottom:10px;">
                             Carrusel principal. Formato: 1920x600 px.
                         </div>
-                        <div style="display:grid; grid-template-columns: 1fr; gap:15px;">
-                            <!-- SLOT 1 -->
-                            <div id="bannerSlotContainer1" class="banner-slot-container">
-                                <div id="bannerUploader1" class="image-uploader wide <?php echo !empty($tienda['banner_imagen']) ? 'has-image' : ''; ?>">
-                                    <input type="file" id="bannerInput1" accept="image/*" hidden>
-                                    <button type="button" id="btnDeleteBanner1" class="btn-delete-image" title="Eliminar"><i class="fas fa-times"></i></button>
-                                    <?php if (!empty($tienda['banner_imagen'])): ?>
-                                        <img src="/uploads/<?php echo htmlspecialchars($tienda['banner_imagen']); ?>?v=<?php echo time(); ?>" id="bannerPreviewImg1" class="image-preview" style="display:block;">
-                                        <div class="image-placeholder" id="bannerPlaceholder1" style="display:none;"><i class="fas fa-cloud-upload-alt"></i></div>
-                                    <?php else: ?>
-                                        <div class="image-placeholder" id="bannerPlaceholder1"><i class="fas fa-cloud-upload-alt"></i></div>
-                                        <img src="" id="bannerPreviewImg1" class="image-preview" style="display:none;">
-                                    <?php endif; ?>
+                        
+                        <!-- CARRUSEL ENTERPRISE PARA BANNERS -->
+                        <div class="banner-carousel-container">
+                            <div class="carousel-header">
+                                <div class="carousel-indicators">
+                                    <span class="indicator active" data-slide="0">1</span>
+                                    <span class="indicator" data-slide="1">2</span>
+                                    <span class="indicator" data-slide="2">3</span>
+                                </div>
+                                <div class="carousel-controls">
+                                    <button class="carousel-btn prev" onclick="navigateBannerCarousel('prev')" title="Anterior">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </button>
+                                    <button class="carousel-btn next" onclick="navigateBannerCarousel('next')" title="Siguiente">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </button>
                                 </div>
                             </div>
-                            <!-- SLOT 2 -->
-                            <div id="bannerSlotContainer2" class="banner-slot-container">
-                                <div id="bannerUploader2" class="image-uploader wide <?php echo !empty($tienda['banner_imagen_2']) ? 'has-image' : ''; ?>">
-                                    <input type="file" id="bannerInput2" accept="image/*" hidden>
-                                    <button type="button" id="btnDeleteBanner2" class="btn-delete-image" title="Eliminar"><i class="fas fa-times"></i></button>
-                                    <?php if (!empty($tienda['banner_imagen_2'])): ?>
-                                        <img src="/uploads/<?php echo htmlspecialchars($tienda['banner_imagen_2']); ?>?v=<?php echo time(); ?>" id="bannerPreviewImg2" class="image-preview" style="display:block;">
-                                        <div class="image-placeholder" id="bannerPlaceholder2" style="display:none;"><i class="fas fa-cloud-upload-alt"></i></div>
-                                    <?php else: ?>
-                                        <div class="image-placeholder" id="bannerPlaceholder2"><i class="fas fa-cloud-upload-alt"></i></div>
-                                        <img src="" id="bannerPreviewImg2" class="image-preview" style="display:none;">
-                                    <?php endif; ?>
-                                </div>
-                            </div>
-                            <!-- SLOT 3 -->
-                            <div id="bannerSlotContainer3" class="banner-slot-container">
-                                <div id="bannerUploader3" class="image-uploader wide <?php echo !empty($tienda['banner_imagen_3']) ? 'has-image' : ''; ?>">
-                                    <input type="file" id="bannerInput3" accept="image/*" hidden>
-                                    <button type="button" id="btnDeleteBanner3" class="btn-delete-image" title="Eliminar"><i class="fas fa-times"></i></button>
-                                    <?php if (!empty($tienda['banner_imagen_3'])): ?>
-                                        <img src="/uploads/<?php echo htmlspecialchars($tienda['banner_imagen_3']); ?>?v=<?php echo time(); ?>" id="bannerPreviewImg3" class="image-preview" style="display:block;">
-                                        <div class="image-placeholder" id="bannerPlaceholder3" style="display:none;"><i class="fas fa-cloud-upload-alt"></i></div>
-                                    <?php else: ?>
-                                        <div class="image-placeholder" id="bannerPlaceholder3"><i class="fas fa-cloud-upload-alt"></i></div>
-                                        <img src="" id="bannerPreviewImg3" class="image-preview" style="display:none;">
-                                    <?php endif; ?>
+                            
+                            <div class="carousel-viewport">
+                                <div class="carousel-track" id="bannerCarouselTrack">
+                                    <!-- SLIDE 1 -->
+                                    <div class="carousel-slide active" data-slide="0">
+                                        <div class="slide-content">
+                                            <div class="slide-label">Banner 1</div>
+                                            <div id="bannerSlotContainer1" class="banner-slot-container">
+                                                <div id="bannerUploader1" class="image-uploader wide <?php echo !empty($tienda['banner_imagen']) ? 'has-image' : ''; ?>">
+                                                    <input type="file" id="bannerInput1" accept="image/*" hidden>
+                                                    <button type="button" id="btnDeleteBanner1" class="btn-delete-image" title="Eliminar"><i class="fas fa-times"></i></button>
+                                                    <?php if (!empty($tienda['banner_imagen'])): ?>
+                                                        <img src="/uploads/<?php echo htmlspecialchars($tienda['banner_imagen']); ?>?v=<?php echo time(); ?>" id="bannerPreviewImg1" class="image-preview" style="display:block;">
+                                                        <div class="image-placeholder" id="bannerPlaceholder1" style="display:none;"><i class="fas fa-cloud-upload-alt"></i></div>
+                                                    <?php else: ?>
+                                                        <div class="image-placeholder" id="bannerPlaceholder1"><i class="fas fa-cloud-upload-alt"></i></div>
+                                                        <img src="" id="bannerPreviewImg1" class="image-preview" style="display:none;">
+                                                    <?php endif; ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- SLIDE 2 -->
+                                    <div class="carousel-slide" data-slide="1">
+                                        <div class="slide-content">
+                                            <div class="slide-label">Banner 2</div>
+                                            <div id="bannerSlotContainer2" class="banner-slot-container">
+                                                <div id="bannerUploader2" class="image-uploader wide <?php echo !empty($tienda['banner_imagen_2']) ? 'has-image' : ''; ?>">
+                                                    <input type="file" id="bannerInput2" accept="image/*" hidden>
+                                                    <button type="button" id="btnDeleteBanner2" class="btn-delete-image" title="Eliminar"><i class="fas fa-times"></i></button>
+                                                    <?php if (!empty($tienda['banner_imagen_2'])): ?>
+                                                        <img src="/uploads/<?php echo htmlspecialchars($tienda['banner_imagen_2']); ?>?v=<?php echo time(); ?>" id="bannerPreviewImg2" class="image-preview" style="display:block;">
+                                                        <div class="image-placeholder" id="bannerPlaceholder2" style="display:none;"><i class="fas fa-cloud-upload-alt"></i></div>
+                                                    <?php else: ?>
+                                                        <div class="image-placeholder" id="bannerPlaceholder2"><i class="fas fa-cloud-upload-alt"></i></div>
+                                                        <img src="" id="bannerPreviewImg2" class="image-preview" style="display:none;">
+                                                    <?php endif; ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- SLIDE 3 -->
+                                    <div class="carousel-slide" data-slide="2">
+                                        <div class="slide-content">
+                                            <div class="slide-label">Banner 3</div>
+                                            <div id="bannerSlotContainer3" class="banner-slot-container">
+                                                <div id="bannerUploader3" class="image-uploader wide <?php echo !empty($tienda['banner_imagen_3']) ? 'has-image' : ''; ?>">
+                                                    <input type="file" id="bannerInput3" accept="image/*" hidden>
+                                                    <button type="button" id="btnDeleteBanner3" class="btn-delete-image" title="Eliminar"><i class="fas fa-times"></i></button>
+                                                    <?php if (!empty($tienda['banner_imagen_3'])): ?>
+                                                        <img src="/uploads/<?php echo htmlspecialchars($tienda['banner_imagen_3']); ?>?v=<?php echo time(); ?>" id="bannerPreviewImg3" class="image-preview" style="display:block;">
+                                                        <div class="image-placeholder" id="bannerPlaceholder3" style="display:none;"><i class="fas fa-cloud-upload-alt"></i></div>
+                                                    <?php else: ?>
+                                                        <div class="image-placeholder" id="bannerPlaceholder3"><i class="fas fa-cloud-upload-alt"></i></div>
+                                                        <img src="" id="bannerPreviewImg3" class="image-preview" style="display:none;">
+                                                    <?php endif; ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1183,6 +1222,140 @@ $titulo = "Editor: " . $tienda['nombre'];
         logo: <?php echo json_encode(!empty($tienda['logo']) ? '/uploads/logos/'.$tienda['logo'].'?t='.time() : ''); ?>
     };
 </script>
+<script>
+/**
+ * Carrusel Enterprise para Banners
+ * Funcionalidad de navegación y control del carrusel
+ */
+class BannerCarousel {
+    constructor() {
+        this.currentSlide = 0;
+        this.totalSlides = 3;
+        this.track = null;
+        this.slides = [];
+        this.indicators = [];
+        this.prevBtn = null;
+        this.nextBtn = null;
+        
+        this.init();
+    }
+    
+    init() {
+        // Esperar a que el DOM esté listo
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => this.setupCarousel());
+        } else {
+            this.setupCarousel();
+        }
+    }
+    
+    setupCarousel() {
+        this.track = document.getElementById('bannerCarouselTrack');
+        if (!this.track) return;
+        
+        this.slides = this.track.querySelectorAll('.carousel-slide');
+        this.indicators = document.querySelectorAll('.indicator');
+        this.prevBtn = document.querySelector('.carousel-btn.prev');
+        this.nextBtn = document.querySelector('.carousel-btn.next');
+        
+        if (this.slides.length === 0) return;
+        
+        // Configurar eventos en indicadores
+        this.indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => this.goToSlide(index));
+        });
+        
+        // Actualizar estado inicial
+        this.updateCarousel();
+        
+        // Configurar navegación con teclado
+        document.addEventListener('keydown', (e) => {
+            if (e.target.closest('.banner-carousel-container')) {
+                if (e.key === 'ArrowLeft') this.navigate('prev');
+                if (e.key === 'ArrowRight') this.navigate('next');
+            }
+        });
+        
+        // Soporte para touch/swipe en móviles
+        this.setupTouchSupport();
+        
+        console.log('Banner Carousel initialized successfully');
+    }
+    
+    navigate(direction) {
+        if (direction === 'prev') {
+            this.currentSlide = this.currentSlide > 0 ? this.currentSlide - 1 : this.totalSlides - 1;
+        } else {
+            this.currentSlide = this.currentSlide < this.totalSlides - 1 ? this.currentSlide + 1 : 0;
+        }
+        
+        this.updateCarousel();
+    }
+    
+    goToSlide(index) {
+        if (index >= 0 && index < this.totalSlides) {
+            this.currentSlide = index;
+            this.updateCarousel();
+        }
+    }
+    
+    updateCarousel() {
+        // Actualizar posición del track
+        const translateX = -this.currentSlide * 100;
+        this.track.style.transform = `translateX(${translateX}%)`;
+        
+        // Actualizar slides
+        this.slides.forEach((slide, index) => {
+            slide.classList.toggle('active', index === this.currentSlide);
+        });
+        
+        // Actualizar indicadores
+        this.indicators.forEach((indicator, index) => {
+            indicator.classList.toggle('active', index === this.currentSlide);
+        });
+        
+        // Actualizar estado de botones
+        if (this.prevBtn) this.prevBtn.disabled = false;
+        if (this.nextBtn) this.nextBtn.disabled = false;
+    }
+    
+    setupTouchSupport() {
+        let startX = 0;
+        let endX = 0;
+        let threshold = 50; // Umbral para swipe
+        
+        this.track.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+        }, { passive: true });
+        
+        this.track.addEventListener('touchend', (e) => {
+            endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+            
+            if (Math.abs(diff) > threshold) {
+                if (diff > 0) {
+                    this.navigate('next'); // Swipe izquierda = siguiente
+                } else {
+                    this.navigate('prev'); // Swipe derecha = anterior
+                }
+            }
+        }, { passive: true });
+    }
+}
+
+// Función global para navegación (usada en onclick)
+function navigateBannerCarousel(direction) {
+    if (window.bannerCarousel) {
+        window.bannerCarousel.navigate(direction);
+    }
+}
+
+// Inicializar el carrusel cuando se cargue la página
+document.addEventListener('DOMContentLoaded', () => {
+    window.bannerCarousel = new BannerCarousel();
+});
+</script>
+
 <script src="/assets/js/ImageUploader.js?v=<?php echo time(); ?>"></script>
 <script src="/assets/js/image-uploader-safe-init.js?v=<?php echo time(); ?>"></script>
 <script src="/assets/js/ui-multiselect.js?v=<?php echo time(); ?>"></script>
