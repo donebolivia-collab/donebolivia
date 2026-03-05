@@ -1706,23 +1706,9 @@ window.renderInventoryList = function() {
             </td>
             <td style="padding: 12px 4px 12px 4px; vertical-align: middle; width: 50px; text-align: right; padding-right: 4px;">
                 <div class="dropdown-inventory" style="position: relative; display: inline-block; width: 100%; text-align: right;">
-                    <button id="ellipsis-${p.id}" class="dropdown-trigger-ellipsis menu-trigger" data-template="dropdown-content-${p.id}" style="background: none; border: none; padding: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s; margin-left: auto;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
+                    <button id="ellipsis-${p.id}" class="dropdown-trigger" data-dropdown-type="inventory" data-dropdown-id="${p.id}" style="background: none; border: none; padding: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s; margin-left: auto;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
                         <i class="fas fa-ellipsis-v" style="color: #64748b; font-size: 14px;"></i>
                     </button>
-                    <!-- Contenido del dropdown para Tippy -->
-                    <div id="dropdown-content-${p.id}" style="display: none;">
-                        <div style="background: white; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); border: 1px solid #e2e8f0; min-width: 140px; font-family: var(--font-ui);">
-                            <div style="padding: 10px 12px; cursor: pointer; border-bottom: 1px solid #f1f5f9; transition: background 0.2s;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'" onclick="openProductDrawer(${p.id})">
-                                <span>Editar</span>
-                            </div>
-                            <div style="padding: 10px 12px; cursor: pointer; border-bottom: 1px solid #f1f5f9; transition: background 0.2s;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'" onclick="eliminarProducto(${p.id})">
-                                <span>Eliminar</span>
-                            </div>
-                            <div style="padding: 10px 12px; cursor: pointer; transition: background 0.2s;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'" onclick="toggleProductoActivo(${p.id}, ${p.activo})">
-                                <span>${parseInt(p.activo) === 1 ? 'Ocultar' : 'Mostrar'}</span>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </td>
         `;
@@ -2666,76 +2652,3 @@ window.ocuparPuesto = function(slotNumero) {
 };
 
 window.openProductDrawer = openProductDrawer;
-
-// Inicialización global con delegación de eventos para dropdowns dinámicos
-document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(() => {
-        // Usar delegación de eventos para botones dinámicos
-        tippy.delegate('body', {
-            target: '.menu-trigger',
-            content(reference) {
-                const id = reference.getAttribute('data-template');
-                const template = document.getElementById(id);
-                return template ? template.innerHTML : '';
-            },
-            allowHTML: true,
-            interactive: true,
-            trigger: 'click',
-            placement: 'left',
-            arrow: true,
-            animation: 'scale',
-            theme: 'light',
-            hideOnClick: true,
-            appendTo: document.body,
-            offset: [0, 8],
-            popperOptions: {
-                fallbackPlacements: []
-            },
-            onShow(instance) {
-                // Ocultar otros tippys usando el método hide() de Tippy
-                document.querySelectorAll('[data-tippy-root]').forEach(popper => {
-                    const tippyInstance = popper._tippy;
-                    if (tippyInstance && tippyInstance !== instance) {
-                        tippyInstance.hide();
-                    }
-                });
-                
-                // Cerrar dropdown al hacer scroll - versión corregida
-                const scrollHandler = () => {
-                    if (instance.state.isShown) {
-                        // Aplicar efecto profesional con fadeOut
-                        instance.popper.style.transition = 'opacity 0.2s ease-out, transform 0.2s ease-out';
-                        instance.popper.style.opacity = '0';
-                        instance.popper.style.transform = 'scale(0.95) translateX(10px)';
-                        
-                        // Ocultar después de la animación
-                        setTimeout(() => {
-                            instance.hide();
-                            // Resetear estilos para próxima apertura
-                            instance.popper.style.transition = '';
-                            instance.popper.style.opacity = '';
-                            instance.popper.style.transform = '';
-                        }, 200);
-                    }
-                };
-                
-                // Guardar referencia para poder limpiar después
-                instance._scrollHandler = scrollHandler;
-                
-                // Añadir listeners con capture para mejor detección
-                document.addEventListener('scroll', scrollHandler, { capture: true, passive: true });
-                window.addEventListener('scroll', scrollHandler, { capture: true, passive: true });
-                
-                // También cerrar al hacer clic fuera (ya está incluido en hideOnClick: true)
-            },
-            onHide(instance) {
-                // Limpiar listeners de scroll cuando se cierra
-                if (instance._scrollHandler) {
-                    document.removeEventListener('scroll', instance._scrollHandler, { capture: true });
-                    window.removeEventListener('scroll', instance._scrollHandler, { capture: true });
-                    delete instance._scrollHandler;
-                }
-            }
-        });
-    }, 100);
-});
