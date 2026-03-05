@@ -670,7 +670,7 @@ $titulo = "Editor: " . $tienda['nombre'];
                             <span class="slider round"></span>
                         </label>
                     </div>
-                    <div class="control-group-content" id="bannerBlockContent" style="padding-top: 15px; <?php echo (empty($tienda['mostrar_banner']) || $tienda['mostrar_banner'] == 0) ? 'display:none;' : ''; ?>">
+                    <div class="control-group-content" id="bannerBlockContent" style="padding-top: 15px;">
                         <div style="font-size:11px; color:#64748b; margin-bottom:10px;">
                             Carrusel principal. Formato: 1920x600 px.
                         </div>
