@@ -125,30 +125,40 @@ class DropdownManager {
         
         // Guardar referencia
         instance._scrollHandler = closeOnScroll;
+
+        // Siempre añadir un listener de 'wheel' al documento para capturar cualquier scroll de la rueda del ratón externo
+        document.addEventListener('wheel', closeOnScroll, { passive: true });
+        instance._documentWheelListener = closeOnScroll; // Guardar referencia para removerlo después
         
-        // Buscar el contenedor scrollable más cercano
+        // Buscar el contenedor scrollable más cercano para eventos de scroll específicos del elemento
         const scrollableParent = instance.reference.closest('.drawer-body, .sidebar-content');
         if (scrollableParent) {
             scrollableParent.addEventListener('scroll', closeOnScroll, { passive: true });
             instance._scrollTarget = scrollableParent;
         } else {
-            // Fallback a document si no se encuentra un scrollableParent específico
-            document.addEventListener('wheel', closeOnScroll, { passive: true });
-            instance._scrollTarget = document;
+            // Si no hay un padre scrollable específico, el wheel event del documento ya cubre el caso general.
+            // No necesitamos un fallback adicional aquí.
+            instance._scrollTarget = null; // Indicar que no hay un target de scroll específico del elemento
         }
-    }
 
     /**
      * Maneja el evento hide del dropdown
      */
     handleHide(instance) {
-        // Limpiar el listener de scroll - SIMPLE Y DIRECTO
+        // Limpiar el listener de scroll específico del elemento
         if (instance._scrollHandler && instance._scrollTarget) {
-            instance._scrollTarget.removeEventListener('scroll', instance._scrollHandler);
-            instance._scrollTarget.removeEventListener('wheel', instance._scrollHandler); // Remover también el wheel event si se usó el fallback
-            delete instance._scrollHandler;
-            delete instance._scrollTarget;
+            instance._scrollTarget.removeEventListener('scroll', instance._scrollHandler, { passive: true });
         }
+
+        // Limpiar el listener de wheel global del documento
+        if (instance._documentWheelListener) {
+            document.removeEventListener('wheel', instance._documentWheelListener, { passive: true });
+        }
+
+        // Limpiar referencias
+        delete instance._scrollHandler;
+        delete instance._scrollTarget;
+        delete instance._documentWheelListener;
     }
 
     /**
