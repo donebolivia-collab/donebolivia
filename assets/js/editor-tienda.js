@@ -1676,46 +1676,64 @@ window.renderInventoryList = function() {
         return;
     }
     
-    products.forEach(p => {
+    // Crear tabla enterprise
+    const tableContainer = document.createElement('div');
+    tableContainer.className = 'inventory-container';
+    tableContainer.style.cssText = 'background: white; border-radius: 8px; overflow: hidden; border: none; width: 100%; margin: 0; padding: 0;';
+    
+    const table = document.createElement('table');
+    table.className = 'inventory-table';
+    table.style.cssText = 'width: 100%; border-collapse: collapse; table-layout: fixed;';
+    
+    const tbody = document.createElement('tbody');
+    
+    products.forEach((p, index) => {
         const imgUrl = p.imagen_principal ? `/uploads/${p.imagen_principal}` : '/assets/img/default-store.png';
-        const section = p.categoria_tienda || 'Inicio';
+        const rowClass = (index % 2 === 0) ? 'white' : '#f8fafc';
         
-        const card = document.createElement('div');
-        card.className = 'inv-product-card';
-        // Estado visual según activo
-        if (parseInt(p.activo) === 0) card.classList.add('hidden-product'); 
-
-        // Icono de STOCK (Caja)
-        const isHidden = parseInt(p.activo) === 0;
-        const stockIcon = isHidden ? 'fa-box-open' : 'fa-box';
-        const stockTitle = isHidden ? 'Sin Stock (Oculto)' : 'En Stock (Visible)';
-        // Clases específicas para color
-        const stockClass = isHidden ? 'stock-out' : 'stock-in';
-
-        card.innerHTML = `
-            <div class="inv-img-box">
-                <img src="${imgUrl}" class="inv-img">
-            </div>
-            <div class="inv-info">
-                <div class="inv-title" title="${p.titulo}">${p.titulo}</div>
-                <div class="inv-meta">
-                    <span class="inv-price">Bs ${p.precio}</span>
+        const row = document.createElement('tr');
+        row.className = 'inventory-row';
+        row.style.cssText = `background: ${rowClass}; border-bottom: 1px solid #f1f5f9;`;
+        
+        row.innerHTML = `
+            <td style="padding: 12px 8px 12px 0; vertical-align: middle; width: 45px;">
+                <div style="display: flex; align-items: center; gap: 8px; width: 100%; margin-left: 0;">
+                    <input type="checkbox" id="inventory_${p.id}" style="width: 16px; height: 16px; margin: 0; padding: 0; position: relative; left: 0; transform: translateX(0);">
+                    <img src="${imgUrl}" alt="${p.titulo}" style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
                 </div>
-            </div>
-            <div class="inv-actions">
-                <button class="btn-inv-action ${stockClass}" title="${stockTitle}" onclick="toggleProductoActivo(${p.id}, ${p.activo})">
-                    <i class="fas ${stockIcon}"></i>
-                </button>
-                <button class="btn-inv-action edit" title="Editar" onclick="openProductDrawer(${p.id})">
-                    <i class="fas fa-pencil-alt"></i>
-                </button>
-                <button class="btn-inv-action delete" title="Eliminar" onclick="eliminarProducto(${p.id})">
-                    <i class="fas fa-trash-alt"></i>
-                </button>
-            </div>
+            </td>
+            <td style="padding: 12px; vertical-align: middle; width: auto; overflow: hidden;">
+                <span style="font-weight: 500; color: #1f293b; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px;" title="${p.titulo}">${p.titulo}</span>
+            </td>
+            <td style="padding: 12px; vertical-align: middle; width: 60px; text-align: right; padding-right: 8px;">
+                <div class="dropdown-inventory" style="position: relative; display: inline-block; width: 100%; text-align: right;">
+                    <button class="dropdown-trigger-ellipsis" onclick="toggleInventoryDropdown('${p.id}')" style="background: none; border: none; padding: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s; margin-left: auto;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
+                        <i class="fas fa-ellipsis-v" style="color: #64748b; font-size: 14px;"></i>
+                    </button>
+                    <div id="inventory_${p.id}Dropdown" class="dropdown-menu-inventory" style="display: none; position: absolute; top: 100%; left: -140px; z-index: 1000; background: white; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 140px; border: 1px solid #e2e8f0;">
+                        <div class="dropdown-item" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9;" onclick="window.open('/products/view_product.php?id=${p.id}', '_blank')">
+                            <i class="fas fa-eye" style="color: #64748b; font-size: 12px;"></i>
+                            <span>Ver producto</span>
+                        </div>
+                        <div class="dropdown-item" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9;" onclick="openProductDrawer(${p.id})">
+                            <i class="fas fa-edit" style="color: #64748b; font-size: 12px;"></i>
+                            <span>Editar</span>
+                        </div>
+                        <div class="dropdown-item" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px;" onclick="eliminarProducto(${p.id})">
+                            <i class="fas fa-trash" style="color: #dc2626; font-size: 12px;"></i>
+                            <span style="color: #dc2626;">Eliminar</span>
+                        </div>
+                    </div>
+                </div>
+            </td>
         `;
-        list.appendChild(card);
+        
+        tbody.appendChild(row);
     });
+    
+    table.appendChild(tbody);
+    tableContainer.appendChild(table);
+    list.appendChild(tableContainer);
 };
 
 window.filterInventory = function() {
@@ -1723,6 +1741,45 @@ window.filterInventory = function() {
 };
 
 // --- HELPER: Title Case (Capitalización Real) ---
+
+// Función para toggle del dropdown de inventario
+window.toggleInventoryDropdown = function(productId) {
+    const dropdown = document.getElementById('inventory_' + productId + 'Dropdown');
+    const allDropdowns = document.querySelectorAll('.dropdown-menu-inventory');
+    
+    // Cerrar otros dropdowns
+    allDropdowns.forEach(d => {
+        if (d !== dropdown) {
+            d.style.display = 'none';
+        }
+    });
+    
+    // Toggle actual
+    if (dropdown.style.display === 'none') {
+        dropdown.style.display = 'block';
+    } else {
+        dropdown.style.display = 'none';
+    }
+};
+
+// Cerrar dropdowns al hacer clic fuera
+document.addEventListener('click', function(event) {
+    const dropdowns = document.querySelectorAll('.dropdown-menu-inventory');
+    const buttons = document.querySelectorAll('.dropdown-trigger-ellipsis');
+    
+    let isClickInside = false;
+    buttons.forEach(button => {
+        if (button.contains(event.target)) {
+            isClickInside = true;
+        }
+    });
+    
+    dropdowns.forEach(dropdown => {
+        if (!dropdown.contains(event.target) && !isClickInside) {
+            dropdown.style.display = 'none';
+        }
+    });
+});
 
 
 window.updateInventoryFilters = function() {
