@@ -1104,7 +1104,7 @@ $titulo = "Editor: " . $tienda['nombre'];
             </div>
 
             <!-- FILTROS FIJOS (SUB-HEADER) -->
-            <div style="padding: 16px 20px 0 20px; background: white; border-bottom: 1px solid #f1f5f9; position: sticky; top: 0; z-index: 10;">
+            <div style="padding: 16px 12px 0 12px; background: white; border-bottom: 1px solid #f1f5f9; position: sticky; top: 0; z-index: 10;">
                 <!-- Buscador (Fila 1) -->
                 <div style="position: relative; margin-bottom: 12px;">
                     <i class="fas fa-search" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #94a3b8; font-size: 13px;"></i>

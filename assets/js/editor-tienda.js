@@ -1696,16 +1696,16 @@ window.renderInventoryList = function() {
         row.style.cssText = `background: ${rowClass}; border-bottom: 1px solid #f1f5f9;`;
         
         row.innerHTML = `
-            <td style="padding: 12px 8px 12px 0; vertical-align: middle; width: 45px;">
-                <div style="display: flex; align-items: center; gap: 8px; width: 100%; margin-left: 0;">
+            <td style="padding: 12px 4px 12px 0; vertical-align: middle; width: 45px;">
+                <div style="display: flex; align-items: center; gap: 4px; width: 100%; margin-left: 0;">
                     <input type="checkbox" id="inventory_${p.id}" style="width: 16px; height: 16px; margin: 0; padding: 0; position: relative; left: 0; transform: translateX(0);">
                     <img src="${imgUrl}" alt="${p.titulo}" style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
                 </div>
             </td>
-            <td style="padding: 12px; vertical-align: middle; width: auto; overflow: hidden;">
+            <td style="padding: 12px 4px; vertical-align: middle; width: auto; overflow: hidden;">
                 <span style="font-weight: 500; color: #1f293b; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px;" title="${p.titulo}">${p.titulo}</span>
             </td>
-            <td style="padding: 12px; vertical-align: middle; width: 60px; text-align: right; padding-right: 8px;">
+            <td style="padding: 12px 4px 12px 4px; vertical-align: middle; width: 50px; text-align: right; padding-right: 4px;">
                 <div class="dropdown-inventory" style="position: relative; display: inline-block; width: 100%; text-align: right;">
                     <button class="dropdown-trigger-ellipsis" onclick="toggleInventoryDropdown('${p.id}')" style="background: none; border: none; padding: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s; margin-left: auto;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
                         <i class="fas fa-ellipsis-v" style="color: #64748b; font-size: 14px;"></i>
