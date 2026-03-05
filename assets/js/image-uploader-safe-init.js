@@ -16,9 +16,9 @@ function initImageUploaders() {
 
     console.log('Initializing Image Uploaders...');
 
-    // 1. BANNERS (1, 2, 3)
+    // 1. BANNERS (1, 2, 3, 4)
     // Usamos los IDs específicos de los elementos .image-uploader
-    ['bannerUploader1', 'bannerUploader2', 'bannerUploader3'].forEach((uploaderId, index) => {
+    ['bannerUploader1', 'bannerUploader2', 'bannerUploader3', 'bannerUploader4'].forEach((uploaderId, index) => {
         const container = document.getElementById(uploaderId);
         if (container) {
             const bannerIndex = index + 1; // 1-based index

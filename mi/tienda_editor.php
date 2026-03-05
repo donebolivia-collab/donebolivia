@@ -682,6 +682,7 @@ $titulo = "Editor: " . $tienda['nombre'];
                                     <span class="indicator active" data-slide="0">1</span>
                                     <span class="indicator" data-slide="1">2</span>
                                     <span class="indicator" data-slide="2">3</span>
+                                    <span class="indicator" data-slide="3">4</span>
                                 </div>
                             </div>
                             
@@ -741,6 +742,26 @@ $titulo = "Editor: " . $tienda['nombre'];
                                                     <?php else: ?>
                                                         <div class="image-placeholder" id="bannerPlaceholder3"><i class="fas fa-cloud-upload-alt"></i></div>
                                                         <img src="" id="bannerPreviewImg3" class="image-preview" style="display:none;">
+                                                    <?php endif; ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- SLIDE 4 -->
+                                    <div class="carousel-slide" data-slide="3">
+                                        <div class="slide-content">
+                                            <div class="slide-label">Banner 4</div>
+                                            <div id="bannerSlotContainer4" class="banner-slot-container">
+                                                <div id="bannerUploader4" class="image-uploader wide <?php echo !empty($tienda['banner_imagen_4']) ? 'has-image' : ''; ?>">
+                                                    <input type="file" id="bannerInput4" accept="image/*" hidden>
+                                                    <button type="button" id="btnDeleteBanner4" class="btn-delete-image" title="Eliminar"><i class="fas fa-times"></i></button>
+                                                    <?php if (!empty($tienda['banner_imagen_4'])): ?>
+                                                        <img src="/uploads/<?php echo htmlspecialchars($tienda['banner_imagen_4']); ?>?v=<?php echo time(); ?>" id="bannerPreviewImg4" class="image-preview" style="display:block;">
+                                                        <div class="image-placeholder" id="bannerPlaceholder4" style="display:none;"><i class="fas fa-cloud-upload-alt"></i></div>
+                                                    <?php else: ?>
+                                                        <div class="image-placeholder" id="bannerPlaceholder4"><i class="fas fa-cloud-upload-alt"></i></div>
+                                                        <img src="" id="bannerPreviewImg4" class="image-preview" style="display:none;">
                                                     <?php endif; ?>
                                                 </div>
                                             </div>
@@ -1193,7 +1214,8 @@ $titulo = "Editor: " . $tienda['nombre'];
             'imagenes' => [
                 !empty($tienda['banner_imagen']) ? '/uploads/'.$tienda['banner_imagen'].'?v='.time() : null,
                 !empty($tienda['banner_imagen_2']) ? '/uploads/'.$tienda['banner_imagen_2'].'?v='.time() : null,
-                !empty($tienda['banner_imagen_3']) ? '/uploads/'.$tienda['banner_imagen_3'].'?v='.time() : null
+                !empty($tienda['banner_imagen_3']) ? '/uploads/'.$tienda['banner_imagen_3'].'?v='.time() : null,
+                !empty($tienda['banner_imagen_4']) ? '/uploads/'.$tienda['banner_imagen_4'].'?v='.time() : null
             ]
         ],
         'deptCode' => $deptCode,
@@ -1222,7 +1244,7 @@ $titulo = "Editor: " . $tienda['nombre'];
 class BannerCarousel {
     constructor() {
         this.currentSlide = 0;
-        this.totalSlides = 3;
+        this.totalSlides = 4; // Actualizado a 4 banners
         this.track = null;
         this.slides = [];
         this.indicators = [];
