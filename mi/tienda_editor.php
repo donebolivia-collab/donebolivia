@@ -683,14 +683,6 @@ $titulo = "Editor: " . $tienda['nombre'];
                                     <span class="indicator" data-slide="1">2</span>
                                     <span class="indicator" data-slide="2">3</span>
                                 </div>
-                                <div class="carousel-controls">
-                                    <button class="carousel-btn prev" onclick="navigateBannerCarousel('prev')" title="Anterior">
-                                        <i class="fas fa-chevron-left"></i>
-                                    </button>
-                                    <button class="carousel-btn next" onclick="navigateBannerCarousel('next')" title="Siguiente">
-                                        <i class="fas fa-chevron-right"></i>
-                                    </button>
-                                </div>
                             </div>
                             
                             <div class="carousel-viewport">
@@ -1255,8 +1247,6 @@ class BannerCarousel {
         
         this.slides = this.track.querySelectorAll('.carousel-slide');
         this.indicators = document.querySelectorAll('.indicator');
-        this.prevBtn = document.querySelector('.carousel-btn.prev');
-        this.nextBtn = document.querySelector('.carousel-btn.next');
         
         if (this.slides.length === 0) return;
         
@@ -1279,7 +1269,7 @@ class BannerCarousel {
         // Soporte para touch/swipe en móviles
         this.setupTouchSupport();
         
-        console.log('Banner Carousel initialized successfully');
+        console.log('Banner Carousel initialized successfully (indicators only)');
     }
     
     navigate(direction) {
