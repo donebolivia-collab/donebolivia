@@ -1746,14 +1746,14 @@ window.renderInventoryList = function() {
                     content: content.innerHTML,
                     allowHTML: true,
                     trigger: 'click',
-                    placement: 'bottom-end',
+                    placement: 'bottom-start',
                     arrow: true,
                     animation: 'scale',
                     theme: 'light',
                     interactive: true,
                     hideOnClick: true,
                     appendTo: document.body,
-                    offset: [10, 5],
+                    offset: [-10, 5],
                     onShow(instance) {
                         // Ocultar otros tippys
                         document.querySelectorAll('[data-tippy-root]').forEach(tippy => {
