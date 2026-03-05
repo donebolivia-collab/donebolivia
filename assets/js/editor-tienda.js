@@ -2700,6 +2700,21 @@ document.addEventListener('DOMContentLoaded', function() {
                         tippyInstance.hide();  // ← Método correcto para ocultar
                     }
                 });
+                
+                // Cerrar dropdown al hacer scroll
+                const handleScroll = () => {
+                    instance.hide();
+                    document.removeEventListener('scroll', handleScroll, true);
+                    window.removeEventListener('scroll', handleScroll, true);
+                };
+                
+                document.addEventListener('scroll', handleScroll, true);
+                window.addEventListener('scroll', handleScroll, true);
+            },
+            onHide(instance) {
+                // Limpiar listeners de scroll cuando se cierra
+                document.removeEventListener('scroll', handleScroll, true);
+                window.removeEventListener('scroll', handleScroll, true);
             }
         });
     }, 100);
