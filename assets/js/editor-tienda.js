@@ -1707,7 +1707,7 @@ window.renderInventoryList = function() {
             </td>
             <td style="padding: 12px 4px 12px 4px; vertical-align: middle; width: 50px; text-align: right; padding-right: 4px;">
                 <div class="dropdown-inventory" style="position: relative; display: inline-block; width: 100%; text-align: right;">
-                    <button id="ellipsis-${p.id}" class="dropdown-trigger-ellipsis menu-trigger" style="background: none; border: none; padding: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s; margin-left: auto;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
+                    <button id="ellipsis-${p.id}" class="dropdown-trigger-ellipsis menu-trigger" data-template="dropdown-content-${p.id}" style="background: none; border: none; padding: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s; margin-left: auto;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
                         <i class="fas fa-ellipsis-v" style="color: #64748b; font-size: 14px;"></i>
                     </button>
                     <!-- Contenido del dropdown para Tippy -->
@@ -2668,21 +2668,27 @@ window.ocuparPuesto = function(slotNumero) {
 
 window.openProductDrawer = openProductDrawer;
 
-// Inicialización global de Tippy.js para dropdowns del inventario
+// Inicialización global con delegación de eventos para dropdowns dinámicos
 document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
-        // Inicializar Tippy.js para todos los botones con clase .menu-trigger
-        tippy('.menu-trigger', {
+        // Usar delegación de eventos para botones dinámicos
+        tippy.delegate('body', {
+            target: '.menu-trigger',
+            content(reference) {
+                const id = reference.getAttribute('data-template');
+                const template = document.getElementById(id);
+                return template ? template.innerHTML : '';
+            },
             allowHTML: true,
+            interactive: true,
             trigger: 'click',
             placement: 'left',
             arrow: true,
             animation: 'scale',
             theme: 'light',
-            interactive: true,
             hideOnClick: true,
             appendTo: document.body,
-            offset: [0, 5],
+            offset: [0, 8],
             popperOptions: {
                 fallbackPlacements: []
             },
@@ -2693,12 +2699,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         tippy.style.display = 'none';
                     }
                 });
-            },
-            // Obtener contenido dinámicamente del dropdown correspondiente
-            content: function(reference) {
-                const productId = reference.id.replace('ellipsis-', '');
-                const content = document.getElementById(`dropdown-content-${productId}`);
-                return content ? content.innerHTML : '';
             }
         });
     }, 100);
