@@ -606,26 +606,20 @@ $titulo = "Editor: " . $tienda['nombre'];
                         <label style="display: block; font-size: 11px; font-weight: 700; color: #000000; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">PRUEBAS A/B ACTIVAS</label>
                         <div style="font-size: 12px; color: #000000; margin-top: 0; margin-bottom: 12px;">Tabla de pruebas para experimentos y configuraciones.</div>
                         
-                        <!-- TABLA ENTERPRISE -->
+                        <!-- TABLA ENTERPRISE - SIN ENCABEZADO Y CON IMÁGENES -->
                         <div class="table-tests-container" style="background: white; border-radius: 8px; overflow: hidden; border: 1px solid #e2e8f0; width: 100%;">
                             <table class="table-tests" style="width: 100%; border-collapse: collapse; table-layout: fixed;">
-                                <thead>
-                                    <tr style="background: #f8fafc;">
-                                        <th style="padding: 12px; text-align: left; font-weight: 600; color: #374151; border-bottom: 1px solid #e2e8f0; font-size: 12px; width: 80px;">
-                                            <i class="fas fa-check-square" style="margin-right: 6px;"></i> Activo
-                                        </th>
-                                        <th style="padding: 12px; text-align: left; font-weight: 600; color: #374151; border-bottom: 1px solid #e2e8f0; font-size: 12px; width: auto;">Nombre de Prueba</th>
-                                        <th style="padding: 12px; text-align: center; font-weight: 600; color: #374151; border-bottom: 1px solid #e2e8f0; font-size: 12px; width: 60px;">Acciones</th>
-                                    </tr>
-                                </thead>
                                 <tbody id="tableTestsBody">
-                                    <!-- Fila 1 -->
-                                    <tr class="table-row" style="border-bottom: 1px solid #f1f5f9;">
+                                    <!-- Fila 1 - BLANCA -->
+                                    <tr class="table-row" style="background: white; border-bottom: 1px solid #f1f5f9;">
                                         <td style="padding: 12px; vertical-align: middle; width: 80px;">
-                                            <input type="checkbox" id="test1Active" checked style="width: 16px; height: 16px;">
+                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                <input type="checkbox" id="test1Active" checked style="width: 16px; height: 16px;">
+                                                <img src="https://picsum.photos/seed/test1/24/24.jpg" alt="Test 1" style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
+                                            </div>
                                         </td>
                                         <td style="padding: 12px; vertical-align: middle; width: auto; overflow: hidden;">
-                                            <span style="font-weight: 500; color: #1f293b; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="Tecno Camon 18 Pro Más">Tecno Camon 18 Pro Más</span>
+                                            <span style="font-weight: 500; color: #1f293b; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px;" title="Tecno Camon 18 Pro Más">Tecno Camon 18 Pro Más</span>
                                         </td>
                                         <td style="padding: 12px; vertical-align: middle; width: 60px; text-align: center;">
                                             <div class="dropdown-table" style="position: relative; display: inline-block;">
@@ -650,13 +644,16 @@ $titulo = "Editor: " . $tienda['nombre'];
                                         </td>
                                     </tr>
                                     
-                                    <!-- Fila 2 -->
-                                    <tr class="table-row" style="border-bottom: 1px solid #f1f5f9;">
+                                    <!-- Fila 2 - GRIS CLARA -->
+                                    <tr class="table-row" style="background: #f8fafc; border-bottom: 1px solid #f1f5f9;">
                                         <td style="padding: 12px; vertical-align: middle; width: 80px;">
-                                            <input type="checkbox" id="test2Active" style="width: 16px; height: 16px;">
+                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                <input type="checkbox" id="test2Active" style="width: 16px; height: 16px;">
+                                                <img src="https://picsum.photos/seed/test2/24/24.jpg" alt="Test 2" style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
+                                            </div>
                                         </td>
                                         <td style="padding: 12px; vertical-align: middle; width: auto; overflow: hidden;">
-                                            <span style="font-weight: 500; color: #1f293b; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="Beta Test v2.0">Beta Test v2.0</span>
+                                            <span style="font-weight: 500; color: #1f293b; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px;" title="Beta Test v2.0">Beta Test v2.0</span>
                                         </td>
                                         <td style="padding: 12px; vertical-align: middle; width: 60px; text-align: center;">
                                             <div class="dropdown-table" style="position: relative; display: inline-block;">
@@ -681,13 +678,16 @@ $titulo = "Editor: " . $tienda['nombre'];
                                         </td>
                                     </tr>
                                     
-                                    <!-- Fila 3 -->
-                                    <tr class="table-row" style="border-bottom: 1px solid #f1f5f9;">
+                                    <!-- Fila 3 - BLANCA -->
+                                    <tr class="table-row" style="background: white; border-bottom: 1px solid #f1f5f9;">
                                         <td style="padding: 12px; vertical-align: middle; width: 80px;">
-                                            <input type="checkbox" id="test3Active" style="width: 16px; height: 16px;">
+                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                <input type="checkbox" id="test3Active" style="width: 16px; height: 16px;">
+                                                <img src="https://picsum.photos/seed/test3/24/24.jpg" alt="Test 3" style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
+                                            </div>
                                         </td>
                                         <td style="padding: 12px; vertical-align: middle; width: auto; overflow: hidden;">
-                                            <span style="font-weight: 500; color: #1f293b; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="Experimento Responsive v1.5">Experimento Responsive v1.5</span>
+                                            <span style="font-weight: 500; color: #1f293b; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px;" title="Experimento Responsive v1.5">Experimento Responsive v1.5</span>
                                         </td>
                                         <td style="padding: 12px; vertical-align: middle; width: 60px; text-align: center;">
                                             <div class="dropdown-table" style="position: relative; display: inline-block;">
@@ -695,6 +695,142 @@ $titulo = "Editor: " . $tienda['nombre'];
                                                     <i class="fas fa-ellipsis-v" style="color: #64748b; font-size: 14px;"></i>
                                                 </button>
                                                 <div id="test3Dropdown" class="dropdown-menu-table" style="display: none; position: absolute; top: 100%; right: 0; z-index: 1000; background: white; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 140px; border: 1px solid #e2e8f0;">
+                                                    <div class="dropdown-item" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9;">
+                                                        <i class="fas fa-edit" style="color: #64748b; font-size: 12px;"></i>
+                                                        <span>Editar prueba</span>
+                                                    </div>
+                                                    <div class="dropdown-item" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                                                        <i class="fas fa-trash" style="color: #ef4444; font-size: 12px;"></i>
+                                                        <span>Eliminar prueba</span>
+                                                    </div>
+                                                    <div class="dropdown-item" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                                                        <i class="fas fa-eye-slash" style="color: #64748b; font-size: 12px;"></i>
+                                                        <span>Ocultar prueba</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    
+                                    <!-- Fila 4 - GRIS CLARA -->
+                                    <tr class="table-row" style="background: #f8fafc; border-bottom: 1px solid #f1f5f9;">
+                                        <td style="padding: 12px; vertical-align: middle; width: 80px;">
+                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                <input type="checkbox" id="test4Active" style="width: 16px; height: 16px;">
+                                                <img src="https://picsum.photos/seed/test4/24/24.jpg" alt="Test 4" style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
+                                            </div>
+                                        </td>
+                                        <td style="padding: 12px; vertical-align: middle; width: auto; overflow: hidden;">
+                                            <span style="font-weight: 500; color: #1f293b; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px;" title="Test de Carga Optimizada">Test de Carga Optimizada</span>
+                                        </td>
+                                        <td style="padding: 12px; vertical-align: middle; width: 60px; text-align: center;">
+                                            <div class="dropdown-table" style="position: relative; display: inline-block;">
+                                                <button class="dropdown-trigger-ellipsis" onclick="toggleTableDropdown('test4')" style="background: none; border: none; padding: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
+                                                    <i class="fas fa-ellipsis-v" style="color: #64748b; font-size: 14px;"></i>
+                                                </button>
+                                                <div id="test4Dropdown" class="dropdown-menu-table" style="display: none; position: absolute; top: 100%; right: 0; z-index: 1000; background: white; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 140px; border: 1px solid #e2e8f0;">
+                                                    <div class="dropdown-item" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9;">
+                                                        <i class="fas fa-edit" style="color: #64748b; font-size: 12px;"></i>
+                                                        <span>Editar prueba</span>
+                                                    </div>
+                                                    <div class="dropdown-item" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                                                        <i class="fas fa-trash" style="color: #ef4444; font-size: 12px;"></i>
+                                                        <span>Eliminar prueba</span>
+                                                    </div>
+                                                    <div class="dropdown-item" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                                                        <i class="fas fa-eye-slash" style="color: #64748b; font-size: 12px;"></i>
+                                                        <span>Ocultar prueba</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    
+                                    <!-- Fila 5 - BLANCA -->
+                                    <tr class="table-row" style="background: white; border-bottom: 1px solid #f1f5f9;">
+                                        <td style="padding: 12px; vertical-align: middle; width: 80px;">
+                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                <input type="checkbox" id="test5Active" style="width: 16px; height: 16px;">
+                                                <img src="https://picsum.photos/seed/test5/24/24.jpg" alt="Test 5" style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
+                                            </div>
+                                        </td>
+                                        <td style="padding: 12px; vertical-align: middle; width: auto; overflow: hidden;">
+                                            <span style="font-weight: 500; color: #1f293b; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px;" title="Experimento UI/UX Moderna">Experimento UI/UX Moderna</span>
+                                        </td>
+                                        <td style="padding: 12px; vertical-align: middle; width: 60px; text-align: center;">
+                                            <div class="dropdown-table" style="position: relative; display: inline-block;">
+                                                <button class="dropdown-trigger-ellipsis" onclick="toggleTableDropdown('test5')" style="background: none; border: none; padding: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
+                                                    <i class="fas fa-ellipsis-v" style="color: #64748b; font-size: 14px;"></i>
+                                                </button>
+                                                <div id="test5Dropdown" class="dropdown-menu-table" style="display: none; position: absolute; top: 100%; right: 0; z-index: 1000; background: white; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 140px; border: 1px solid #e2e8f0;">
+                                                    <div class="dropdown-item" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9;">
+                                                        <i class="fas fa-edit" style="color: #64748b; font-size: 12px;"></i>
+                                                        <span>Editar prueba</span>
+                                                    </div>
+                                                    <div class="dropdown-item" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                                                        <i class="fas fa-trash" style="color: #ef4444; font-size: 12px;"></i>
+                                                        <span>Eliminar prueba</span>
+                                                    </div>
+                                                    <div class="dropdown-item" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                                                        <i class="fas fa-eye-slash" style="color: #64748b; font-size: 12px;"></i>
+                                                        <span>Ocultar prueba</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    
+                                    <!-- Fila 6 - GRIS CLARA -->
+                                    <tr class="table-row" style="background: #f8fafc; border-bottom: 1px solid #f1f5f9;">
+                                        <td style="padding: 12px; vertical-align: middle; width: 80px;">
+                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                <input type="checkbox" id="test6Active" style="width: 16px; height: 16px;">
+                                                <img src="https://picsum.photos/seed/test6/24/24.jpg" alt="Test 6" style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
+                                            </div>
+                                        </td>
+                                        <td style="padding: 12px; vertical-align: middle; width: auto; overflow: hidden;">
+                                            <span style="font-weight: 500; color: #1f293b; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px;" title="Test de Conversión Mobile First">Test de Conversión Mobile First</span>
+                                        </td>
+                                        <td style="padding: 12px; vertical-align: middle; width: 60px; text-align: center;">
+                                            <div class="dropdown-table" style="position: relative; display: inline-block;">
+                                                <button class="dropdown-trigger-ellipsis" onclick="toggleTableDropdown('test6')" style="background: none; border: none; padding: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
+                                                    <i class="fas fa-ellipsis-v" style="color: #64748b; font-size: 14px;"></i>
+                                                </button>
+                                                <div id="test6Dropdown" class="dropdown-menu-table" style="display: none; position: absolute; top: 100%; right: 0; z-index: 1000; background: white; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 140px; border: 1px solid #e2e8f0;">
+                                                    <div class="dropdown-item" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9;">
+                                                        <i class="fas fa-edit" style="color: #64748b; font-size: 12px;"></i>
+                                                        <span>Editar prueba</span>
+                                                    </div>
+                                                    <div class="dropdown-item" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                                                        <i class="fas fa-trash" style="color: #ef4444; font-size: 12px;"></i>
+                                                        <span>Eliminar prueba</span>
+                                                    </div>
+                                                    <div class="dropdown-item" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                                                        <i class="fas fa-eye-slash" style="color: #64748b; font-size: 12px;"></i>
+                                                        <span>Ocultar prueba</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    
+                                    <!-- Fila 7 - BLANCA -->
+                                    <tr class="table-row" style="background: white; border-bottom: none;">
+                                        <td style="padding: 12px; vertical-align: middle; width: 80px;">
+                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                <input type="checkbox" id="test7Active" style="width: 16px; height: 16px;">
+                                                <img src="https://picsum.photos/seed/test7/24/24.jpg" alt="Test 7" style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
+                                            </div>
+                                        </td>
+                                        <td style="padding: 12px; vertical-align: middle; width: auto; overflow: hidden;">
+                                            <span style="font-weight: 500; color: #1f293b; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px;" title="Test de Rendimiento API">Test de Rendimiento API</span>
+                                        </td>
+                                        <td style="padding: 12px; vertical-align: middle; width: 60px; text-align: center;">
+                                            <div class="dropdown-table" style="position: relative; display: inline-block;">
+                                                <button class="dropdown-trigger-ellipsis" onclick="toggleTableDropdown('test7')" style="background: none; border: none; padding: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
+                                                    <i class="fas fa-ellipsis-v" style="color: #64748b; font-size: 14px;"></i>
+                                                </button>
+                                                <div id="test7Dropdown" class="dropdown-menu-table" style="display: none; position: absolute; top: 100%; right: 0; z-index: 1000; background: white; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 140px; border: 1px solid #e2e8f0;">
                                                     <div class="dropdown-item" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9;">
                                                         <i class="fas fa-edit" style="color: #64748b; font-size: 12px;"></i>
                                                         <span>Editar prueba</span>
