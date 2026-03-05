@@ -1710,14 +1710,14 @@ window.renderInventoryList = function() {
                     <button class="dropdown-trigger-ellipsis" onclick="toggleInventoryDropdown('${p.id}')" style="background: none; border: none; padding: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s; margin-left: auto;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
                         <i class="fas fa-ellipsis-v" style="color: #64748b; font-size: 14px;"></i>
                     </button>
-                    <div id="inventory_${p.id}Dropdown" class="dropdown-menu-inventory" style="display: none; position: absolute; top: 100%; left: -140px; z-index: 1000; background: white; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 140px; border: 1px solid #e2e8f0; font-family: var(--font-ui);">
-                        <div class="dropdown-item" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9; font-family: inherit;" onclick="openProductDrawer(${p.id})">
+                    <div id="inventory_${p.id}Dropdown" class="dropdown-menu-inventory" style="display: none; position: absolute; top: 100%; right: 0; transform: translateX(-50%); z-index: 1000; background: white; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 140px; border: 1px solid #e2e8f0; font-family: var(--font-ui);">
+                        <div class="dropdown-item" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9; font-family: inherit; transition: background 0.2s;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'" onclick="openProductDrawer(${p.id})">
                             <span>Editar</span>
                         </div>
-                        <div class="dropdown-item" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9; font-family: inherit;" onclick="eliminarProducto(${p.id})">
+                        <div class="dropdown-item" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9; font-family: inherit; transition: background 0.2s;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'" onclick="eliminarProducto(${p.id})">
                             <span>Eliminar</span>
                         </div>
-                        <div class="dropdown-item" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; font-family: inherit;" onclick="toggleProductoActivo(${p.id}, ${p.activo})">
+                        <div class="dropdown-item" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; font-family: inherit; transition: background 0.2s;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'" onclick="toggleProductoActivo(${p.id}, ${p.activo})">
                             <span>${parseInt(p.activo) === 1 ? 'Ocultar' : 'Mostrar'}</span>
                         </div>
                     </div>
