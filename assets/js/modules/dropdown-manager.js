@@ -45,7 +45,15 @@ class DropdownManager {
             appendTo: reference => reference.closest('.drawer-body, .sidebar-content') || document.body,
             offset: [0, 8],
             popperOptions: {
-                fallbackPlacements: []
+                strategy: 'absolute',
+                modifiers: [
+                    {
+                        name: 'eventListeners',
+                        options: {
+                            scroll: false, // Detiene el reposicionamiento en scroll
+                        },
+                    },
+                ],
             },
             onShow: (instance) => this.handleShow(instance),
             onHide: (instance) => this.handleHide(instance)
@@ -115,13 +123,54 @@ class DropdownManager {
                 tippyInstance.hide();
             }
         });
+
+        const closeOnScroll = () => {
+            if (instance.state.isShown) {
+                instance.hide();
+            }
+        };
+
+        // Guardar referencia para poder removerlo después
+        instance._scrollHandler = closeOnScroll;
+
+        // Añadir listener al contenedor de scroll más cercano
+        const scrollableParent = instance.reference.closest('.drawer-body, .sidebar-content');
+        if (scrollableParent) {
+            scrollableParent.addEventListener('scroll', closeOnScroll, { passive: true });
+            instance._scrollTarget = scrollableParent;
+        }
+
+        // Añadir listener global para la rueda del ratón, con retraso para evitar que cierre al abrir
+        instance._wheelTimeout = setTimeout(() => {
+            document.addEventListener('wheel', closeOnScroll, { passive: true });
+            instance._documentWheelListener = closeOnScroll;
+        }, 150); // 150ms de gracia
     }
 
     /**
      * Maneja el evento hide del dropdown
      */
     handleHide(instance) {
-        // No se necesita lógica adicional aquí ahora
+        // Limpiar listener de scroll del contenedor
+        if (instance._scrollHandler && instance._scrollTarget) {
+            instance._scrollTarget.removeEventListener('scroll', instance._scrollHandler);
+        }
+
+        // Limpiar el timeout si el menú se cierra antes de que se ejecute
+        if (instance._wheelTimeout) {
+            clearTimeout(instance._wheelTimeout);
+        }
+
+        // Limpiar listener de la rueda del ratón del documento
+        if (instance._documentWheelListener) {
+            document.removeEventListener('wheel', instance._documentWheelListener);
+        }
+
+        // Limpiar todas las referencias guardadas
+        delete instance._scrollHandler;
+        delete instance._scrollTarget;
+        delete instance._wheelTimeout;
+        delete instance._documentWheelListener;
     }
 
     /**
