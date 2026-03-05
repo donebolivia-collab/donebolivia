@@ -2697,24 +2697,33 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.querySelectorAll('[data-tippy-root]').forEach(popper => {
                     const tippyInstance = popper._tippy;
                     if (tippyInstance && tippyInstance !== instance) {
-                        tippyInstance.hide();  // ← Método correcto para ocultar
+                        tippyInstance.hide();
                     }
                 });
                 
-                // Cerrar dropdown al hacer scroll
-                const handleScroll = () => {
-                    instance.hide();
-                    document.removeEventListener('scroll', handleScroll, true);
-                    window.removeEventListener('scroll', handleScroll, true);
+                // Cerrar dropdown al hacer scroll - versión corregida
+                const scrollHandler = () => {
+                    if (instance.state.isShown) {
+                        instance.hide();
+                    }
                 };
                 
-                document.addEventListener('scroll', handleScroll, true);
-                window.addEventListener('scroll', handleScroll, true);
+                // Guardar referencia para poder limpiar después
+                instance._scrollHandler = scrollHandler;
+                
+                // Añadir listeners con capture para mejor detección
+                document.addEventListener('scroll', scrollHandler, { capture: true, passive: true });
+                window.addEventListener('scroll', scrollHandler, { capture: true, passive: true });
+                
+                // También cerrar al hacer clic fuera (ya está incluido en hideOnClick: true)
             },
             onHide(instance) {
                 // Limpiar listeners de scroll cuando se cierra
-                document.removeEventListener('scroll', handleScroll, true);
-                window.removeEventListener('scroll', handleScroll, true);
+                if (instance._scrollHandler) {
+                    document.removeEventListener('scroll', instance._scrollHandler, { capture: true });
+                    window.removeEventListener('scroll', instance._scrollHandler, { capture: true });
+                    delete instance._scrollHandler;
+                }
             }
         });
     }, 100);
