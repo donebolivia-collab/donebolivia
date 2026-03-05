@@ -691,7 +691,6 @@ $titulo = "Editor: " . $tienda['nombre'];
                                     <!-- SLIDE 1 -->
                                     <div class="carousel-slide active" data-slide="0">
                                         <div class="slide-content">
-                                            <div class="slide-label">Banner 1</div>
                                             <div id="bannerSlotContainer1" class="banner-slot-container">
                                                 <div id="bannerUploader1" class="image-uploader wide <?php echo !empty($tienda['banner_imagen']) ? 'has-image' : ''; ?>">
                                                     <input type="file" id="bannerInput1" accept="image/*" hidden>
@@ -711,7 +710,6 @@ $titulo = "Editor: " . $tienda['nombre'];
                                     <!-- SLIDE 2 -->
                                     <div class="carousel-slide" data-slide="1">
                                         <div class="slide-content">
-                                            <div class="slide-label">Banner 2</div>
                                             <div id="bannerSlotContainer2" class="banner-slot-container">
                                                 <div id="bannerUploader2" class="image-uploader wide <?php echo !empty($tienda['banner_imagen_2']) ? 'has-image' : ''; ?>">
                                                     <input type="file" id="bannerInput2" accept="image/*" hidden>
@@ -731,7 +729,6 @@ $titulo = "Editor: " . $tienda['nombre'];
                                     <!-- SLIDE 3 -->
                                     <div class="carousel-slide" data-slide="2">
                                         <div class="slide-content">
-                                            <div class="slide-label">Banner 3</div>
                                             <div id="bannerSlotContainer3" class="banner-slot-container">
                                                 <div id="bannerUploader3" class="image-uploader wide <?php echo !empty($tienda['banner_imagen_3']) ? 'has-image' : ''; ?>">
                                                     <input type="file" id="bannerInput3" accept="image/*" hidden>
@@ -751,7 +748,6 @@ $titulo = "Editor: " . $tienda['nombre'];
                                     <!-- SLIDE 4 -->
                                     <div class="carousel-slide" data-slide="3">
                                         <div class="slide-content">
-                                            <div class="slide-label">Banner 4</div>
                                             <div id="bannerSlotContainer4" class="banner-slot-container">
                                                 <div id="bannerUploader4" class="image-uploader wide <?php echo !empty($tienda['banner_imagen_4']) ? 'has-image' : ''; ?>">
                                                     <input type="file" id="bannerInput4" accept="image/*" hidden>

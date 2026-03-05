@@ -705,6 +705,7 @@ if (!empty($tienda['menu_items'])) {
         if (!empty($tienda['banner_imagen'])) $banners[] = $tienda['banner_imagen'];
         if (!empty($tienda['banner_imagen_2'])) $banners[] = $tienda['banner_imagen_2'];
         if (!empty($tienda['banner_imagen_3'])) $banners[] = $tienda['banner_imagen_3'];
+        if (!empty($tienda['banner_imagen_4'])) $banners[] = $tienda['banner_imagen_4'];
         ?>
         
         <div id="heroSliderContainer" class="slider-container banner-slider" data-user-enabled="<?php echo $mostrar_banner ? 'true' : 'false'; ?>" style="display: <?php echo $banner_display; ?>;">
