@@ -664,15 +664,15 @@ $titulo = "Editor: " . $tienda['nombre'];
                 <!-- BLOQUE 1: PORTADA (SLIDER) - CORREGIDO -->
                 <div class="control-group">
                     <div class="control-group-header">
-                        <label>Portada (Slider)</label>
+                        <label>Carrusel</label>
                         <label class="switch" title="Activar/Desactivar">
-                            <input type="checkbox" id="bannerActive" onchange="updateBannerState()" <?php echo (!empty($tienda['mostrar_banner']) && $tienda['mostrar_banner'] == 1) ? 'checked' : ''; ?>>
+                            <input type="checkbox" id="bannerActive" onchange="updateBannerState()" {{ (!empty($tienda['mostrar_banner']) && $tienda['mostrar_banner'] == 1) ? 'checked' : '' }}>
                             <span class="slider round"></span>
                         </label>
                     </div>
                     <div class="control-group-content" id="bannerBlockContent" style="padding-top: 15px;">
                         <div style="font-size:11px; color:#64748b; margin-bottom:10px;">
-                            Carrusel principal. Formato: 1920x600 px.
+                            
                         </div>
                         
                         <!-- CARRUSEL ENTERPRISE PARA BANNERS -->
