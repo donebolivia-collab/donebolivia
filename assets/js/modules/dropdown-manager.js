@@ -42,7 +42,7 @@ class DropdownManager {
             animation: 'scale',
             theme: 'light',
             hideOnClick: true,
-            appendTo: document.body,
+            appendTo: reference => reference.closest('.drawer-body, .sidebar-content') || document.body,
             offset: [0, 8],
             popperOptions: {
                 fallbackPlacements: []
@@ -108,62 +108,20 @@ class DropdownManager {
      * Maneja el evento show del dropdown
      */
     handleShow(instance) {
-        // Ocultar otros tippys
+        // Ocultar otros tippys para evitar solapamientos
         document.querySelectorAll('[data-tippy-root]').forEach(popper => {
             const tippyInstance = popper._tippy;
             if (tippyInstance && tippyInstance !== instance) {
                 tippyInstance.hide();
             }
         });
-
-        // Configurar cierre al scroll - SOLUCIÓN SIMPLE Y DIRECTA
-        const closeOnScroll = () => {
-            if (instance.state.isShown) {
-                instance.hide();
-            }
-        };
-        
-        // Guardar referencia
-        instance._scrollHandler = closeOnScroll;
-
-        // Buscar el contenedor scrollable más cercano para eventos de scroll específicos del elemento
-        const scrollableParent = instance.reference.closest('.drawer-body, .sidebar-content');
-        if (scrollableParent) {
-            scrollableParent.addEventListener('scroll', closeOnScroll, { passive: true });
-            instance._scrollTarget = scrollableParent;
-        }
-
-        // Listener para wheel del documento, con un pequeño retraso
-        // Esto permite que el click que abre el dropdown se complete antes de que un wheel accidental lo cierre
-        instance._wheelTimeout = setTimeout(() => {
-            document.addEventListener('wheel', closeOnScroll, { passive: true });
-            instance._documentWheelListener = closeOnScroll;
-        }, 100); // Pequeño retraso de 100ms
+    }
 
     /**
      * Maneja el evento hide del dropdown
      */
     handleHide(instance) {
-        // Limpiar el listener de scroll específico del elemento
-        if (instance._scrollHandler && instance._scrollTarget) {
-            instance._scrollTarget.removeEventListener('scroll', instance._scrollHandler, { passive: true });
-        }
-
-        // Limpiar el timeout si aún no se ha ejecutado
-        if (instance._wheelTimeout) {
-            clearTimeout(instance._wheelTimeout);
-            delete instance._wheelTimeout;
-        }
-
-        // Limpiar el listener de wheel global del documento
-        if (instance._documentWheelListener) {
-            document.removeEventListener('wheel', instance._documentWheelListener, { passive: true });
-        }
-
-        // Limpiar referencias
-        delete instance._scrollHandler;
-        delete instance._scrollTarget;
-        delete instance._documentWheelListener;
+        // No se necesita lógica adicional aquí ahora
     }
 
     /**
