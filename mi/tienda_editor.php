@@ -626,7 +626,7 @@ $titulo = "Editor: " . $tienda['nombre'];
                                                 <button class="dropdown-trigger-ellipsis" onclick="toggleTableDropdown('test1')" style="background: none; border: none; padding: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s; margin-left: auto;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
                                                     <i class="fas fa-ellipsis-v" style="color: #64748b; font-size: 14px;"></i>
                                                 </button>
-                                                <div id="test1Dropdown" class="dropdown-menu-table" style="display: none; position: absolute; top: 100%; right: -20px; z-index: 1000; background: white; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 140px; border: 1px solid #e2e8f0;">
+                                                <div id="test1Dropdown" class="dropdown-menu-table" style="display: none; position: absolute; top: 100%; left: -140px; z-index: 1000; background: white; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 140px; border: 1px solid #e2e8f0;">
                                                     <div class="dropdown-item" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9;">
                                                         <i class="fas fa-edit" style="color: #64748b; font-size: 12px;"></i>
                                                         <span>Editar prueba</span>
@@ -660,7 +660,7 @@ $titulo = "Editor: " . $tienda['nombre'];
                                                 <button class="dropdown-trigger-ellipsis" onclick="toggleTableDropdown('test2')" style="background: none; border: none; padding: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s; margin-left: auto;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
                                                     <i class="fas fa-ellipsis-v" style="color: #64748b; font-size: 14px;"></i>
                                                 </button>
-                                                <div id="test2Dropdown" class="dropdown-menu-table" style="display: none; position: absolute; top: 100%; right: -20px; z-index: 1000; background: white; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 140px; border: 1px solid #e2e8f0;">
+                                                <div id="test2Dropdown" class="dropdown-menu-table" style="display: none; position: absolute; top: 100%; left: -140px; z-index: 1000; background: white; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 140px; border: 1px solid #e2e8f0;">
                                                     <div class="dropdown-item" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9;">
                                                         <i class="fas fa-edit" style="color: #64748b; font-size: 12px;"></i>
                                                         <span>Editar prueba</span>
@@ -694,7 +694,7 @@ $titulo = "Editor: " . $tienda['nombre'];
                                                 <button class="dropdown-trigger-ellipsis" onclick="toggleTableDropdown('test3')" style="background: none; border: none; padding: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s; margin-left: auto;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
                                                     <i class="fas fa-ellipsis-v" style="color: #64748b; font-size: 14px;"></i>
                                                 </button>
-                                                <div id="test3Dropdown" class="dropdown-menu-table" style="display: none; position: absolute; top: 100%; right: -20px; z-index: 1000; background: white; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 140px; border: 1px solid #e2e8f0;">
+                                                <div id="test3Dropdown" class="dropdown-menu-table" style="display: none; position: absolute; top: 100%; left: -140px; z-index: 1000; background: white; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 140px; border: 1px solid #e2e8f0;">
                                                     <div class="dropdown-item" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9;">
                                                         <i class="fas fa-edit" style="color: #64748b; font-size: 12px;"></i>
                                                         <span>Editar prueba</span>
@@ -728,7 +728,7 @@ $titulo = "Editor: " . $tienda['nombre'];
                                                 <button class="dropdown-trigger-ellipsis" onclick="toggleTableDropdown('test4')" style="background: none; border: none; padding: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s; margin-left: auto;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
                                                     <i class="fas fa-ellipsis-v" style="color: #64748b; font-size: 14px;"></i>
                                                 </button>
-                                                <div id="test4Dropdown" class="dropdown-menu-table" style="display: none; position: absolute; top: 100%; right: -20px; z-index: 1000; background: white; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 140px; border: 1px solid #e2e8f0;">
+                                                <div id="test4Dropdown" class="dropdown-menu-table" style="display: none; position: absolute; top: 100%; left: -140px; z-index: 1000; background: white; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 140px; border: 1px solid #e2e8f0;">
                                                     <div class="dropdown-item" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9;">
                                                         <i class="fas fa-edit" style="color: #64748b; font-size: 12px;"></i>
                                                         <span>Editar prueba</span>
@@ -762,7 +762,7 @@ $titulo = "Editor: " . $tienda['nombre'];
                                                 <button class="dropdown-trigger-ellipsis" onclick="toggleTableDropdown('test5')" style="background: none; border: none; padding: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s; margin-left: auto;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
                                                     <i class="fas fa-ellipsis-v" style="color: #64748b; font-size: 14px;"></i>
                                                 </button>
-                                                <div id="test5Dropdown" class="dropdown-menu-table" style="display: none; position: absolute; top: 100%; right: -20px; z-index: 1000; background: white; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 140px; border: 1px solid #e2e8f0;">
+                                                <div id="test5Dropdown" class="dropdown-menu-table" style="display: none; position: absolute; top: 100%; left: -140px; z-index: 1000; background: white; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 140px; border: 1px solid #e2e8f0;">
                                                     <div class="dropdown-item" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9;">
                                                         <i class="fas fa-edit" style="color: #64748b; font-size: 12px;"></i>
                                                         <span>Editar prueba</span>
@@ -796,7 +796,7 @@ $titulo = "Editor: " . $tienda['nombre'];
                                                 <button class="dropdown-trigger-ellipsis" onclick="toggleTableDropdown('test6')" style="background: none; border: none; padding: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s; margin-left: auto;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
                                                     <i class="fas fa-ellipsis-v" style="color: #64748b; font-size: 14px;"></i>
                                                 </button>
-                                                <div id="test6Dropdown" class="dropdown-menu-table" style="display: none; position: absolute; top: 100%; right: -20px; z-index: 1000; background: white; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 140px; border: 1px solid #e2e8f0;">
+                                                <div id="test6Dropdown" class="dropdown-menu-table" style="display: none; position: absolute; top: 100%; left: -140px; z-index: 1000; background: white; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 140px; border: 1px solid #e2e8f0;">
                                                     <div class="dropdown-item" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9;">
                                                         <i class="fas fa-edit" style="color: #64748b; font-size: 12px;"></i>
                                                         <span>Editar prueba</span>
@@ -830,7 +830,7 @@ $titulo = "Editor: " . $tienda['nombre'];
                                                 <button class="dropdown-trigger-ellipsis" onclick="toggleTableDropdown('test7')" style="background: none; border: none; padding: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s; margin-left: auto;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
                                                     <i class="fas fa-ellipsis-v" style="color: #64748b; font-size: 14px;"></i>
                                                 </button>
-                                                <div id="test7Dropdown" class="dropdown-menu-table" style="display: none; position: absolute; top: 100%; right: -20px; z-index: 1000; background: white; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 140px; border: 1px solid #e2e8f0;">
+                                                <div id="test7Dropdown" class="dropdown-menu-table" style="display: none; position: absolute; top: 100%; left: -140px; z-index: 1000; background: white; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 140px; border: 1px solid #e2e8f0;">
                                                     <div class="dropdown-item" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9;">
                                                         <i class="fas fa-edit" style="color: #64748b; font-size: 12px;"></i>
                                                         <span>Editar prueba</span>
