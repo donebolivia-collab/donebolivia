@@ -1582,10 +1582,9 @@ window.closeHomeDrawer = function() {
 
 window.toggleProductoActivo = async function(id, estadoActual) {
     const nuevoEstado = parseInt(estadoActual) === 1 ? 0 : 1;
-    const btn = event.currentTarget; 
     
-    const icon = btn.querySelector('i');
-    icon.className = 'fas fa-spinner fa-spin';
+    // No usar event.currentTarget porque en Tippy no funciona correctamente
+    // En su lugar, mostrar feedback directamente
     
     try {
         const res = await fetch('/api/toggle_producto_activo.php', {
