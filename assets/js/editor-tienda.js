@@ -1712,14 +1712,14 @@ window.renderInventoryList = function() {
                     </button>
                     <!-- Contenido del dropdown para Tippy -->
                     <div id="dropdown-content-${p.id}" style="display: none;">
-                        <div class="tippy-dropdown" style="min-width: 140px; font-family: var(--font-ui);">
-                            <div class="tippy-item" style="padding: 10px 12px; cursor: pointer; border-bottom: 1px solid #f1f5f9; transition: background 0.2s;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'" onclick="openProductDrawer(${p.id})">
+                        <div style="background: white; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); border: 1px solid #e2e8f0; min-width: 140px; font-family: var(--font-ui);">
+                            <div style="padding: 10px 12px; cursor: pointer; border-bottom: 1px solid #f1f5f9; transition: background 0.2s;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'" onclick="openProductDrawer(${p.id})">
                                 <span>Editar</span>
                             </div>
-                            <div class="tippy-item" style="padding: 10px 12px; cursor: pointer; border-bottom: 1px solid #f1f5f9; transition: background 0.2s;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'" onclick="eliminarProducto(${p.id})">
+                            <div style="padding: 10px 12px; cursor: pointer; border-bottom: 1px solid #f1f5f9; transition: background 0.2s;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'" onclick="eliminarProducto(${p.id})">
                                 <span>Eliminar</span>
                             </div>
-                            <div class="tippy-item" style="padding: 10px 12px; cursor: pointer; transition: background 0.2s;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'" onclick="toggleProductoActivo(${p.id}, ${p.activo})">
+                            <div style="padding: 10px 12px; cursor: pointer; transition: background 0.2s;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'" onclick="toggleProductoActivo(${p.id}, ${p.activo})">
                                 <span>${parseInt(p.activo) === 1 ? 'Ocultar' : 'Mostrar'}</span>
                             </div>
                         </div>
@@ -1748,10 +1748,11 @@ window.renderInventoryList = function() {
                 placement: 'bottom-end',
                 arrow: true,
                 animation: 'scale',
-                theme: 'light-border',
+                theme: 'light',
                 interactive: true,
                 hideOnClick: true,
                 appendTo: document.body,
+                offset: [10, 5],
                 onShow(instance) {
                     // Ocultar otros tippys
                     document.querySelectorAll('[data-tippy-root]').forEach(tippy => {
