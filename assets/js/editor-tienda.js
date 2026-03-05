@@ -1707,21 +1707,21 @@ window.renderInventoryList = function() {
             </td>
             <td style="padding: 12px 4px 12px 4px; vertical-align: middle; width: 50px; text-align: right; padding-right: 4px;">
                 <div class="dropdown-inventory" style="position: relative; display: inline-block; width: 100%; text-align: right;">
-                    <button class="dropdown-trigger-ellipsis" onclick="toggleInventoryDropdown('${p.id}')" style="background: none; border: none; padding: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s; margin-left: auto;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
+                    <button id="ellipsis-${p.id}" class="dropdown-trigger-ellipsis" style="background: none; border: none; padding: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s; margin-left: auto;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
                         <i class="fas fa-ellipsis-v" style="color: #64748b; font-size: 14px;"></i>
                     </button>
-                    <div id="inventory_${p.id}Dropdown" class="dropdown-menu-inventory" style="display: none; position: absolute; top: 100%; right: -10px; z-index: 1000; background: white; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 140px; border: 1px solid #e2e8f0; font-family: var(--font-ui);">
-                        <!-- Flecha indicadora -->
-                        <div style="position: absolute; top: -5px; right: 18px; width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-bottom: 5px solid white;"></div>
-                        
-                        <div class="dropdown-item" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9; font-family: inherit; transition: background 0.2s;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'" onclick="openProductDrawer(${p.id})">
-                            <span>Editar</span>
-                        </div>
-                        <div class="dropdown-item" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9; font-family: inherit; transition: background 0.2s;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'" onclick="eliminarProducto(${p.id})">
-                            <span>Eliminar</span>
-                        </div>
-                        <div class="dropdown-item" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; font-family: inherit; transition: background 0.2s;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'" onclick="toggleProductoActivo(${p.id}, ${p.activo})">
-                            <span>${parseInt(p.activo) === 1 ? 'Ocultar' : 'Mostrar'}</span>
+                    <!-- Contenido del dropdown para Tippy -->
+                    <div id="dropdown-content-${p.id}" style="display: none;">
+                        <div class="tippy-dropdown" style="min-width: 140px; font-family: var(--font-ui);">
+                            <div class="tippy-item" style="padding: 10px 12px; cursor: pointer; border-bottom: 1px solid #f1f5f9; transition: background 0.2s;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'" onclick="openProductDrawer(${p.id})">
+                                <span>Editar</span>
+                            </div>
+                            <div class="tippy-item" style="padding: 10px 12px; cursor: pointer; border-bottom: 1px solid #f1f5f9; transition: background 0.2s;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'" onclick="eliminarProducto(${p.id})">
+                                <span>Eliminar</span>
+                            </div>
+                            <div class="tippy-item" style="padding: 10px 12px; cursor: pointer; transition: background 0.2s;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'" onclick="toggleProductoActivo(${p.id}, ${p.activo})">
+                                <span>${parseInt(p.activo) === 1 ? 'Ocultar' : 'Mostrar'}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1734,6 +1734,35 @@ window.renderInventoryList = function() {
     table.appendChild(tbody);
     tableContainer.appendChild(table);
     list.appendChild(tableContainer);
+    
+    // Inicializar Tippy.js para cada dropdown
+    products.forEach(p => {
+        const trigger = document.getElementById(`ellipsis-${p.id}`);
+        const content = document.getElementById(`dropdown-content-${p.id}`);
+        
+        if (trigger && content) {
+            tippy(trigger, {
+                content: content.innerHTML,
+                allowHTML: true,
+                trigger: 'click',
+                placement: 'bottom-end',
+                arrow: true,
+                animation: 'scale',
+                theme: 'light-border',
+                interactive: true,
+                hideOnClick: true,
+                appendTo: document.body,
+                onShow(instance) {
+                    // Ocultar otros tippys
+                    document.querySelectorAll('[data-tippy-root]').forEach(tippy => {
+                        if (tippy !== instance.popper) {
+                            tippy.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        }
+    });
 };
 
 window.filterInventory = function() {

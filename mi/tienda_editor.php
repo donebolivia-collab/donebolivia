@@ -1679,6 +1679,9 @@ document.addEventListener('DOMContentLoaded', () => {
 <script src="/assets/js/modules/realtime-communicator.js?v=<?php echo time(); ?>"></script>
 <script src="/assets/js/modules/product-sync-manager.js?v=<?php echo time(); ?>"></script>
 <script src="/assets/js/modules/editor-integration.js?v=<?php echo time(); ?>"></script>
+<!-- Tippy.js para dropdowns perfectos -->
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<script src="https://unpkg.com/tippy.js@6"></script>
 <link rel="stylesheet" href="/assets/css/ui-multiselect.css?v=<?php echo time(); ?>">
 </body>
 </html>
