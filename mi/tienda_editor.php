@@ -595,6 +595,132 @@ $titulo = "Editor: " . $tienda['nombre'];
                 </div>
             </div>
 
+            <!-- PRUEBAS DE TABLA -->
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span><i class="fas fa-flask"></i> Pruebas de Tabla</span>
+                    <i class="fas fa-chevron-down arrow"></i>
+                </div>
+                <div class="accordion-body">
+                    <div class="control-group">
+                        <label style="display: block; font-size: 11px; font-weight: 700; color: #000000; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">PRUEBAS A/B ACTIVAS</label>
+                        <div style="font-size: 12px; color: #000000; margin-top: 0; margin-bottom: 12px;">Tabla de pruebas para experimentos y configuraciones.</div>
+                        
+                        <!-- TABLA ENTERPRISE -->
+                        <div class="table-tests-container" style="background: white; border-radius: 8px; overflow: hidden; border: 1px solid #e2e8f0;">
+                            <table class="table-tests" style="width: 100%; border-collapse: collapse;">
+                                <thead>
+                                    <tr style="background: #f8fafc;">
+                                        <th style="padding: 12px; text-align: left; font-weight: 600; color: #374151; border-bottom: 1px solid #e2e8f0; font-size: 12px;">
+                                            <i class="fas fa-check-square" style="margin-right: 6px;"></i> Activo
+                                        </th>
+                                        <th style="padding: 12px; text-align: left; font-weight: 600; color: #374151; border-bottom: 1px solid #e2e8f0; font-size: 12px;">Nombre de Prueba</th>
+                                        <th style="padding: 12px; text-align: left; font-weight: 600; color: #374151; border-bottom: 1px solid #e2e8f0; font-size: 12px;">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tableTestsBody">
+                                    <!-- Fila 1 -->
+                                    <tr class="table-row" style="border-bottom: 1px solid #f1f5f9;">
+                                        <td style="padding: 12px; vertical-align: middle;">
+                                            <input type="checkbox" id="test1Active" checked style="width: 16px; height: 16px;">
+                                        </td>
+                                        <td style="padding: 12px; vertical-align: middle;">
+                                            <span style="font-weight: 500; color: #1f293b;">Tecno Camon 18 Pro Más</span>
+                                        </td>
+                                        <td style="padding: 12px; vertical-align: middle;">
+                                            <div class="dropdown-table" style="position: relative; display: inline-block;">
+                                                <button class="dropdown-trigger" onclick="toggleTableDropdown('test1')" style="background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; padding: 6px 12px; font-size: 12px; color: #374151; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                                                    <span id="test1Label">Seleccionar acción</span>
+                                                    <i class="fas fa-chevron-down" style="font-size: 10px;"></i>
+                                                </button>
+                                                <div id="test1Dropdown" class="dropdown-menu-table" style="display: none; position: absolute; top: 100%; right: 0; z-index: 1000; background: white; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 160px; border: 1px solid #e2e8f0;">
+                                                    <div class="dropdown-item" onclick="editTableTest('test1')" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9;">
+                                                        <i class="fas fa-edit" style="color: #64748b; font-size: 12px;"></i>
+                                                        <span>Editar prueba</span>
+                                                    </div>
+                                                    <div class="dropdown-item" onclick="deleteTableTest('test1')" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                                                        <i class="fas fa-trash" style="color: #ef4444; font-size: 12px;"></i>
+                                                        <span>Eliminar prueba</span>
+                                                    </div>
+                                                    <div class="dropdown-item" onclick="hideTableTest('test1')" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                                                        <i class="fas fa-eye-slash" style="color: #64748b; font-size: 12px;"></i>
+                                                        <span>Ocultar prueba</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    
+                                    <!-- Fila 2 -->
+                                    <tr class="table-row" style="border-bottom: 1px solid #f1f5f9;">
+                                        <td style="padding: 12px; vertical-align: middle;">
+                                            <input type="checkbox" id="test2Active" style="width: 16px; height: 16px;">
+                                        </td>
+                                        <td style="padding: 12px; vertical-align: middle;">
+                                            <span style="font-weight: 500; color: #1f293b;">Beta Test v2.0</span>
+                                        </td>
+                                        <td style="padding: 12px; vertical-align: middle;">
+                                            <div class="dropdown-table" style="position: relative; display: inline-block;">
+                                                <button class="dropdown-trigger" onclick="toggleTableDropdown('test2')" style="background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; padding: 6px 12px; font-size: 12px; color: #374151; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                                                    <span id="test2Label">Seleccionar acción</span>
+                                                    <i class="fas fa-chevron-down" style="font-size: 10px;"></i>
+                                                </button>
+                                                <div id="test2Dropdown" class="dropdown-menu-table" style="display: none; position: absolute; top: 100%; right: 0; z-index: 1000; background: white; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 160px; border: 1px solid #e2e8f0;">
+                                                    <div class="dropdown-item" onclick="editTableTest('test2')" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9;">
+                                                        <i class="fas fa-edit" style="color: #64748b; font-size: 12px;"></i>
+                                                        <span>Editar prueba</span>
+                                                    </div>
+                                                    <div class="dropdown-item" onclick="deleteTableTest('test2')" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                                                        <i class="fas fa-trash" style="color: #ef4444; font-size: 12px;"></i>
+                                                        <span>Eliminar prueba</span>
+                                                    </div>
+                                                    <div class="dropdown-item" onclick="hideTableTest('test2')" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                                                        <i class="fas fa-eye-slash" style="color: #64748b; font-size: 12px;"></i>
+                                                        <span>Ocultar prueba</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    
+                                    <!-- Fila 3 -->
+                                    <tr class="table-row" style="border-bottom: 1px solid #f1f5f9;">
+                                        <td style="padding: 12px; vertical-align: middle;">
+                                            <input type="checkbox" id="test3Active" style="width: 16px; height: 16px;">
+                                        </td>
+                                        <td style="padding: 12px; vertical-align: middle;">
+                                            <span style="font-weight: 500; color: #1f293b;">Experimento Responsive v1.5</span>
+                                        </td>
+                                        <td style="padding: 12px; vertical-align: middle;">
+                                            <div class="dropdown-table" style="position: relative; display: inline-block;">
+                                                <button class="dropdown-trigger" onclick="toggleTableDropdown('test3')" style="background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; padding: 6px 12px; font-size: 12px; color: #374151; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                                                    <span id="test3Label">Seleccionar acción</span>
+                                                    <i class="fas fa-chevron-down" style="font-size: 10px;"></i>
+                                                </button>
+                                                <div id="test3Dropdown" class="dropdown-menu-table" style="display: none; position: absolute; top: 100%; right: 0; z-index: 1000; background: white; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 160px; border: 1px solid #e2e8f0;">
+                                                    <div class="dropdown-item" onclick="editTableTest('test3')" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9;">
+                                                        <i class="fas fa-edit" style="color: #64748b; font-size: 12px;"></i>
+                                                        <span>Editar prueba</span>
+                                                    </div>
+                                                    <div class="dropdown-item" onclick="deleteTableTest('test3')" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                                                        <i class="fas fa-trash" style="color: #ef4444; font-size: 12px;"></i>
+                                                        <span>Eliminar prueba</span>
+                                                    </div>
+                                                    <div class="dropdown-item" onclick="hideTableTest('test3')" style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                                                        <i class="fas fa-eye-slash" style="color: #64748b; font-size: 12px;"></i>
+                                                        <span>Ocultar prueba</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- PRODUCTOS -->
             <div class="accordion-item">
                 <div class="accordion-header" onclick="toggleAccordion(this)">
@@ -1266,7 +1392,6 @@ class BannerCarousel {
         this.slides = this.track.querySelectorAll('.carousel-slide');
         this.indicators = document.querySelectorAll('.indicator');
         
-        if (this.slides.length === 0) return;
         
         // Configurar eventos en indicadores
         this.indicators.forEach((indicator, index) => {
