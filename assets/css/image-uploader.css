@@ -129,6 +129,28 @@
 .image-uploader.wide {
     width: 100%;
     height: 100px;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Contenedor específico para banners en carrusel */
+.banner-slot-container {
+    width: 100%;
+    padding: 0 4px; /* Pequeño padding interno */
+    box-sizing: border-box;
+}
+
+/* Ajuste específico para image-uploader dentro del carrusel */
+.banner-carousel-container .image-uploader.wide {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Ajuste del slide content para mejor espacio */
+.carousel-slide .slide-content {
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* Aumento de tamaño para el Logo de Feria (Square) */
@@ -257,10 +279,11 @@
 
 .carousel-slide {
     min-width: 100%;
-    padding: 20px;
+    padding: 16px;
     opacity: 0;
     transform: translateX(20px);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-sizing: border-box;
 }
 
 .carousel-slide.active {
@@ -295,7 +318,7 @@
     }
     
     .carousel-slide {
-        padding: 16px;
+        padding: 12px;
     }
     
     .indicator {
@@ -308,5 +331,14 @@
         width: 32px;
         height: 32px;
         font-size: 12px;
+    }
+    
+    /* Ajustes específicos para móviles */
+    .banner-slot-container {
+        padding: 0 2px;
+    }
+    
+    .banner-carousel-container .image-uploader.wide {
+        height: 90px; /* Ligeramente más pequeño en móviles */
     }
 }
