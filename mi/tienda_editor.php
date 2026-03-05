@@ -1483,6 +1483,50 @@ function navigateBannerCarousel(direction) {
 // Inicializar el carrusel cuando se cargue la página
 document.addEventListener('DOMContentLoaded', () => {
     window.bannerCarousel = new BannerCarousel();
+    
+    // Funciones para la tabla de pruebas
+    window.toggleTableDropdown = function(testId) {
+        const dropdown = document.getElementById(testId + 'Dropdown');
+        const allDropdowns = document.querySelectorAll('.dropdown-menu-table');
+        
+        // Cerrar otros dropdowns
+        allDropdowns.forEach(d => {
+            if (d !== dropdown) {
+                d.style.display = 'none';
+            }
+        });
+        
+        // Toggle actual
+        if (dropdown.style.display === 'none') {
+            dropdown.style.display = 'block';
+        } else {
+            dropdown.style.display = 'none';
+        }
+    };
+    
+    window.editTableTest = function(testId) {
+        console.log('Editar prueba:', testId);
+        // Solo mostrar opción, sin funcionalidad real
+    };
+    
+    window.deleteTableTest = function(testId) {
+        console.log('Eliminar prueba:', testId);
+        // Solo mostrar opción, sin funcionalidad real
+    };
+    
+    window.hideTableTest = function(testId) {
+        console.log('Ocultar prueba:', testId);
+        // Solo mostrar opción, sin funcionalidad real
+    };
+    
+    // Cerrar dropdowns al hacer clic fuera
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.dropdown-table')) {
+            document.querySelectorAll('.dropdown-menu-table').forEach(d => {
+                d.style.display = 'none';
+            });
+        }
+    });
 });
 </script>
 
