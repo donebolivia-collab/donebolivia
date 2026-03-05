@@ -42,21 +42,34 @@ class DropdownManager {
             animation: 'scale',
             theme: 'light',
             hideOnClick: true,
-            appendTo: reference => reference.closest('.drawer-body, .sidebar-content') || document.body,
             offset: [0, 8],
-            popperOptions: {
-                strategy: 'absolute',
-                modifiers: [
-                    {
-                        name: 'eventListeners',
-                        options: {
-                            scroll: false, // Detiene el reposicionamiento en scroll
-                        },
-                    },
-                ],
+            
+            // Lógica robusta para cerrar el menú en cualquier evento de scroll
+            onShow: (instance) => {
+                // Ocultar otros tippys para evitar solapamientos
+                document.querySelectorAll('[data-tippy-root]').forEach(popper => {
+                    const tippyInstance = popper._tippy;
+                    if (tippyInstance && tippyInstance !== instance) {
+                        tippyInstance.hide();
+                    }
+                });
+
+                const hideOnScroll = () => {
+                    if (instance.state.isShown) {
+                        instance.hide();
+                    }
+                };
+
+                // 'capture: true' es la clave. Detecta el evento de scroll en la fase de captura,
+                // antes de que cualquier otra cosa pueda interferir.
+                // 'once: true' elimina el listener automáticamente después de que se ejecuta,
+                // lo que es muy eficiente.
+                // Usamos 'scroll' y 'wheel' para máxima compatibilidad.
+                window.addEventListener('scroll', hideOnScroll, { once: true, capture: true });
+                window.addEventListener('wheel', hideOnScroll, { once: true, capture: true });
             },
-            onShow: (instance) => this.handleShow(instance),
-            onHide: (instance) => this.handleHide(instance)
+
+            // onHide ya no es necesario gracias a 'once: true'
         });
     }
 
