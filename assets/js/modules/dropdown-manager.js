@@ -126,8 +126,16 @@ class DropdownManager {
         // Guardar referencia
         instance._scrollHandler = closeOnScroll;
         
-        // UN SOLO EVENTO - el más efectivo para rueda del mouse
-        document.addEventListener('wheel', closeOnScroll, { passive: false });
+        // Buscar el contenedor scrollable más cercano
+        const scrollableParent = instance.reference.closest('.drawer-body, .sidebar-content');
+        if (scrollableParent) {
+            scrollableParent.addEventListener('scroll', closeOnScroll, { passive: true });
+            instance._scrollTarget = scrollableParent;
+        } else {
+            // Fallback a document si no se encuentra un scrollableParent específico
+            document.addEventListener('wheel', closeOnScroll, { passive: true });
+            instance._scrollTarget = document;
+        }
     }
 
     /**
@@ -135,9 +143,11 @@ class DropdownManager {
      */
     handleHide(instance) {
         // Limpiar el listener de scroll - SIMPLE Y DIRECTO
-        if (instance._scrollHandler) {
-            document.removeEventListener('wheel', instance._scrollHandler, { passive: false });
+        if (instance._scrollHandler && instance._scrollTarget) {
+            instance._scrollTarget.removeEventListener('scroll', instance._scrollHandler);
+            instance._scrollTarget.removeEventListener('wheel', instance._scrollHandler); // Remover también el wheel event si se usó el fallback
             delete instance._scrollHandler;
+            delete instance._scrollTarget;
         }
     }
 
