@@ -2704,7 +2704,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Cerrar dropdown al hacer scroll - versión corregida
                 const scrollHandler = () => {
                     if (instance.state.isShown) {
-                        instance.hide();
+                        // Aplicar efecto profesional con fadeOut
+                        instance.popper.style.transition = 'opacity 0.2s ease-out, transform 0.2s ease-out';
+                        instance.popper.style.opacity = '0';
+                        instance.popper.style.transform = 'scale(0.95) translateX(10px)';
+                        
+                        // Ocultar después de la animación
+                        setTimeout(() => {
+                            instance.hide();
+                            // Resetear estilos para próxima apertura
+                            instance.popper.style.transition = '';
+                            instance.popper.style.opacity = '';
+                            instance.popper.style.transform = '';
+                        }, 200);
                     }
                 };
                 
