@@ -1707,7 +1707,7 @@ window.renderInventoryList = function() {
             </td>
             <td style="padding: 12px 4px 12px 4px; vertical-align: middle; width: 50px; text-align: right; padding-right: 4px;">
                 <div class="dropdown-inventory" style="position: relative; display: inline-block; width: 100%; text-align: right;">
-                    <button id="ellipsis-${p.id}" class="dropdown-trigger-ellipsis" style="background: none; border: none; padding: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s; margin-left: auto;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
+                    <button id="ellipsis-${p.id}" class="dropdown-trigger-ellipsis menu-trigger" style="background: none; border: none; padding: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s; margin-left: auto;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='none'">
                         <i class="fas fa-ellipsis-v" style="color: #64748b; font-size: 14px;"></i>
                     </button>
                     <!-- Contenido del dropdown para Tippy -->
@@ -1734,41 +1734,6 @@ window.renderInventoryList = function() {
     table.appendChild(tbody);
     tableContainer.appendChild(table);
     list.appendChild(tableContainer);
-    
-    // Inicializar Tippy.js para cada dropdown (después de que cargue Tippy)
-    setTimeout(() => {
-        products.forEach(p => {
-            const trigger = document.getElementById(`ellipsis-${p.id}`);
-            const content = document.getElementById(`dropdown-content-${p.id}`);
-            
-            if (trigger && content && typeof tippy !== 'undefined') {
-                tippy(trigger, {
-                    content: content.innerHTML,
-                    allowHTML: true,
-                    trigger: 'click',
-                    placement: 'left',
-                    arrow: true,
-                    animation: 'scale',
-                    theme: 'light',
-                    interactive: true,
-                    hideOnClick: true,
-                    appendTo: document.body,
-                    offset: [0, 5],
-                    popperOptions: {
-                        fallbackPlacements: []
-                    },
-                    onShow(instance) {
-                        // Ocultar otros tippys
-                        document.querySelectorAll('[data-tippy-root]').forEach(tippy => {
-                            if (tippy !== instance.popper) {
-                                tippy.style.display = 'none';
-                            }
-                        });
-                    }
-                });
-            }
-        });
-    }, 100);
 };
 
 window.filterInventory = function() {
@@ -2702,3 +2667,39 @@ window.ocuparPuesto = function(slotNumero) {
 };
 
 window.openProductDrawer = openProductDrawer;
+
+// Inicialización global de Tippy.js para dropdowns del inventario
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(() => {
+        // Inicializar Tippy.js para todos los botones con clase .menu-trigger
+        tippy('.menu-trigger', {
+            allowHTML: true,
+            trigger: 'click',
+            placement: 'left',
+            arrow: true,
+            animation: 'scale',
+            theme: 'light',
+            interactive: true,
+            hideOnClick: true,
+            appendTo: document.body,
+            offset: [0, 5],
+            popperOptions: {
+                fallbackPlacements: []
+            },
+            onShow(instance) {
+                // Ocultar otros tippys
+                document.querySelectorAll('[data-tippy-root]').forEach(tippy => {
+                    if (tippy !== instance.popper) {
+                        tippy.style.display = 'none';
+                    }
+                });
+            },
+            // Obtener contenido dinámicamente del dropdown correspondiente
+            content: function(reference) {
+                const productId = reference.id.replace('ellipsis-', '');
+                const content = document.getElementById(`dropdown-content-${productId}`);
+                return content ? content.innerHTML : '';
+            }
+        });
+    }, 100);
+});
