@@ -612,7 +612,7 @@ $titulo = "Editor: " . $tienda['nombre'];
                                 <tbody id="tableTestsBody">
                                     <!-- Fila 1 - BLANCA -->
                                     <tr class="table-row" style="background: white; border-bottom: 1px solid #f1f5f9;">
-                                        <td style="padding: 12px 8px 12px 0; vertical-align: middle; width: 10px;">
+                                        <td style="padding: 12px 8px 12px 0; vertical-align: middle; width: 45px;">
                                             <div style="display: flex; align-items: center; gap: 8px; width: 100%; margin-left: 0;">
                                                 <input type="checkbox" id="test1Active" checked style="width: 16px; height: 16px; margin: 0; padding: 0; position: relative; left: 0; transform: translateX(0);">
                                                 <img src="https://picsum.photos/seed/test1/24/24.jpg" alt="Test 1" style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
@@ -646,7 +646,7 @@ $titulo = "Editor: " . $tienda['nombre'];
                                     
                                     <!-- Fila 2 - GRIS CLARA -->
                                     <tr class="table-row" style="background: #f8fafc; border-bottom: 1px solid #f1f5f9;">
-                                        <td style="padding: 12px 8px 12px 0; vertical-align: middle; width: 10px;">
+                                        <td style="padding: 12px 8px 12px 0; vertical-align: middle; width: 45px;">
                                             <div style="display: flex; align-items: center; gap: 8px; width: 100%; margin-left: 0;">
                                                 <input type="checkbox" id="test2Active" style="width: 16px; height: 16px; margin: 0; padding: 0; position: relative; left: 0; transform: translateX(0);">
                                                 <img src="https://picsum.photos/seed/test2/24/24.jpg" alt="Test 2" style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
@@ -680,7 +680,7 @@ $titulo = "Editor: " . $tienda['nombre'];
                                     
                                     <!-- Fila 3 - BLANCA -->
                                     <tr class="table-row" style="background: white; border-bottom: 1px solid #f1f5f9;">
-                                        <td style="padding: 12px 8px 12px 0; vertical-align: middle; width: 10px;">
+                                        <td style="padding: 12px 8px 12px 0; vertical-align: middle; width: 45px;">
                                             <div style="display: flex; align-items: center; gap: 8px; width: 100%; margin-left: 0;">
                                                 <input type="checkbox" id="test3Active" style="width: 16px; height: 16px; margin: 0; padding: 0; position: relative; left: 0; transform: translateX(0);">
                                                 <img src="https://picsum.photos/seed/test3/24/24.jpg" alt="Test 3" style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
@@ -714,7 +714,7 @@ $titulo = "Editor: " . $tienda['nombre'];
                                     
                                     <!-- Fila 4 - GRIS CLARA -->
                                     <tr class="table-row" style="background: #f8fafc; border-bottom: 1px solid #f1f5f9;">
-                                        <td style="padding: 12px 8px 12px 0; vertical-align: middle; width: 10px;">
+                                        <td style="padding: 12px 8px 12px 0; vertical-align: middle; width: 45px;">
                                             <div style="display: flex; align-items: center; gap: 8px; width: 100%; margin-left: 0;">
                                                 <input type="checkbox" id="test4Active" style="width: 16px; height: 16px; margin: 0; padding: 0; position: relative; left: 0; transform: translateX(0);">
                                                 <img src="https://picsum.photos/seed/test4/24/24.jpg" alt="Test 4" style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
@@ -748,7 +748,7 @@ $titulo = "Editor: " . $tienda['nombre'];
                                     
                                     <!-- Fila 5 - BLANCA -->
                                     <tr class="table-row" style="background: white; border-bottom: 1px solid #f1f5f9;">
-                                        <td style="padding: 12px 8px 12px 0; vertical-align: middle; width: 10px;">
+                                        <td style="padding: 12px 8px 12px 0; vertical-align: middle; width: 45px;">
                                             <div style="display: flex; align-items: center; gap: 8px; width: 100%; margin-left: 0;">
                                                 <input type="checkbox" id="test5Active" style="width: 16px; height: 16px; margin: 0; padding: 0; position: relative; left: 0; transform: translateX(0);">
                                                 <img src="https://picsum.photos/seed/test5/24/24.jpg" alt="Test 5" style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
@@ -782,7 +782,7 @@ $titulo = "Editor: " . $tienda['nombre'];
                                     
                                     <!-- Fila 6 - GRIS CLARA -->
                                     <tr class="table-row" style="background: #f8fafc; border-bottom: 1px solid #f1f5f9;">
-                                        <td style="padding: 12px 8px 12px 0; vertical-align: middle; width: 10px;">
+                                        <td style="padding: 12px 8px 12px 0; vertical-align: middle; width: 45px;">
                                             <div style="display: flex; align-items: center; gap: 8px; width: 100%; margin-left: 0;">
                                                 <input type="checkbox" id="test6Active" style="width: 16px; height: 16px; margin: 0; padding: 0; position: relative; left: 0; transform: translateX(0);">
                                                 <img src="https://picsum.photos/seed/test6/24/24.jpg" alt="Test 6" style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
@@ -816,7 +816,7 @@ $titulo = "Editor: " . $tienda['nombre'];
                                     
                                     <!-- Fila 7 - BLANCA -->
                                     <tr class="table-row" style="background: white; border-bottom: none;">
-                                        <td style="padding: 12px 8px 12px 0; vertical-align: middle; width: 10px;">
+                                        <td style="padding: 12px 8px 12px 0; vertical-align: middle; width: 45px;">
                                             <div style="display: flex; align-items: center; gap: 8px; width: 100%; margin-left: 0;">
                                                 <input type="checkbox" id="test7Active" style="width: 16px; height: 16px; margin: 0; padding: 0; position: relative; left: 0; transform: translateX(0);">
                                                 <img src="https://picsum.photos/seed/test7/24/24.jpg" alt="Test 7" style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
