@@ -43,8 +43,8 @@ class DropdownManager {
             theme: 'light',
             hideOnClick: true,
             offset: [0, 8],
-            
-            // Lógica robusta para cerrar el menú en cualquier evento de scroll
+            // appendTo por defecto es document.body, que es lo correcto en este caso.
+
             onShow: (instance) => {
                 // Ocultar otros tippys para evitar solapamientos
                 document.querySelectorAll('[data-tippy-root]').forEach(popper => {
@@ -54,22 +54,20 @@ class DropdownManager {
                     }
                 });
 
-                const hideOnScroll = () => {
-                    if (instance.state.isShown) {
-                        instance.hide();
-                    }
-                };
+                // 1. Definimos la acción de cierre
+                const closeMenu = () => instance.hide();
 
-                // 'capture: true' es la clave. Detecta el evento de scroll en la fase de captura,
-                // antes de que cualquier otra cosa pueda interferir.
-                // 'once: true' elimina el listener automáticamente después de que se ejecuta,
-                // lo que es muy eficiente.
-                // Usamos 'scroll' y 'wheel' para máxima compatibilidad.
-                window.addEventListener('scroll', hideOnScroll, { once: true, capture: true });
-                window.addEventListener('wheel', hideOnScroll, { once: true, capture: true });
+                // 2. Escuchamos el scroll en la ventana global
+                window.addEventListener('scroll', closeMenu, { once: true, capture: true });
+
+                // 3. Escuchamos el scroll específico del panel de inventario (IMPORTANTE)
+                const scrollContainer = document.querySelector('.inventory-list-container');
+                if (scrollContainer) {
+                    scrollContainer.addEventListener('scroll', closeMenu, { once: true });
+                    // También escuchamos la rueda del mouse por si el scroll es muy pequeño
+                    scrollContainer.addEventListener('wheel', closeMenu, { once: true });
+                }
             },
-
-            // onHide ya no es necesario gracias a 'once: true'
         });
     }
 
