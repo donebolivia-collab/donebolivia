@@ -573,10 +573,11 @@ window.updateBannerState = function() {
     const isActive = bannerActive.checked;
     window.tiendaState.banner.activo = isActive ? 1 : 0;
     
-    const bannerContent = safeGetById('bannerBlockContent');
-    if (bannerContent) {
-        bannerContent.style.display = isActive ? 'block' : 'none';
-    }
+    // Los campos de subida ahora siempre permanecen visibles en el editor
+    // const bannerContent = safeGetById('bannerBlockContent');
+    // if (bannerContent) {
+    //     bannerContent.style.display = isActive ? 'block' : 'none';
+    // }
     
     if(isActive) {
         updateBannerSlotsUI();
@@ -595,7 +596,7 @@ window.updateBannerSlotsUI = function() {
 
     const imagenes = window.tiendaState.banner.imagenes || [];
     
-    [1, 2, 3].forEach((i) => {
+    [1, 2, 3, 4].forEach((i) => {
         const slotContainer = safeGetById(`bannerSlotContainer${i}`);
         if (!slotContainer) return;
 
