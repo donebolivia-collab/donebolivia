@@ -2693,10 +2693,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 fallbackPlacements: []
             },
             onShow(instance) {
-                // Ocultar otros tippys
-                document.querySelectorAll('[data-tippy-root]').forEach(tippy => {
-                    if (tippy !== instance.popper) {
-                        tippy.style.display = 'none';
+                // Ocultar otros tippys usando el método hide() de Tippy
+                document.querySelectorAll('[data-tippy-root]').forEach(popper => {
+                    const tippyInstance = popper._tippy;
+                    if (tippyInstance && tippyInstance !== instance) {
+                        tippyInstance.hide();  // ← Método correcto para ocultar
                     }
                 });
             }
