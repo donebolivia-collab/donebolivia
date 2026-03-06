@@ -10,7 +10,7 @@
 
 /* Trigger del dropdown - IGUAL A UI-TRIGGER */
 .ts-wrapper.badges-multiselect .ts-control {
-  border: 2px solid #e2e8f0;
+  border: 1px solid #cbd5e1; /* IGUAL A UI-TRIGGER */
   border-radius: 8px;
   padding: 0 16px;
   height: 46px;
@@ -20,6 +20,10 @@
   box-sizing: border-box;
   display: flex;
   align-items: center;
+  justify-content: space-between; /* IGUAL A UI-TRIGGER */
+  cursor: pointer; /* IGUAL A UI-TRIGGER */
+  font-size: 14px; /* IGUAL A UI-TRIGGER */
+  color: var(--text-main); /* IGUAL A UI-TRIGGER */
   min-height: 46px; /* Forzar altura mínima */
   line-height: 1; /* Eliminar espacio extra */
 }
@@ -103,7 +107,7 @@
 
 /* Dropdown - IGUAL A UI-MENU */
 .ts-wrapper.badges-multiselect .ts-dropdown {
-  border: 2px solid #e2e8f0;
+  border: 1px solid #cbd5e1; /* IGUAL A UI-TRIGGER */
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   margin-top: 4px;
