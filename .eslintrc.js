@@ -106,6 +106,10 @@ module.exports = {
     'formatNumber': 'writable',
     'formatPhone': 'writable',
     'isMobile': 'writable',
+    // Clases globales de componentes
+    'ImageUploader': 'writable',
+    // Variables de módulos
+    'module': 'readonly',
     // jQuery y globals del navegador
     '$': 'readonly',
     'jQuery': 'readonly',
