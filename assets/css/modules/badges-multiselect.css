@@ -1,26 +1,29 @@
 /**
- * CLONACIÓN PERFECTA: Dropdowns Badges IDÉNTICOS a UI-Trigger
- * Misma apariencia, mismos efectos, mismos colores EXACTOS
+ * SUEÑO CUMPLIDO: Dropdowns Badges PERFECTAMENTE IDÉNTICOS
+ * Chips elegantes, flecha Font Awesome, checkbox corporativo, altura dinámica
  */
 
 /* 1. CONTENEDOR PRINCIPAL - CLON EXACTO DE .ui-trigger */
 #badgesSelect + .ts-wrapper .ts-control {
     /* Propiedades IDÉNTICAS a .ui-trigger */
     width: 100% !important;
-    padding: 0 16px !important; /* Mismo padding */
-    height: 46px !important; /* Altura fija IGUAL */
+    padding: 8px 40px 8px 16px !important; /* Espacio para chips múltiples */
+    min-height: 46px !important; /* Altura mínima IGUAL */
+    height: auto !important; /* ¡PERMITIR CRECIMIENTO! */
     background: white !important;
     border: 1px solid #cbd5e1 !important; /* Borde IDÉNTICO */
     border-radius: 8px !important;
     display: flex !important;
+    flex-wrap: wrap !important; /* ¡PERMITIR MÚLTIPLES FILAS! */
     align-items: center !important;
-    justify-content: space-between !important; /* Espacio entre texto y flecha */
+    justify-content: flex-start !important; /* Alineación natural */
     cursor: pointer !important;
     transition: all 0.2s !important; /* MISMA transición */
     font-size: 14px !important; /* Tamaño IGUAL */
     color: var(--text-main) !important; /* Color variable IGUAL */
     box-sizing: border-box !important;
     position: relative !important;
+    gap: 8px !important; /* Espaciado entre chips */
 }
 
 /* 2. ESTADO HOVER - CLON EXACTO */
@@ -36,9 +39,11 @@
     box-shadow: 0 0 0 3px rgba(34, 34, 107, 0.1) !important;
 }
 
-/* 4. FLECHA - CLON EXACTO DE i.chevron */
+/* 4. FLECHA - FONT AWESOME REAL (NO TEXTO) */
 #badgesSelect + .ts-wrapper .ts-control::after {
-    content: "▼" !important;
+    content: "\f078" !important; /* fa-chevron-down */
+    font-family: "Font Awesome 5 Free" !important;
+    font-weight: 900 !important;
     position: absolute !important;
     right: 16px !important; /* MISMA posición */
     top: 50% !important;
@@ -55,28 +60,35 @@
     transform: translateY(-50%) rotate(180deg) !important;
 }
 
-/* 6. CHIPS - Se integran perfectamente sin romper el layout */
+/* 6. CHIPS ELEGANTES - PEQUEÑOS Y PROFESIONALES */
 #badgesSelect + .ts-wrapper .ts-control .item {
-    background: #22226B !important;
-    color: white !important;
-    border: none !important;
+    background: #e0e7ff !important; /* Azul suave elegante */
+    color: #22226B !important; /* Texto azul corporativo */
+    border: 1px solid #c7d2fe !important; /* Borde sutil */
     border-radius: 6px !important;
-    padding: 2px 8px !important;
+    padding: 4px 12px !important; /* Elegante */
     font-size: 12px !important;
     font-weight: 500 !important;
-    margin: 0 4px 0 0 !important;
+    margin: 0 8px 8px 0 !important; /* Espaciado limpio */
     display: inline-flex !important;
     align-items: center !important;
-    gap: 4px !important;
+    gap: 6px !important;
+    line-height: 1.2 !important;
 }
 
-/* 7. BOTÓN ELIMINAR - Integrado perfecto */
+/* 7. BOTÓN ELIMINAR - Integrado elegante */
 #badgesSelect + .ts-wrapper .ts-control .item .remove {
-    color: white !important;
-    border-left: 1px solid rgba(255,255,255,0.2) !important;
-    margin-left: 4px !important;
-    padding-left: 4px !important;
+    color: #22226B !important; /* Azul corporativo */
+    border-left: 1px solid #c7d2fe !important; /* Borde sutil */
+    margin-left: 6px !important;
+    padding-left: 6px !important;
     font-size: 10px !important;
+    opacity: 0.7 !important;
+    transition: opacity 0.2s !important;
+}
+
+#badgesSelect + .ts-wrapper .ts-control .item .remove:hover {
+    opacity: 1 !important;
 }
 
 /* 8. DROPDOWN - Clon de .ui-menu */
@@ -128,16 +140,36 @@
     color: #22226B !important;
 }
 
-/* 13. INPUT OCULTO - No interfiere */
-#badgesSelect + .ts-wrapper .ts-control input {
-    display: none !important;
+/* 13. CHECKBOX CORPORATIVO - SIN CELESTE */
+#badgesSelect + .ts-wrapper .ts-dropdown .option-checkbox {
+    width: 16px !important;
+    height: 16px !important;
+    border: 2px solid #22226B !important; /* Borde corporativo */
+    border-radius: 3px !important;
+    margin-right: 8px !important;
+    position: relative !important;
+    background: white !important;
+    flex-shrink: 0 !important;
 }
 
-/* 14. ALTURA DINÁMICA PARA CHIPS MÚLTIPLES */
-#badgesSelect + .ts-wrapper .ts-control {
-    height: auto !important; /* Permitir crecimiento */
-    min-height: 46px !important; /* Altura mínima IGUAL */
-    padding: 8px 40px 8px 16px !important; /* Ajustar para chips */
+#badgesSelect + .ts-wrapper .ts-dropdown .option-checkbox.checked::after {
+    content: '✓' !important;
+    position: absolute !important;
+    top: -2px !important;
+    left: 2px !important;
+    color: white !important; /* Check blanco */
+    font-size: 12px !important;
+    font-weight: bold !important;
+}
+
+#badgesSelect + .ts-wrapper .ts-dropdown .option-checkbox.checked {
+    background: #22226B !important; /* Fondo corporativo */
+    border-color: #22226B !important; /* Borde corporativo */
+}
+
+/* 14. INPUT OCULTO - No interfiere */
+#badgesSelect + .ts-wrapper .ts-control input {
+    display: none !important;
 }
 
 /* 15. PLACEHOLDER - Integrado perfecto */
