@@ -3,12 +3,6 @@
  * Estilos personalizados para el multiselect de insignias
  */
 
-/* REGLA DE SACRIFICIO - VERIFICACIÓN DE CARGA */
-body { 
-  border: 10px solid red !important; 
-  background: yellow !important;
-}
-
 /* Contenedor principal del multiselect de badges */
 .ts-wrapper.badges-multiselect {
   width: 100%;

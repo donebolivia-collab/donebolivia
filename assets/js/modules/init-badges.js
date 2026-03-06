@@ -174,10 +174,9 @@ window.badgesModule = new BadgesModule();
 
 // Inicialización automática cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
-  // Solo inicializar si estamos en el editor de tienda
-  if (window.location.pathname.includes('/mi/tienda_editor.php')) {
-    window.badgesModule.init();
-  }
+  console.log('DOM listo - Inicializando badges module...');
+  // FORZAR INICIALIZACIÓN SIN RESTRICCIONES
+  window.badgesModule.init();
 });
 
 // Exponer para inicialización manual
@@ -214,25 +213,33 @@ window.initBadgesEditor = () => {
 // DEBUG VISUAL - DIAGNÓSTICO TÉCNICO
 setTimeout(() => {
   console.log('--- DEBUG BADGES ---');
-  const el = document.querySelector('.ts-control');
-  if (el) {
-    const style = window.getComputedStyle(el);
+  console.log('Tom Select disponible:', typeof window.TomSelect !== 'undefined');
+  console.log('Tom Select object:', window.TomSelect);
+  console.log('Alias tom disponible:', typeof window.tom !== 'undefined');
+  console.log('availableBadges:', window.availableBadges?.length || 0);
+  
+  const selectElement = document.querySelector('#badgesSelect');
+  console.log('Elemento #badgesSelect:', selectElement);
+  
+  const tsWrapper = document.querySelector('.ts-wrapper');
+  console.log('Elemento .ts-wrapper:', tsWrapper);
+  
+  const tsControl = document.querySelector('.ts-control');
+  console.log('Elemento .ts-control:', tsControl);
+  
+  if (tsControl) {
+    const style = window.getComputedStyle(tsControl);
     console.log('Altura real:', style.height);
     console.log('Borde real:', style.border);
     console.log('Background real:', style.background);
     console.log('Display real:', style.display);
     console.log('Padding real:', style.padding);
     console.log('Archivo CSS cargado:', document.querySelector('link[href*="badges-multiselect"]')?.href);
-    console.log('Elemento encontrado:', el);
-    console.log('Clases del elemento:', el.className);
-    console.log('Padre del elemento:', el.parentElement);
-    console.log('Estilos computados completos:', style);
+    console.log('Clases del elemento:', tsControl.className);
   } else {
     console.error('ERROR: No se encuentra el elemento .ts-control en el DOM');
     console.log('Buscando alternativas...');
-    console.log('ts-wrapper:', document.querySelector('.ts-wrapper'));
-    console.log('badges-multiselect:', document.querySelector('.badges-multiselect'));
-    console.log('badgesSelect:', document.querySelector('#badgesSelect'));
     console.log('Todos los selects:', document.querySelectorAll('select'));
+    console.log('Todos los wrappers:', document.querySelectorAll('.ts-wrapper'));
   }
-}, 2000); // Esperar 2 segundos para que todo cargue
+}, 3000); // Esperar 3 segundos para que todo cargue
