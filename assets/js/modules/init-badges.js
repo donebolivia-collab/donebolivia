@@ -78,6 +78,7 @@ class BadgesModule {
       plugins: ['checkbox_options', 'remove_button'],
       maxItems: null,
       create: false,
+      controlInput: null, // DESACTIVAR BUSCADOR - Solo selección por clic
       render: {
         option: (data, escape) => {
           // Versión limpia solo con texto y color de marca

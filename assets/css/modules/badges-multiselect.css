@@ -108,6 +108,7 @@
     align-items: center !important;
     gap: 10px !important;
     font-size: 14px !important;
+    text-transform: capitalize !important; /* "Delivery", "Garantía" - Enterprise */
 }
 
 #badgesSelect + .ts-wrapper .ts-option.selected {
