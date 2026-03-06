@@ -1,177 +1,69 @@
-/**
- * SOLUCIÓN FINAL: MULTISELECT ENTERPRISE "LA CASA DE LAS GOLOSINAS"
- */
-
-/* 1. Flecha con el tamaño y grosor exacto de tu patrón */
+/* 1. CONTENEDOR: Clon de tus inputs (--border-color: #e2e8f0) */
 #badgesSelect + .ts-wrapper .ts-control {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2364748b' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e") !important;
-    background-size: 1.25rem !important; /* Este es el tamaño de tus iconos en editor-tienda.css */
-    background-position: right 0.75rem center !important;
-    transition: all 0.2s ease-in-out !important; /* El efecto de suavizado que mencionas */
-}
-
-/* 2. Efecto de apertura (Rotación) */
-#badgesSelect + .ts-wrapper.dropdown-opened .ts-control {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2322226B' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 12l4-4 4 4'/%3e%3c/svg%3e") !important;
-    border-color: #22226B !important;
-}
-
-/* 3. Sincronización de Bordes y Sombras con tu patrón */
-#badgesSelect + .ts-wrapper .ts-control {
-    border: 1px solid #cbd5e1 !important; /* --border-color de tu CSS */
-    box-shadow: none !important; 
+    border: 1px solid #cbd5e1 !important; 
     border-radius: 8px !important;
-    height: auto !important;
+    background-color: white !important;
+    box-shadow: none !important;
     min-height: 46px !important;
+    height: auto !important;
+    padding: 0.5rem 2.5rem 0.5rem 0.75rem !important;
     display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
     align-items: center !important;
-    padding: 0 40px 0 12px !important;
+    transition: all 0.2s ease !important;
+    cursor: pointer !important;
+    position: relative !important;
 }
 
-/* 2. CHIPS CORPORATIVOS (Mata el celeste definitivamente) */
-.ts-wrapper.multi .ts-control .item {
-    background: #22226B !important; /* Azul corporativo */
-    color: white !important;
+/* 2. LA FLECHA: Tamaño 1.25rem y grosor stroke-width 2 (Igual a tu patrón) */
+#badgesSelect + .ts-wrapper .ts-control::after {
+    content: "" !important;
+    display: block !important;
+    position: absolute !important;
+    right: 0.75rem !important;
+    top: 50% !important;
+    width: 1.25rem !important; /* 20px reales */
+    height: 1.25rem !important;
+    margin-top: -0.625rem !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2364748b' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 8l5 5 5-5'/%3e%3c/svg%3e") !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    transition: transform 0.2s ease !important;
     border: none !important;
+}
+
+/* 3. EFECTO AL ABRIR: Rotación y cambio a azul corporativo (#22226B) */
+#badgesSelect + .ts-wrapper.dropdown-opened .ts-control::after {
+    transform: rotate(180deg) !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2322226B' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 8l5 5 5-5'/%3e%3c/svg%3e") !important;
+}
+
+/* 4. ESTADO FOCUS/HOVER */
+#badgesSelect + .ts-wrapper.focus .ts-control,
+#badgesSelect + .ts-wrapper .ts-control:hover {
+    border-color: #22226B !important;
+    box-shadow: 0 0 0 1px #22226B !important;
+}
+
+/* 5. CHIPS: Azul corporativo sin bordes celestes */
+#badgesSelect + .ts-wrapper .ts-control .item {
+    background: #22226B !important; 
+    color: white !important;
     border-radius: 6px !important;
     padding: 2px 10px !important;
-    font-size:13px !important;
     font-weight: 500 !important;
+    font-size: 13px !important;
+    border: none !important;
     margin: 2px 0 !important;
     display: inline-flex !important;
     align-items: center !important;
 }
 
-/* 3. BOTÓN DE ELIMINAR (X) */
-.ts-wrapper.multi .ts-control .item .remove {
-    color: white !important;
-    border-left: 1px solid rgba(255,255,255,0.2) !important;
+/* 6. BOTÓN ELIMINAR (X) */
+#badgesSelect + .ts-wrapper .ts-control .item .remove {
+    border-left: 1px solid rgba(255,255,255,0.3) !important;
     margin-left: 8px !important;
     padding-left: 4px !important;
-}
-
-/* 4. FLECHA EN HOVER (Sincronizada con "Estado") */
-.ts-wrapper.multi.focus .ts-control,
-.ts-wrapper.multi:hover .ts-control {
-    border-color: #22226B !important;
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2322226B' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e") !important;
-}
-
-/* 5. ELIMINAR EL INPUT QUE CREA ESPACIOS */
-.ts-wrapper.multi .ts-control > input {
-    display: none !important;
-}
-
-.ts-wrapper.badges-multiselect .remove-item {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 16px;
-  line-height: 1;
-  padding: 0;
-  margin-left: 4px;
-}
-
-.ts-wrapper.badges-multiselect .remove-item:hover {
-  color: white;
-}
-
-.ts-wrapper.badges-multiselect .badge-option {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
-  padding: 4px 8px;
-  min-height: 32px;
-}
-
-.ts-wrapper.badges-multiselect .badge-option-image {
-  width: 20px !important;
-  height: 20px !important;
-  object-fit: contain;
-  border-radius: 2px;
-  flex-shrink: 0;
-  border: 1px solid #e2e8f0;
-  background: white;
-}
-
-.ts-wrapper.badges-multiselect .badge-option-text {
-  flex: 1;
-  font-size: 13px;
-  color: #334155;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.ts-wrapper.badges-multiselect .badge-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  font-weight: 500;
-}
-
-.ts-wrapper.badges-multiselect .badge-item-text {
-  line-height: 1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 120px;
-}
-
-.ts-wrapper.badges-multiselect .ts-control .ts-placeholder {
-  color: #94a3b8;
-  font-style: italic;
-}
-
-.ts-wrapper.badges-multiselect .remove-item {
-  border: none;
-  cursor: pointer;
-}
-
-.ts-wrapper.badges-multiselect .remove-item:hover {
-  color: white;
-}
-
-/* Loading state */
-.ts-wrapper.badges-multiselect.loading .ts-control {
-  background: #f8fafc;
-  pointer-events: none;
-}
-
-.ts-wrapper.badges-multiselect.loading .ts-control::after {
-  content: '';
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 16px;
-  height: 16px;
-  border: 2px solid #e2e8f0;
-  border-top: 2px solid #3b82f6;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: translateY(-50%) rotate(0deg); }
-  100% { transform: translateY(-50%) rotate(360deg); }
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .ts-wrapper.badges-multiselect .ts-control {
-    min-height: 40px;
-    padding: 6px 10px;
-  }
-  
-  .ts-wrapper.badges-multiselect .ts-item {
-    font-size: 11px;
-    padding: 3px 6px;
-  }
-  
-  .ts-wrapper.badges-multiselect .badge-option-image,
-  .ts-wrapper.badges-multiselect .badge-item-image {
-    width: 16px;
-    height: 16px;
-  }
+    color: white !important;
 }
