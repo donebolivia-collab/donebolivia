@@ -387,33 +387,7 @@ function toggleLikeCurrent() {
     });
 }
 
-function shareProduct() {
-  // URL limpia para compartir
-  const shareUrl = currentProductUrl;
-  const shareTitle = document.getElementById('modalTitle').textContent;
-
-  // Detectar si es móvil para usar Web Share API
-  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-    if (navigator.share) {
-      navigator.share({
-        title: shareTitle,
-        url: shareUrl
-      }).catch(console.error);
-      return;
-    }
-  }
-
-  // EN PC: Usar api.whatsapp.com para permitir abrir la App de escritorio
-  const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareUrl)}`;
-  window.open(whatsappUrl, '_blank');
-}
-
 const reportModal = document.getElementById('reportModal');
-
-function openReportModal() {
-  reportModal.style.display = 'flex';
-  setTimeout(() => reportModal.classList.add('active'), 10);
-}
 
 function closeReportModal() {
   reportModal.classList.remove('active');

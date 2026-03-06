@@ -217,16 +217,6 @@ function handleImageUpload(input) {
   }
 }
 
-// Remover imagen
-function removeImage(button, index) {
-  const preview = button.closest('.image-preview');
-  const input = preview.parentNode.querySelector('input[type="file"]');
-
-  button.closest('.preview-image').remove();
-
-  // Actualizar input files (esto es complejo en JavaScript puro)
-  // En una implementación real, usarías FormData
-}
 
 // Funcionalidad de filtros
 function initFilters() {
@@ -299,8 +289,6 @@ function clearFilters() {
 // Funcionalidad de favoritos
 function initFavorites() { /* desactivado - usar favorites-share-fix.js */ }
 
-// Toggle favorito
-function toggleFavorite(button) { /* desactivado - usar favorites-share-fix.js */ }
 
 // Lazy loading de imágenes
 function initLazyLoading() {
@@ -373,46 +361,7 @@ function formatPhone(input) {
   input.value = value;
 }
 
-// Compartir producto
-function shareProduct(productId, title) {
-  if (navigator.share) {
-    navigator.share({
-      title,
-      text: 'Mira este producto en CAMBALACHE',
-      url: window.location.href
-    });
-  } else {
-    // Fallback: copiar al portapapeles
-    navigator.clipboard.writeText(window.location.href).then(() => {
-      showNotification('Enlace copiado al portapapeles', 'success');
-    });
-  }
-}
 
-// Reportar producto
-function reportProduct(productId) {
-  const reason = prompt('¿Por qué quieres reportar este producto?');
-  if (reason) {
-    fetch('/api/report_product.php', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        product_id: productId,
-        reason
-      })
-    })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          showNotification('Reporte enviado correctamente', 'success');
-        } else {
-          showNotification('Error al enviar el reporte', 'error');
-        }
-      });
-  }
-}
 
 // Smooth scroll para enlaces internos
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
