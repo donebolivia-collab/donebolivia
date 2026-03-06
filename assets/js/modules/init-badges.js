@@ -217,16 +217,16 @@ setTimeout(() => {
   console.log('Tom Select object:', window.TomSelect);
   console.log('Alias tom disponible:', typeof window.tom !== 'undefined');
   console.log('availableBadges:', window.availableBadges?.length || 0);
-  
+
   const selectElement = document.querySelector('#badgesSelect');
   console.log('Elemento #badgesSelect:', selectElement);
-  
+
   const tsWrapper = document.querySelector('.ts-wrapper');
   console.log('Elemento .ts-wrapper:', tsWrapper);
-  
+
   const tsControl = document.querySelector('.ts-control');
   console.log('Elemento .ts-control:', tsControl);
-  
+
   if (tsControl) {
     const style = window.getComputedStyle(tsControl);
     console.log('Altura real:', style.height);

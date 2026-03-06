@@ -17,42 +17,24 @@
   padding: 0 40px 0 12px !important;
   display: flex !important;
   align-items: center !important;
-  background: white !important;
-}
-
-/* Matar el input que crea el rectángulo vacío */
-#badgesSelect + .ts-wrapper .ts-control input {
-  position: absolute !important;
-  opacity: 0 !important;
-}
-
-/* Chips Azul Corporativo */
-#badgesSelect + .ts-wrapper .ts-item {
-  background: #22226B !important;
-  color: white !important;
-  border: none !important;
-  border-radius: 6px !important;
-}
-
-/* Flecha ▼ igual a dropdown Estado */
-#badgesSelect + .ts-wrapper .ts-control::after {
-  content: '▼' !important;
-  position: absolute !important;
-  right: 15px !important;
-  color: #94a3b8 !important;
-  font-size: 10px !important;
+  background: white url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e") no-repeat right 12px center !important;
+  background-size: 16px !important;
 }
 
 /* Hover: borde cambia a #22226B */
 #badgesSelect + .ts-wrapper .ts-control:hover {
   border-color: #22226B !important;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05) !important;
+  background: white url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2322226B' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e") no-repeat right 12px center !important;
+  background-size: 16px !important;
 }
 
 /* Focus: borde cambia a #22226B */
 #badgesSelect + .ts-wrapper.ts-focused .ts-control {
   border-color: #22226B !important;
   box-shadow: 0 0 0 3px rgba(34, 34, 107, 0.1) !important;
+  background: white url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2322226B' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e") no-repeat right 12px center !important;
+  background-size: 16px !important;
 }
 
 /* EXTERMINAR ESPACIO VACÍO - INPUT OCULTO TOTAL */
@@ -76,11 +58,11 @@
   padding: 0 !important;
 }
 
-/* CHIPS CORPORATIVOS SINCRONIZADOS */
+/* CHIPS CORPORATIVOS SINCRONIZADOS - SIN BORDES CELESTES */
 #badgesSelect + .ts-wrapper .ts-item {
-  background-color: #22226B !important; /* AZUL CORPORATIVO */
+  background: #22226B !important; /* AZUL CORPORATIVO */
   color: white !important; /* TEXTO BLANCO */
-  border: 1px solid #22226B !important;
+  border: none !important; /* SIN BORDES CELESTES */
   border-radius: 6px !important;
   padding: 4px 8px !important;
   margin: 0 4px 0 0 !important; /* MARGEN ESPECÍFICO: no empujar hacia abajo */
@@ -211,26 +193,31 @@
   max-width: 120px;
 }
 
-/* Checkbox para opciones múltiples */
-.ts-wrapper.badges-multiselect .ts-dropdown .option-checkbox {
-  width: 16px;
-  height: 16px;
-  border: 2px solid #cbd5e1;
-  border-radius: 3px;
-  margin-right: 8px;
-  position: relative;
-  flex-shrink: 0;
+/* Checkbox para opciones múltiples - ESTILO CORPORATIVO */
+#badgesSelect + .ts-wrapper .ts-dropdown .option-checkbox {
+  width: 16px !important;
+  height: 16px !important;
+  border: 2px solid #cbd5e1 !important; /* Borde corporativo */
+  border-radius: 3px !important;
+  margin-right: 8px !important;
+  position: relative !important;
+  background: white !important;
+  flex-shrink: 0 !important;
 }
 
-.ts-wrapper.badges-multiselect .ts-dropdown .selected .option-checkbox {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-color: #667eea;
+#badgesSelect + .ts-wrapper .ts-dropdown .option-checkbox.checked::after {
+  content: '✓' !important;
+  position: absolute !important;
+  top: -2px !important;
+  left: 2px !important;
+  color: #22226B !important; /* Azul corporativo */
+  font-size: 12px !important;
+  font-weight: bold !important;
 }
 
-.ts-wrapper.badges-multiselect .ts-dropdown .selected .option-checkbox::after {
-  content: '✓';
-  position: absolute;
-  top: 50%;
+#badgesSelect + .ts-wrapper .ts-dropdown .option-checkbox.checked {
+  background: #22226B !important; /* Fondo azul corporativo */
+  border-color: #22226B !important; /* Borde azul corporativo */
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
