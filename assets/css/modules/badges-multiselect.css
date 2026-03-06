@@ -2,33 +2,30 @@
  * SOLUCIÓN FINAL: MULTISELECT ENTERPRISE "LA CASA DE LAS GOLOSINAS"
  */
 
-/* AJUSTE INTEGRAL: Bordes, Sombras y Flecha idéntica a 'Estado' */
+/* 1. Flecha con el tamaño y grosor exacto de tu patrón */
 #badgesSelect + .ts-wrapper .ts-control {
-    /* 1. Flecha con grosor y tamaño real (stroke-width 2 y 1.25rem) */
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2364748b' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 8l5 5 5-5'/%3e%3c/svg%3e") !important;
-    background-size: 1.25rem !important; 
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2364748b' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e") !important;
+    background-size: 1.25rem !important; /* Este es el tamaño de tus iconos en editor-tienda.css */
     background-position: right 0.75rem center !important;
-    background-repeat: no-repeat !important;
+    transition: all 0.2s ease-in-out !important; /* El efecto de suavizado que mencionas */
+}
 
-    /* 2. Bordes y Sombras calcados de editor-tienda.css */
-    border: 1px solid #cbd5e1 !important; 
+/* 2. Efecto de apertura (Rotación) */
+#badgesSelect + .ts-wrapper.dropdown-opened .ts-control {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2322226B' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 12l4-4 4 4'/%3e%3c/svg%3e") !important;
+    border-color: #22226B !important;
+}
+
+/* 3. Sincronización de Bordes y Sombras con tu patrón */
+#badgesSelect + .ts-wrapper .ts-control {
+    border: 1px solid #cbd5e1 !important; /* --border-color de tu CSS */
+    box-shadow: none !important; 
     border-radius: 8px !important;
-    box-shadow: none !important; /* Adiós a la sombra pesada de la librería */
-    
-    /* 3. Corrección de altura para que crezca con los chips */
     height: auto !important;
     min-height: 46px !important;
     display: flex !important;
     align-items: center !important;
     padding: 0 40px 0 12px !important;
-    transition: border-color 0.2s, box-shadow 0.2s !important;
-}
-
-/* Estado Focus/Hover (Sincronizado) */
-#badgesSelect + .ts-wrapper.focus .ts-control {
-    border-color: #22226B !important;
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2322226B' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 8l5 5 5-5'/%3e%3c/svg%3e") !important;
-    box-shadow: 0 0 0 1px #22226B !important;
 }
 
 /* 2. CHIPS CORPORATIVOS (Mata el celeste definitivamente) */
