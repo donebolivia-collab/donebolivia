@@ -987,20 +987,7 @@ window.closeProductDrawer = function() {
   postToFrame('previewProduct', { active: false }); // ESTO apaga la ghost card
 };
 
-function initGhostCardListeners() {
-  const inputs = ['prodTitulo', 'prodPrecio'];
-  inputs.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.oninput = updateGhostCard;
-      el.onchange = updateGhostCard;
-    }
-  });
-  // No longer needed, as we're reading from UIMultiSelect
-  // document.querySelectorAll('.badges-container input[name="badges[]"]').forEach(el => {
-  //     el.onchange = updateGhostCard;
-  // });
-}
+// Removed function initGhostCardListeners
 
 function updateGhostCard() {
   const title = document.getElementById('prodTitulo')?.value || '';
@@ -1985,15 +1972,15 @@ function getDragAfterElement(container, y) {
   }, { offset: Number.NEGATIVE_INFINITY }).element;
 }
 
-function handleDragEnter(e) {
+function handleDragEnter() {
   // Ya no es necesario marcar estilos aquí, lo maneja dragOver con inserción real
 }
 
-function handleDragLeave(e) {
+function handleDragLeave() {
   // Limpieza manejada por dragOver
 }
 
-function handleDragEnd(e) {
+function handleDragEnd() {
   this.classList.remove('dragging');
   document.querySelectorAll('.section-sortable-item').forEach(item => {
     item.classList.remove('drag-over-top', 'drag-over-bottom');
@@ -2201,15 +2188,11 @@ window.renderMasterFilter = function() {
   const filterLabel = document.getElementById('sectionFilterLabel'); // UI Label
 
   // El select del formulario drawer (para crear producto)
-  const prodSelect = document.getElementById('prodCategoriaTienda');
   const formMenu = document.getElementById('prodCatTiendaMenu'); // UI Dropdown Form
 
   // if (!select) return; // Puede que select hidden no exista si no cargó el HTML
 
   const currentVal = select ? select.value : '';
-
-  // Calcular conteo total (Protegido contra null/undefined)
-  const totalCount = (window.allProducts && Array.isArray(window.allProducts)) ? window.allProducts.length : 0;
 
   // --- CONSTRUIR HTML PARA UI DROPDOWNS ---
   let filterHtml = '<div class="ui-option selected" onclick="selectUIOption(\'sectionFilterDropdown\', \'\', \'Inicio\', (val)=>{ document.getElementById(\'masterSectionFilter\').value=val; applySectionFilter(val); })">Inicio</div>';
@@ -2220,9 +2203,6 @@ window.renderMasterFilter = function() {
       if (item.label.toLowerCase() === 'inicio') return;
 
       const labelCap = toTitleCase(item.label);
-      const count = (window.allProducts && Array.isArray(window.allProducts))
-        ? window.allProducts.filter(p => p.categoria_tienda === item.label).length
-        : 0;
 
       // Filter Dropdown Item
       filterHtml += `<div class="ui-option" onclick="selectUIOption('sectionFilterDropdown', '${item.label}', '${labelCap}', (val)=>{ document.getElementById('masterSectionFilter').value=val; applySectionFilter(val); })">
