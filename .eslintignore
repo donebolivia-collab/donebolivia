@@ -1,0 +1,26 @@
+# Ignorar archivos PHP directamente (se analizan con plugin-html)
+# *.php
+
+# Ignorar archivos minificados
+*.min.js
+
+# Ignorar librerías de terceros
+assets/js/vendor/
+assets/js/lib/
+
+# Ignorar archivos generados
+node_modules/
+dist/
+build/
+
+# Ignorar archivos específicos del proyecto
+assets/js/favorites-share-fix.min.js
+assets/js/form-wizard.min.js
+assets/js/mobile-menu.min.js
+assets/js/publish-simple.min.js
+assets/js/publish_flow.min.js
+assets/js/register-verification.min.js
+assets/js/user-menu.min.js
+
+# Ignorar archivos de configuración
+package-lock.json

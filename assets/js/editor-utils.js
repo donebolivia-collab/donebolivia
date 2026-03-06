@@ -14,10 +14,10 @@ const TiendaGuard = {
       const fullUrl = `${url}?${urlParams}`;
       return fetch(fullUrl)
         .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
         })
         .catch(error => console.error('API GET Error:', error));
     },
@@ -31,17 +31,17 @@ const TiendaGuard = {
       return fetch(url, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/x-www-form-urlencoded'
         },
-        body: formData,
+        body: formData
       })
-      .then(response => {
-        if (!response.ok) {
+        .then(response => {
+          if (!response.ok) {
             throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .catch(error => console.error('API POST Error:', error));
+          }
+          return response.json();
+        })
+        .catch(error => console.error('API POST Error:', error));
     }
   }
 };

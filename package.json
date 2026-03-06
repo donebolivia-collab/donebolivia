@@ -1,0 +1,39 @@
+{
+  "name": "funcional",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "lint": "eslint assets/js/**/*.js",
+    "lint:php": "eslint --ext .php mi/",
+    "lint:fix": "eslint assets/js/**/*.js --fix",
+    "lint:php:fix": "eslint --ext .php mi/ --fix",
+    "lint:all": "npm run lint && npm run lint:php",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/donebolivia-collab/donebolivia.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/donebolivia-collab/donebolivia/issues"
+  },
+  "homepage": "https://github.com/donebolivia-collab/donebolivia#readme",
+  "devDependencies": {
+    "@html-eslint/parser": "^0.58.1",
+    "eslint": "^8.57.1",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-html": "^8.1.4",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jquery": "^1.5.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^7.2.1"
+  }
+}
