@@ -8,26 +8,25 @@
   width: 100%;
 }
 
-/* Trigger del dropdown - CORRECCIONES QUIRÚRGICAS */
+/* Trigger del dropdown - FORZADO ATÓMICO */
 .ts-wrapper.badges-multiselect .ts-control {
-  border: 1px solid #cbd5e1 !important; /* EXACTO IGUAL A UI-TRIGGER */
-  border-radius: 8px !important; /* EXACTO IGUAL A UI-TRIGGER */
-  padding: 4px 12px !important; /* CORREGIDO: Eliminar hueco */
-  min-height: 46px !important; /* CORREGIDO: Altura mínima */
-  height: auto !important; /* CORREGIDO: Altura automática */
-  background: white !important; /* IGUAL A UI-TRIGGER */
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important; /* IGUAL A UI-TRIGGER */
-  transition: all 0.2s ease !important; /* IGUAL A UI-TRIGGER */
-  box-sizing: border-box !important; /* IGUAL A UI-TRIGGER */
-  display: flex !important; /* FORZAR LAYOUT */
-  align-items: center !important; /* IGUAL A UI-TRIGGER */
-  justify-content: space-between !important; /* IGUAL A UI-TRIGGER */
-  cursor: pointer !important; /* IGUAL A UI-TRIGGER */
-  font-size: 14px !important; /* IGUAL A UI-TRIGGER */
-  color: var(--text-main) !important; /* IGUAL A UI-TRIGGER */
-  line-height: 1 !important; /* Eliminar espacio extra */
-  flex-wrap: wrap !important; /* Permitir wrap de chips */
-  gap: 4px !important; /* Espacio entre chips */
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 8px !important;
+  padding: 0 16px !important;
+  height: 46px !important; /* FORZADO: ALTURA EXACTA */
+  min-height: 46px !important; /* FORZADO: ALTURA MÍNIMA */
+  background: white !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.2s ease !important;
+  box-sizing: border-box !important;
+  display: flex !important; /* FORZADO: LAYOUT FLEX */
+  align-items: center !important;
+  justify-content: space-between !important;
+  cursor: pointer !important;
+  font-size: 14px !important;
+  color: var(--text-main) !important;
+  line-height: 1 !important;
+  position: relative !important; /* IMPORTANTE PARA FLECHA */
 }
 
 /* Hover: borde cambia a #22226B */
@@ -42,61 +41,29 @@
   box-shadow: 0 0 0 3px rgba(34, 34, 107, 0.1) !important; /* IGUAL A UI-TRIGGER */
 }
 
-/* Input interno: display none cuando hay badges */
-.ts-wrapper.badges-multiselect .ts-control > input {
-  display: none !important; /* CORREGIDO: Ocultar completamente */
-}
-
-/* Input solo visible cuando no hay badges */
-.ts-wrapper.badges-multiselect.has-items .ts-control > input {
-  display: none !important; /* Siempre oculto para evitar hueco */
-}
-
-.ts-wrapper.badges-multiselect:not(.has-items) .ts-control > input {
-  display: block !important; /* Solo visible cuando está vacío */
-  height: 30px !important;
-  width: auto !important;
+/* EXTERMINAR ESPACIO VACÍO - INPUT OCULTO TOTAL */
+.ts-wrapper.badges-multiselect .ts-control input {
+  position: absolute !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  pointer-events: none !important;
   margin: 0 !important;
   padding: 0 !important;
   border: none !important;
-  background: transparent !important;
 }
 
-/* Contenedor de items con flex forzado */
-.ts-wrapper.badges-multiselect .ts-control > div {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  gap: 4px !important;
-  align-items: center !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  width: 100% !important;
-  min-height: 40px !important;
-  max-height: 40px !important;
-  overflow: hidden !important;
-}
-
-.ts-wrapper.badges-multiselect .ts-control:hover {
-  border-color: #22226B !important;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-
-.ts-wrapper.badges-multiselect.ts-focused .ts-control {
-  border-color: #22226B !important;
-  box-shadow: 0 0 0 3px rgba(34, 34, 107, 0.1);
-}
-
-/* Flecha del dropdown - IGUAL A UI-TRIGGER */
+/* FLECHA DE DROPDOWN GARANTIZADA */
 .ts-wrapper.badges-multiselect .ts-control::after {
   content: '▼' !important;
   position: absolute !important;
   right: 16px !important;
   top: 50% !important;
   transform: translateY(-50%) !important;
-  font-size: 12px !important;
+  font-size: 10px !important;
   color: #94a3b8 !important;
   pointer-events: none !important;
-  z-index: 1 !important;
+  z-index: 10 !important;
 }
 
 /* Flecha en hover */
@@ -109,11 +76,6 @@
   color: #22226B !important;
 }
 
-/* Ajustar padding derecho para espacio de la flecha */
-.ts-wrapper.badges-multiselect .ts-control {
-  padding: 4px 40px 4px 12px !important; /* Espacio para la flecha a la derecha */
-}
-
 /* Placeholder */
 .ts-wrapper.badges-multiselect .ts-control .ts-placeholder {
   color: #94a3b8 !important;
@@ -123,27 +85,28 @@
   padding: 0 !important;
 }
 
-/* Items seleccionados (chips) - CORPORATIVO #22226B */
+/* CHIPS CORPORATIVOS SINCRONIZADOS */
 .ts-wrapper.badges-multiselect .ts-item {
-  background-color: #22226B !important; /* AZUL CORPORATIVO OSCURO */
+  background-color: #22226B !important; /* AZUL CORPORATIVO */
   color: white !important; /* TEXTO BLANCO */
-  border: 1px solid #22226B !important; /* BORDE CORPORATIVO */
+  border: 1px solid #22226B !important;
   border-radius: 6px !important;
   padding: 4px 8px !important;
-  margin: 0 !important; /* Eliminar margin externo */
+  margin: 0 4px 0 0 !important; /* MARGEN ESPECÍFICO: no empujar hacia abajo */
   font-size: 12px !important;
   font-weight: 500 !important;
   display: inline-flex !important;
   align-items: center !important;
   gap: 4px !important;
   line-height: 1.2 !important;
-  height: auto !important; /* Altura automática */
-  min-height: 24px !important; /* Altura mínima */
+  height: auto !important;
+  min-height: 24px !important;
+  max-height: 24px !important; /* ALTURA FIJA */
 }
 
 /* X para borrar: BLANCA y CENTRADA */
 .ts-wrapper.badges-multiselect .ts-item .item-remove {
-  color: white !important; /* X BLANCA */
+  color: white !important;
   margin-left: 4px !important;
   font-size: 14px !important;
   line-height: 1 !important;
@@ -154,12 +117,12 @@
   width: 16px !important;
   height: 16px !important;
   border-radius: 50% !important;
-  background: rgba(255, 255, 255, 0.2) !important; /* Fondo sutil para la X */
+  background: rgba(255, 255, 255, 0.2) !important;
 }
 
 .ts-wrapper.badges-multiselect .ts-item .item-remove:hover {
   color: white !important;
-  background: rgba(255, 255, 255, 0.3) !important; /* Hover más visible */
+  background: rgba(255, 255, 255, 0.3) !important;
 }
 
 /* Dropdown - IGUAL A UI-MENU CON !IMPORTANT */
