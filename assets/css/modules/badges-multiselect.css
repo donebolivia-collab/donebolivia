@@ -1,154 +1,68 @@
 /**
- * Tom Select Custom Styles for Badges
- * Estilos personalizados para el multiselect de insignias
+ * SOLUCIÓN FINAL: MULTISELECT ENTERPRISE "LA CASA DE LAS GOLOSINAS"
  */
 
-/* Contenedor principal del multiselect de badges */
-#badgesSelect + .ts-wrapper {
-  width: 100%;
+/* 1. CONTENEDOR FLEXIBLE (Cura el corte de filas) */
+.ts-wrapper.multi .ts-control {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+    padding: 8px 40px 8px 12px !important; /* Espacio para que respire */
+    min-height:46px !important; 
+    height: auto !important; /* ¡FUNDAMENTAL: permite crecer! */
+    background: white url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e") no-repeat right 12px center !important;
+    background-size: 20px !important; /* Flecha más grande y visible */
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 8px !important;
+    align-items: center !important;
 }
 
-/* Atacamos al wrapper que sigue inmediatamente a nuestro select */
-#badgesSelect + .ts-wrapper .ts-control {
-  height: 46px !important;
-  min-height: 46px !important;
-  border: 1px solid #cbd5e1 !important;
-  border-radius: 8px !important;
-  padding: 0 40px 0 12px !important;
-  display: flex !important;
-  align-items: center !important;
-  background: white url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e") no-repeat right 12px center !important;
-  background-size: 16px !important;
+/* 2. CHIPS CORPORATIVOS (Mata el celeste definitivamente) */
+.ts-wrapper.multi .ts-control .item {
+    background: #22226B !important; /* Azul corporativo */
+    color: white !important;
+    border: none !important;
+    border-radius: 6px !important;
+    padding: 2px 10px !important;
+    font-size:13px !important;
+    font-weight: 500 !important;
+    margin: 2px 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
 }
 
-/* Hover: borde cambia a #22226B */
-#badgesSelect + .ts-wrapper .ts-control:hover {
-  border-color: #22226B !important;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05) !important;
-  background: white url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2322226B' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e") no-repeat right 12px center !important;
-  background-size: 16px !important;
+/* 3. BOTÓN DE ELIMINAR (X) */
+.ts-wrapper.multi .ts-control .item .remove {
+    color: white !important;
+    border-left: 1px solid rgba(255,255,255,0.2) !important;
+    margin-left: 8px !important;
+    padding-left: 4px !important;
 }
 
-/* Focus: borde cambia a #22226B */
-#badgesSelect + .ts-wrapper.ts-focused .ts-control {
-  border-color: #22226B !important;
-  box-shadow: 0 0 0 3px rgba(34, 34, 107, 0.1) !important;
-  background: white url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2322226B' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e") no-repeat right 12px center !important;
-  background-size: 16px !important;
+/* 4. FLECHA EN HOVER (Sincronizada con "Estado") */
+.ts-wrapper.multi.focus .ts-control,
+.ts-wrapper.multi:hover .ts-control {
+    border-color: #22226B !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2322226B' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e") !important;
 }
 
-/* EXTERMINAR ESPACIO VACÍO - INPUT OCULTO TOTAL */
-#badgesSelect + .ts-wrapper .ts-control input {
-  position: absolute !important;
-  opacity: 0 !important;
-  width: 0 !important;
-  height: 0 !important;
-  pointer-events: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border: none !important;
+/* 5. ELIMINAR EL INPUT QUE CREA ESPACIOS */
+.ts-wrapper.multi .ts-control > input {
+    display: none !important;
 }
 
-/* Placeholder */
-#badgesSelect + .ts-wrapper .ts-control .ts-placeholder {
-  color: #94a3b8 !important;
-  font-style: italic !important;
-  line-height: 1 !important;
-  margin: 0 !important;
-  padding: 0 !important;
+.ts-wrapper.badges-multiselect .remove-item {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 16px;
+  line-height: 1;
+  padding: 0;
+  margin-left: 4px;
 }
 
-/* CHIPS CORPORATIVOS SINCRONIZADOS - SIN BORDES CELESTES */
-#badgesSelect + .ts-wrapper .ts-item {
-  background: #22226B !important; /* AZUL CORPORATIVO */
-  color: white !important; /* TEXTO BLANCO */
-  border: none !important; /* SIN BORDES CELESTES */
-  border-radius: 6px !important;
-  padding: 4px 8px !important;
-  margin: 0 4px 0 0 !important; /* MARGEN ESPECÍFICO: no empujar hacia abajo */
-  font-size: 12px !important;
-  font-weight: 500 !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 4px !important;
-  line-height: 1.2 !important;
-  height: auto !important;
-  min-height: 24px !important;
-  max-height: 24px !important; /* ALTURA FIJA */
+.ts-wrapper.badges-multiselect .remove-item:hover {
+  color: white;
 }
 
-/* X para borrar: BLANCA y CENTRADA */
-#badgesSelect + .ts-wrapper .ts-item .item-remove {
-  color: white !important;
-  margin-left: 4px !important;
-  font-size: 14px !important;
-  line-height: 1 !important;
-  cursor: pointer !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: 16px !important;
-  height: 16px !important;
-  border-radius: 50% !important;
-  background: rgba(255, 255, 255, 0.2) !important;
-}
-
-#badgesSelect + .ts-wrapper .ts-item .item-remove:hover {
-  color: white !important;
-  background: rgba(255, 255, 255, 0.3) !important;
-}
-
-/* Dropdown - IGUAL A UI-MENU CON !IMPORTANT */
-#badgesSelect + .ts-wrapper .ts-dropdown {
-  border: 1px solid #cbd5e1 !important;
-  border-radius: 8px !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
-  margin-top: 4px !important;
-  max-height: 280px !important;
-  overflow-y: auto !important;
-  background: white !important;
-  border-top: none !important;
-}
-
-/* Opciones del dropdown - IGUAL A UI-OPTION */
-#badgesSelect + .ts-wrapper .ts-dropdown-content {
-  padding: 4px 0 !important;
-}
-
-#badgesSelect + .ts-wrapper .ts-option {
-  padding: 10px 16px !important;
-  border-radius: 0 !important;
-  margin: 0 !important;
-  cursor: pointer !important;
-  transition: background-color 0.2s ease !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 8px !important;
-  font-size: 13px !important;
-  border-left: 3px solid transparent !important;
-  color: var(--text-main) !important;
-}
-
-#badgesSelect + .ts-wrapper .ts-option:hover {
-  background: #f8fafc !important;
-  border-left-color: #cbd5e1 !important;
-  color: var(--text-main) !important;
-}
-
-#badgesSelect + .ts-wrapper .ts-option.selected {
-  background: #eef2ff !important; /* Azul muy suave */
-  color: #22226B !important; /* Azul corporativo */
-  border-left-color: #22226B !important;
-  font-weight: 600 !important;
-}
-
-#badgesSelect + .ts-wrapper .ts-option.selected:hover {
-  background: #e0e7ff !important; /* Un poco más oscuro que selected normal */
-  border-left-color: #22226B !important;
-  color: #22226B !important;
-}
-
-/* Badge option */
 .ts-wrapper.badges-multiselect .badge-option {
   display: flex;
   align-items: center;
@@ -193,52 +107,12 @@
   max-width: 120px;
 }
 
-/* Checkbox para opciones múltiples - ESTILO CORPORATIVO */
-#badgesSelect + .ts-wrapper .ts-dropdown .option-checkbox {
-  width: 16px !important;
-  height: 16px !important;
-  border: 2px solid #cbd5e1 !important; /* Borde corporativo */
-  border-radius: 3px !important;
-  margin-right: 8px !important;
-  position: relative !important;
-  background: white !important;
-  flex-shrink: 0 !important;
-}
-
-#badgesSelect + .ts-wrapper .ts-dropdown .option-checkbox.checked::after {
-  content: '✓' !important;
-  position: absolute !important;
-  top: -2px !important;
-  left: 2px !important;
-  color: #22226B !important; /* Azul corporativo */
-  font-size: 12px !important;
-  font-weight: bold !important;
-}
-
-#badgesSelect + .ts-wrapper .ts-dropdown .option-checkbox.checked {
-  background: #22226B !important; /* Fondo azul corporativo */
-  border-color: #22226B !important; /* Borde azul corporativo */
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  font-size: 10px;
-  font-weight: bold;
-}
-
-/* Placeholder */
 .ts-wrapper.badges-multiselect .ts-control .ts-placeholder {
   color: #94a3b8;
   font-style: italic;
 }
 
-/* Remove button */
 .ts-wrapper.badges-multiselect .remove-item {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 16px;
-  line-height: 1;
-  padding: 0;
-  margin-left: 4px;
-  background: none;
   border: none;
   cursor: pointer;
 }
