@@ -1,0 +1,218 @@
+/**
+ * Tom Select Custom Styles for Badges
+ * Estilos personalizados para el multiselect de insignias
+ */
+
+/* Contenedor principal del multiselect de badges */
+.ts-wrapper.badges-multiselect {
+  width: 100%;
+}
+
+/* Trigger del dropdown */
+.ts-wrapper.badges-multiselect .ts-control {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 8px 12px;
+  background: white;
+  min-height: 44px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.ts-wrapper.badges-multiselect .ts-control:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ts-wrapper.badges-multiselect.ts-focused .ts-control {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Items seleccionados (tags) */
+.ts-wrapper.badges-multiselect .ts-item {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 4px 8px;
+  margin: 2px;
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
+}
+
+.ts-wrapper.badges-multiselect .ts-item .badge-item-image {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  border-radius: 2px;
+}
+
+.ts-wrapper.badges-multiselect .ts-item .item-remove {
+  color: rgba(255, 255, 255, 0.8);
+  margin-left: 4px;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.ts-wrapper.badges-multiselect .ts-item .item-remove:hover {
+  color: white;
+}
+
+/* Dropdown */
+.ts-wrapper.badges-multiselect .ts-dropdown {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  margin-top: 4px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* Opciones del dropdown */
+.ts-wrapper.badges-multiselect .ts-dropdown-content {
+  padding: 4px;
+}
+
+.ts-wrapper.badges-multiselect .ts-option {
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin: 2px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ts-wrapper.badges-multiselect .ts-option:hover {
+  background: #f8fafc;
+}
+
+.ts-wrapper.badges-multiselect .ts-option.selected {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.ts-wrapper.badges-multiselect .ts-option.active {
+  background: #f1f5f9;
+}
+
+/* Badge option image */
+.ts-wrapper.badges-multiselect .badge-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.ts-wrapper.badges-multiselect .badge-option-image {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.ts-wrapper.badges-multiselect .badge-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Checkbox para opciones múltiples */
+.ts-wrapper.badges-multiselect .ts-dropdown .option-checkbox {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #cbd5e1;
+  border-radius: 3px;
+  margin-right: 8px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.ts-wrapper.badges-multiselect .ts-dropdown .selected .option-checkbox {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-color: #667eea;
+}
+
+.ts-wrapper.badges-multiselect .ts-dropdown .selected .option-checkbox::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+/* Placeholder */
+.ts-wrapper.badges-multiselect .ts-control .ts-placeholder {
+  color: #94a3b8;
+  font-style: italic;
+}
+
+/* Remove button */
+.ts-wrapper.badges-multiselect .remove-item {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 16px;
+  line-height: 1;
+  padding: 0;
+  margin-left: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.ts-wrapper.badges-multiselect .remove-item:hover {
+  color: white;
+}
+
+/* Loading state */
+.ts-wrapper.badges-multiselect.loading .ts-control {
+  background: #f8fafc;
+  pointer-events: none;
+}
+
+.ts-wrapper.badges-multiselect.loading .ts-control::after {
+  content: '';
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  border: 2px solid #e2e8f0;
+  border-top: 2px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: translateY(-50%) rotate(0deg); }
+  100% { transform: translateY(-50%) rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .ts-wrapper.badges-multiselect .ts-control {
+    min-height: 40px;
+    padding: 6px 10px;
+  }
+  
+  .ts-wrapper.badges-multiselect .ts-item {
+    font-size: 11px;
+    padding: 3px 6px;
+  }
+  
+  .ts-wrapper.badges-multiselect .badge-option-image,
+  .ts-wrapper.badges-multiselect .badge-item-image {
+    width: 16px;
+    height: 16px;
+  }
+}

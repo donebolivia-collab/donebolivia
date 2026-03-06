@@ -108,6 +108,7 @@ module.exports = {
     'isMobile': 'writable',
     // Clases globales de componentes
     'ImageUploader': 'writable',
+    'tom': 'readonly',
     // Variables de módulos
     'module': 'readonly',
     // jQuery y globals del navegador

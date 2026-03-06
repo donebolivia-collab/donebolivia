@@ -783,9 +783,9 @@ async function populateDrawerForEdit(p) {
     await cargarSubcategorias(p.categoria_id, p.subcategoria_id);
   }
 
-  // Cargar insignias existentes
-  if (window.badgesMultiSelect && p.badges) {
-    window.badgesMultiSelect.setValues(p.badges);
+  // Cargar insignias existentes (ahora manejado por el módulo de badges)
+  if (window.badgesModule && p.badges) {
+    window.badgesModule.setValues(p.badges);
   }
 
   // Cargar sección de tienda
@@ -1169,38 +1169,6 @@ window.initProductImageUploader = function() {
 // Initialize immediately
 initProductImageUploader();
 
-// Initialize UIMultiSelect for badges
-window.initBadgesMultiSelect = function() {
-  if (typeof UIMultiSelect !== 'undefined' && window.availableBadges) {
-    // Transformar los badges disponibles al formato que requiere el componente
-    const badgeOptions = window.availableBadges.map(badge => {
-      return {
-        value: String(badge.id), // Forzar el valor a ser un string
-        label: badge.nombre
-      };
-    });
-
-    window.badgesMultiSelect = new UIMultiSelect({
-      container: 'badgesMultiSelect',
-      id: 'badgesMultiSelectComponent',
-      placeholder: 'Seleccionar insignias...',
-      options: badgeOptions, // Usar las opciones dinámicas
-      maxVisible: 3,
-      onChange: function(values, selectedOptions) {
-        // Actualizar hidden input con los IDs seleccionados
-        const badgesInput = document.getElementById('badgesInput');
-        if (badgesInput) {
-          badgesInput.value = values.join(',');
-        }
-        // Actualizar ghost card (previsualización en vivo)
-        updateGhostCard();
-      }
-    });
-  }
-};
-
-// Initialize badges multiselect
-initBadgesMultiSelect();
 
 window.guardarProducto = async function() {
   const formData = new FormData();

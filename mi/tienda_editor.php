@@ -1118,7 +1118,9 @@ $titulo = "Editor: " . $tienda['nombre'];
                         </div>
                         <div class="control-group">
                             <label class="label">Badges</label>
-                            <div id="badgesMultiSelect"></div>
+                            <div id="badgesMultiSelect" class="badges-multiselect">
+                                <select id="badgesSelect" name="badges[]" multiple></select>
+                            </div>
                             <input type="hidden" id="badgesInput" name="badges[]" value="">
                         </div>
                     </div>
@@ -1365,13 +1367,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <script src="/assets/js/ImageUploader.js?v=<?php echo time(); ?>"></script>
 <script src="/assets/js/image-uploader-safe-init.js?v=<?php echo time(); ?>"></script>
-<script src="/assets/js/ui-multiselect.js?v=<?php echo time(); ?>"></script>
+<!-- Tom Select para multiselect avanzado -->
+<script src="/assets/js/tom-select.complete.min.js?v=<?php echo time(); ?>"></script>
+<link rel="stylesheet" href="/assets/css/tom-select.default.min.css?v=<?php echo time(); ?>">
+<link rel="stylesheet" href="/assets/css/modules/badges-multiselect.css?v=<?php echo time(); ?>">
 <script src="/assets/js/editor-utils.js"></script>
 <script src="/assets/js/modules/badge-system.js?v=<?php echo time(); ?>"></script>
 <script src="/assets/js/modules/ui-components.js?v=<?php echo time(); ?>"></script>
 <script src="/assets/js/modules/iframe-communicator.js?v=<?php echo time(); ?>"></script>
 <script src="/assets/js/modules/image-manager.js?v=<?php echo time(); ?>"></script>
 <script src="/assets/js/modules/product-editor-core.js?v=<?php echo time(); ?>"></script>
+<!-- Módulo de Badges modular -->
+<script src="/assets/js/modules/init-badges.js?v=<?php echo time(); ?>"></script>
 <script src="/assets/js/editor-tienda.js?v=<?php echo time(); ?>"></script>
 <script src="/assets/js/modules/realtime-communicator.js?v=<?php echo time(); ?>"></script>
 <script src="/assets/js/modules/product-sync-manager.js?v=<?php echo time(); ?>"></script>
