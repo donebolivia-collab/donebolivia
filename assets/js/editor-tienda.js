@@ -876,7 +876,7 @@ let existingProductImages = [];
 let imagesToDelete = [];
 let currentCategoryTienda = '';
 
-window.openProductDrawer = async(id = null) => {
+window.openProductDrawer = async function(id = null) {
   // 1. Abrir el panel y resetear estado base
   resetProductDrawer();
 
