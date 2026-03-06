@@ -4,6 +4,9 @@
  * Usa Tom Select para una mejor experiencia de usuario
  */
 
+// Alias para Tom Select
+const tom = window.TomSelect;
+
 class BadgesModule {
   constructor() {
     this.badgesMultiSelect = null;
@@ -171,6 +174,12 @@ window.initBadgesModule = () => {
 // Función específica para inicializar en el editor
 window.initBadgesEditor = () => {
   console.log('Forzando inicialización de Badges Editor...');
+
+  // Verificar que Tom Select esté disponible
+  if (typeof window.TomSelect === 'undefined') {
+    console.error('Tom Select no está cargado');
+    return;
+  }
 
   // Esperar a que los datos estén disponibles
   if (!window.availableBadges || window.availableBadges.length === 0) {
