@@ -8,41 +8,77 @@
   width: 100%;
 }
 
-/* Trigger del dropdown */
+/* Trigger del dropdown - IGUAL A UI-TRIGGER */
 .ts-wrapper.badges-multiselect .ts-control {
-  border: 1px solid #e2e8f0;
+  border: 2px solid #e2e8f0;
   border-radius: 8px;
-  padding: 8px 12px;
+  padding: 0 16px;
+  height: 46px;
   background: white;
-  min-height: 44px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   transition: all 0.2s ease;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  min-height: 46px; /* Forzar altura mínima */
+  line-height: 1; /* Eliminar espacio extra */
 }
 
 .ts-wrapper.badges-multiselect .ts-control:hover {
-  border-color: #cbd5e1;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-color: #22226B !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .ts-wrapper.badges-multiselect.ts-focused .ts-control {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  border-color: #22226B !important;
+  box-shadow: 0 0 0 3px rgba(34, 34, 107, 0.1);
 }
 
-/* Items seleccionados (tags) */
+/* Placeholder */
+.ts-wrapper.badges-multiselect .ts-control .ts-placeholder {
+  color: #94a3b8;
+  font-style: italic;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+}
+
+/* Eliminar padding interno del contenedor de items */
+.ts-wrapper.badges-multiselect .ts-control > div {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2px;
+  max-height: 40px; /* Limitar altura para evitar espacio vacío */
+  overflow: hidden;
+}
+
+/* Forzar que el control no tenga espacio extra */
+.ts-wrapper.badges-multiselect .ts-control {
+  padding: 0 16px !important;
+  min-height: 46px !important;
+  height: auto !important;
+  max-height: 46px !important;
+}
+
+/* Items seleccionados (chips) - COLOR CORPORATIVO */
 .ts-wrapper.badges-multiselect .ts-item {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border: none;
-  border-radius: 20px;
+  background: #eef2ff; /* Azul muy suave como ui-option.selected */
+  color: #22226B; /* Azul corporativo */
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
   padding: 4px 8px;
-  margin: 2px;
+  margin: 0; /* Eliminar margin externo */
   font-size: 12px;
   font-weight: 500;
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  box-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
+  line-height: 1.2;
+  height: auto; /* Altura automática */
+  min-height: 24px; /* Altura mínima */
 }
 
 .ts-wrapper.badges-multiselect .ts-item .badge-item-image {
@@ -50,64 +86,74 @@
   height: 16px;
   object-fit: contain;
   border-radius: 2px;
+  flex-shrink: 0;
 }
 
 .ts-wrapper.badges-multiselect .ts-item .item-remove {
-  color: rgba(255, 255, 255, 0.8);
+  color: #64748b;
   margin-left: 4px;
   font-size: 14px;
   line-height: 1;
+  cursor: pointer;
 }
 
 .ts-wrapper.badges-multiselect .ts-item .item-remove:hover {
-  color: white;
+  color: #22226B;
 }
 
-/* Dropdown */
+/* Dropdown - IGUAL A UI-MENU */
 .ts-wrapper.badges-multiselect .ts-dropdown {
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   margin-top: 4px;
   max-height: 280px;
   overflow-y: auto;
   background: white;
+  border-top: none;
 }
 
-/* Opciones del dropdown */
+/* Opciones del dropdown - IGUAL A UI-OPTION */
 .ts-wrapper.badges-multiselect .ts-dropdown-content {
-  padding: 2px;
+  padding: 4px 0;
 }
 
 .ts-wrapper.badges-multiselect .ts-option {
-  padding: 6px 12px;
-  border-radius: 4px;
-  margin: 1px;
+  padding: 10px 16px;
+  border-radius: 0;
+  margin: 0;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: background-color 0.2s ease;
   display: flex;
   align-items: center;
   gap: 8px;
-  min-height: 36px;
   font-size: 13px;
-  border: 1px solid transparent;
+  border-left: 3px solid transparent;
+  color: var(--text-main);
 }
 
 .ts-wrapper.badges-multiselect .ts-option:hover {
   background: #f8fafc;
-  border-color: #3b82f6;
+  border-left-color: #cbd5e1;
+  color: var(--text-main);
 }
 
 .ts-wrapper.badges-multiselect .ts-option.selected {
-  background: #3b82f6;
-  color: white;
-  border-color: #2563eb;
-  font-weight: 500;
+  background: #eef2ff; /* Azul muy suave */
+  color: #22226B; /* Azul corporativo */
+  border-left-color: #22226B;
+  font-weight: 600;
+}
+
+.ts-wrapper.badges-multiselect .ts-option.selected:hover {
+  background: #e0e7ff; /* Un poco más oscuro que selected normal */
+  border-left-color: #22226B;
+  color: #22226B;
 }
 
 .ts-wrapper.badges-multiselect .ts-option.active {
   background: #f1f5f9;
-  border-color: #3b82f6;
+  border-left-color: #cbd5e1;
 }
 
 /* Badge option */
