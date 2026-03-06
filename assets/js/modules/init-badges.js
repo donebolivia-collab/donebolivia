@@ -80,26 +80,40 @@ class BadgesModule {
       create: false,
       render: {
         option: (data, escape) => {
+          // Versión limpia solo con texto y color de marca
+          return `<div class="badge-option">
+                    <span class="badge-option-text">${escape(data.text)}</span>
+                  </div>`;
+
+          /* Versión con imágenes (comentada si no se ve limpio)
           if (data.image) {
             return `<div class="badge-option">
-                      <img src="${data.image}" alt="${escape(data.text)}" class="badge-option-image">
-                      <span>${escape(data.text)}</span>
+                      <img src="${data.image}" alt="${escape(data.text)}" class="badge-option-image" style="width: 20px; height: 20px; object-fit: contain;">
+                      <span class="badge-option-text">${escape(data.text)}</span>
                     </div>`;
           }
           return `<div class="badge-option">
-                    <span>${escape(data.text)}</span>
+                    <span class="badge-option-text">${escape(data.text)}</span>
                   </div>`;
+          */
         },
         item: (data, escape) => {
+          // Versión limpia solo con texto
+          return `<div class="badge-item">
+                    <span class="badge-item-text">${escape(data.text)}</span>
+                  </div>`;
+
+          /* Versión con imágenes (comentada si no se ve limpio)
           if (data.image) {
             return `<div class="badge-item">
-                      <img src="${data.image}" alt="${escape(data.text)}" class="badge-item-image">
-                      <span>${escape(data.text)}</span>
+                      <img src="${data.image}" alt="${escape(data.text)}" class="badge-item-image" style="width: 20px; height: 20px; object-fit: contain;">
+                      <span class="badge-item-text">${escape(data.text)}</span>
                     </div>`;
           }
           return `<div class="badge-item">
-                    <span>${escape(data.text)}</span>
+                    <span class="badge-item-text">${escape(data.text)}</span>
                   </div>`;
+          */
         }
       },
       onItemAdd: (value, item) => {

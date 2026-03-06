@@ -66,62 +66,93 @@
 /* Dropdown */
 .ts-wrapper.badges-multiselect .ts-dropdown {
   border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   margin-top: 4px;
-  max-height: 300px;
+  max-height: 280px;
   overflow-y: auto;
+  background: white;
 }
 
 /* Opciones del dropdown */
 .ts-wrapper.badges-multiselect .ts-dropdown-content {
-  padding: 4px;
+  padding: 2px;
 }
 
 .ts-wrapper.badges-multiselect .ts-option {
-  padding: 8px 12px;
-  border-radius: 6px;
-  margin: 2px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  margin: 1px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
   display: flex;
   align-items: center;
   gap: 8px;
+  min-height: 36px;
+  font-size: 13px;
+  border: 1px solid transparent;
 }
 
 .ts-wrapper.badges-multiselect .ts-option:hover {
   background: #f8fafc;
+  border-color: #3b82f6;
 }
 
 .ts-wrapper.badges-multiselect .ts-option.selected {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #3b82f6;
   color: white;
+  border-color: #2563eb;
+  font-weight: 500;
 }
 
 .ts-wrapper.badges-multiselect .ts-option.active {
   background: #f1f5f9;
+  border-color: #3b82f6;
 }
 
-/* Badge option image */
+/* Badge option */
 .ts-wrapper.badges-multiselect .badge-option {
   display: flex;
   align-items: center;
   gap: 8px;
   width: 100%;
+  padding: 4px 8px;
+  min-height: 32px;
 }
 
 .ts-wrapper.badges-multiselect .badge-option-image {
-  width: 20px;
-  height: 20px;
+  width: 20px !important;
+  height: 20px !important;
   object-fit: contain;
   border-radius: 2px;
   flex-shrink: 0;
+  border: 1px solid #e2e8f0;
+  background: white;
+}
+
+.ts-wrapper.badges-multiselect .badge-option-text {
+  flex: 1;
+  font-size: 13px;
+  color: #334155;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .ts-wrapper.badges-multiselect .badge-item {
   display: flex;
   align-items: center;
   gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.ts-wrapper.badges-multiselect .badge-item-text {
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px;
 }
 
 /* Checkbox para opciones múltiples */
