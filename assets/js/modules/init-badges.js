@@ -210,3 +210,29 @@ window.initBadgesEditor = () => {
     console.error('Badges Module no encontrado');
   }
 };
+
+// DEBUG VISUAL - DIAGNÓSTICO TÉCNICO
+setTimeout(() => {
+  console.log('--- DEBUG BADGES ---');
+  const el = document.querySelector('.ts-control');
+  if (el) {
+    const style = window.getComputedStyle(el);
+    console.log('Altura real:', style.height);
+    console.log('Borde real:', style.border);
+    console.log('Background real:', style.background);
+    console.log('Display real:', style.display);
+    console.log('Padding real:', style.padding);
+    console.log('Archivo CSS cargado:', document.querySelector('link[href*="badges-multiselect"]')?.href);
+    console.log('Elemento encontrado:', el);
+    console.log('Clases del elemento:', el.className);
+    console.log('Padre del elemento:', el.parentElement);
+    console.log('Estilos computados completos:', style);
+  } else {
+    console.error('ERROR: No se encuentra el elemento .ts-control en el DOM');
+    console.log('Buscando alternativas...');
+    console.log('ts-wrapper:', document.querySelector('.ts-wrapper'));
+    console.log('badges-multiselect:', document.querySelector('.badges-multiselect'));
+    console.log('badgesSelect:', document.querySelector('#badgesSelect'));
+    console.log('Todos los selects:', document.querySelectorAll('select'));
+  }
+}, 2000); // Esperar 2 segundos para que todo cargue
