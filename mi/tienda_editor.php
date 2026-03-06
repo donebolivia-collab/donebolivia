@@ -1372,7 +1372,6 @@ document.addEventListener('DOMContentLoaded', () => {
 <link rel="stylesheet" href="/assets/css/tom-select.default.min.css?v=<?php echo time(); ?>">
 <link rel="stylesheet" href="/assets/css/modules/badges-multiselect.css?v=<?php echo time(); ?>">
 <script src="/assets/js/editor-utils.js"></script>
-<script src="/assets/js/modules/badge-system.js?v=<?php echo time(); ?>"></script>
 <script src="/assets/js/modules/ui-components.js?v=<?php echo time(); ?>"></script>
 <script src="/assets/js/modules/iframe-communicator.js?v=<?php echo time(); ?>"></script>
 <script src="/assets/js/modules/image-manager.js?v=<?php echo time(); ?>"></script>

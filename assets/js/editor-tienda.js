@@ -744,8 +744,8 @@ function resetProductDrawer() {
   }
 
   // Limpiar selector de insignias (badges)
-  if (window.badgesMultiSelect) {
-    window.badgesMultiSelect.setValues([]);
+  if (window.badgesMultiSelect && typeof window.badgesMultiSelect.clear === 'function') {
+    window.badgesMultiSelect.clear();
   }
 }
 
