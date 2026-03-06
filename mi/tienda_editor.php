@@ -1370,7 +1370,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <!-- Tom Select para multiselect avanzado -->
 <script src="/assets/js/tom-select.complete.min.js?v=<?php echo time(); ?>"></script>
 <link rel="stylesheet" href="/assets/css/tom-select.default.min.css?v=<?php echo time(); ?>">
-<link rel="stylesheet" href="/assets/css/modules/badges-multiselect.css?v=<?php echo time(); ?>">
+<link rel="stylesheet" href="/assets/css/modules/badges-multiselect.css?v=2.0">
 <script src="/assets/js/editor-utils.js"></script>
 <script src="/assets/js/modules/ui-components.js?v=<?php echo time(); ?>"></script>
 <script src="/assets/js/modules/iframe-communicator.js?v=<?php echo time(); ?>"></script>
