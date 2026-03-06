@@ -1,61 +1,148 @@
-/* 1. CONTENEDOR: Recuperamos el look limpio y profesional */
+/**
+ * CLONACIÓN PERFECTA: Dropdowns Badges IDÉNTICOS a UI-Trigger
+ * Misma apariencia, mismos efectos, mismos colores EXACTOS
+ */
+
+/* 1. CONTENEDOR PRINCIPAL - CLON EXACTO DE .ui-trigger */
 #badgesSelect + .ts-wrapper .ts-control {
-    border: 1px solid #cbd5e1 !important; /* Gris suave de tu patrón */
+    /* Propiedades IDÉNTICAS a .ui-trigger */
+    width: 100% !important;
+    padding: 0 16px !important; /* Mismo padding */
+    height: 46px !important; /* Altura fija IGUAL */
+    background: white !important;
+    border: 1px solid #cbd5e1 !important; /* Borde IDÉNTICO */
     border-radius: 8px !important;
-    background-color: white !important;
-    box-shadow: none !important;
-    min-height: 46px !important;
-    height: auto !important;
-    padding: 0.5rem 2.5rem 0.5rem 0.75rem !important;
     display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 6px !important;
     align-items: center !important;
-    transition: border-color 0.2s, box-shadow 0.2s !important;
+    justify-content: space-between !important; /* Espacio entre texto y flecha */
     cursor: pointer !important;
+    transition: all 0.2s !important; /* MISMA transición */
+    font-size: 14px !important; /* Tamaño IGUAL */
+    color: var(--text-main) !important; /* Color variable IGUAL */
+    box-sizing: border-box !important;
     position: relative !important;
 }
 
-/* 2. LA FLECHA: Tamaño proporcional 16px (No gigante) */
+/* 2. ESTADO HOVER - CLON EXACTO */
+#badgesSelect + .ts-wrapper .ts-control:hover {
+    border-color: #22226B !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05) !important;
+}
+
+/* 3. ESTADO ACTIVO/FOCUS - CLON EXACTO */
+#badgesSelect + .ts-wrapper.focus .ts-control,
+#badgesSelect + .ts-wrapper.dropdown-opened .ts-control {
+    border-color: #22226B !important;
+    box-shadow: 0 0 0 3px rgba(34, 34, 107, 0.1) !important;
+}
+
+/* 4. FLECHA - CLON EXACTO DE i.chevron */
 #badgesSelect + .ts-wrapper .ts-control::after {
-    content: "" !important;
+    content: "▼" !important;
     position: absolute !important;
-    right: 12px !important;
+    right: 16px !important; /* MISMA posición */
     top: 50% !important;
-    width: 16px !important; /* Tamaño exacto de tus otros dropdowns */
-    height: 16px !important;
-    margin-top: -8px !important;
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2364748b' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e") !important;
-    background-size: contain !important;
-    background-repeat: no-repeat !important;
-    transition: transform 0.3s ease !important; /* EFECTO DE ROTACIÓN */
-    border: none !important;
+    transform: translateY(-50%) !important;
+    font-size: 12px !important; /* Tamaño IGUAL */
+    color: var(--text-muted) !important; /* Color variable IGUAL */
+    transition: transform 0.2s !important; /* MISMA transición */
+    pointer-events: none !important;
 }
 
-/* 3. EFECTO AL ABRIR: La flecha gira y cambia a azul corporativo */
+/* 5. FLECHA EN ESTADO ACTIVO - ROTACIÓN IGUAL */
+#badgesSelect + .ts-wrapper.focus .ts-control::after,
 #badgesSelect + .ts-wrapper.dropdown-opened .ts-control::after {
-    transform: rotate(180deg) !important;
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2322226B' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e") !important;
+    transform: translateY(-50%) rotate(180deg) !important;
 }
 
-/* 4. CHIPS: Azul corporativo #22226B (Sin celestes) */
+/* 6. CHIPS - Se integran perfectamente sin romper el layout */
 #badgesSelect + .ts-wrapper .ts-control .item {
-    background: #22226B !important; 
+    background: #22226B !important;
     color: white !important;
-    border-radius: 6px !important;
-    padding: 2px 10px !important;
-    font-size: 13px !important;
-    font-weight: 500 !important;
     border: none !important;
-    margin: 2px 0 !important;
+    border-radius: 6px !important;
+    padding: 2px 8px !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    margin: 0 4px 0 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
 }
 
-/* 5. LISTA DESPLEGABLE: Checkboxes y selección */
-.ts-dropdown .active {
-    background-color: #22226B !important; /* Azul corporativo en la lista */
+/* 7. BOTÓN ELIMINAR - Integrado perfecto */
+#badgesSelect + .ts-wrapper .ts-control .item .remove {
     color: white !important;
+    border-left: 1px solid rgba(255,255,255,0.2) !important;
+    margin-left: 4px !important;
+    padding-left: 4px !important;
+    font-size: 10px !important;
 }
 
-.ts-dropdown .option:hover {
-    background-color: #f1f5f9 !important;
+/* 8. DROPDOWN - Clon de .ui-menu */
+#badgesSelect + .ts-wrapper .ts-dropdown {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    width: 100% !important;
+    background: white !important;
+    border: 1px solid #e2e8f0 !important; /* Borde IGUAL */
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+    z-index: 1000 !important;
+    margin-top: 4px !important;
+}
+
+/* 9. OPCIONES - Clon exacto de .ui-option */
+#badgesSelect + .ts-wrapper .ts-option {
+    padding: 10px 16px !important; /* Padding IGUAL */
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important; /* Gap IGUAL */
+    font-size: 14px !important; /* Tamaño IGUAL */
+    color: var(--text-main) !important; /* Color variable IGUAL */
+    transition: background 0.1s !important; /* Transición IGUAL */
+    border-left: 3px solid transparent !important; /* Borde izquierdo IGUAL */
+}
+
+/* 10. ESTADO HOVER DE OPCIONES - Clon exacto */
+#badgesSelect + .ts-wrapper .ts-option:hover {
+    background: #f8fafc !important; /* Color IGUAL */
+    border-left-color: #cbd5e1 !important; /* Borde IGUAL */
+    color: var(--text-main) !important;
+}
+
+/* 11. ESTADO SELECTED - Clon exacto */
+#badgesSelect + .ts-wrapper .ts-option.selected {
+    background: #eef2ff !important; /* Azul muy suave IGUAL */
+    color: #22226B !important; /* Azul corporativo IGUAL */
+    border-left-color: #22226B !important; /* Borde azul IGUAL */
+    font-weight: 600 !important; /* Negrita IGUAL */
+}
+
+/* 12. ESTADO SELECTED + HOVER - Clon exacto */
+#badgesSelect + .ts-wrapper .ts-option.selected:hover {
+    background: #e0e7ff !important; /* Un poco más oscuro IGUAL */
+    border-left-color: #22226B !important; /* Mantener borde azul IGUAL */
+    color: #22226B !important;
+}
+
+/* 13. INPUT OCULTO - No interfiere */
+#badgesSelect + .ts-wrapper .ts-control input {
+    display: none !important;
+}
+
+/* 14. ALTURA DINÁMICA PARA CHIPS MÚLTIPLES */
+#badgesSelect + .ts-wrapper .ts-control {
+    height: auto !important; /* Permitir crecimiento */
+    min-height: 46px !important; /* Altura mínima IGUAL */
+    padding: 8px 40px 8px 16px !important; /* Ajustar para chips */
+}
+
+/* 15. PLACEHOLDER - Integrado perfecto */
+#badgesSelect + .ts-wrapper .ts-control .ts-placeholder {
+    color: var(--text-muted) !important;
+    font-style: italic !important;
+    flex: 1 !important;
 }
