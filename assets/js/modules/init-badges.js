@@ -55,6 +55,12 @@ class BadgesModule {
       return;
     }
 
+    // Destruir instancia previa si existe
+    if (this.badgesMultiSelect && typeof this.badgesMultiSelect.destroy === 'function') {
+      this.badgesMultiSelect.destroy();
+      this.badgesMultiSelect = null;
+    }
+
     // Transformar badges al formato que requiere Tom Select
     const options = this.availableBadges.map(badge => ({
       value: String(badge.id),
@@ -63,7 +69,7 @@ class BadgesModule {
     }));
 
     // Inicializar Tom Select
-    this.badgesMultiSelect = new tom('#badgesMultiSelect input', {
+    this.badgesMultiSelect = new tom('#badgesSelect', {
       options: options,
       items: [],
       plugins: ['checkbox_options', 'remove_button'],
@@ -160,4 +166,24 @@ document.addEventListener('DOMContentLoaded', () => {
 // Exponer para inicialización manual
 window.initBadgesModule = () => {
   window.badgesModule.init();
+};
+
+// Función específica para inicializar en el editor
+window.initBadgesEditor = () => {
+  console.log('Forzando inicialización de Badges Editor...');
+
+  // Esperar a que los datos estén disponibles
+  if (!window.availableBadges || window.availableBadges.length === 0) {
+    console.warn('Badges no disponibles aún, esperando...');
+    setTimeout(() => window.initBadgesEditor(), 100);
+    return;
+  }
+
+  // Forzar inicialización
+  if (window.badgesModule) {
+    window.badgesModule.initializeBadgesMultiSelect();
+    console.log('Badges Editor inicializado correctamente');
+  } else {
+    console.error('Badges Module no encontrado');
+  }
 };

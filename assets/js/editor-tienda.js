@@ -883,6 +883,13 @@ window.openProductDrawer = async function(id = null) {
   const drawer = $('#productDrawer');
   if (drawer) {
     drawer.classList.add('show');
+
+    // Forzar inicialización de badges después de abrir el drawer
+    setTimeout(() => {
+      if (typeof window.initBadgesEditor === 'function') {
+        window.initBadgesEditor();
+      }
+    }, 100);
   } else {
     console.error('PANEL LATERAL NO ENCONTRADO: No se pudo encontrar el elemento con ID #productDrawer');
     return; // Detener ejecución si el panel no existe
