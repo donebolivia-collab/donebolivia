@@ -1,6 +1,6 @@
-/* 1. CONTENEDOR: Clon de tus inputs (--border-color: #e2e8f0) */
+/* 1. CONTENEDOR: Recuperamos el look limpio y profesional */
 #badgesSelect + .ts-wrapper .ts-control {
-    border: 1px solid #cbd5e1 !important; 
+    border: 1px solid #cbd5e1 !important; /* Gris suave de tu patrón */
     border-radius: 8px !important;
     background-color: white !important;
     box-shadow: none !important;
@@ -11,59 +11,51 @@
     flex-wrap: wrap !important;
     gap: 6px !important;
     align-items: center !important;
-    transition: all 0.2s ease !important;
+    transition: border-color 0.2s, box-shadow 0.2s !important;
     cursor: pointer !important;
     position: relative !important;
 }
 
-/* 2. LA FLECHA: Tamaño 1.25rem y grosor stroke-width 2 (Igual a tu patrón) */
+/* 2. LA FLECHA: Tamaño proporcional 16px (No gigante) */
 #badgesSelect + .ts-wrapper .ts-control::after {
     content: "" !important;
-    display: block !important;
     position: absolute !important;
-    right: 0.75rem !important;
+    right: 12px !important;
     top: 50% !important;
-    width: 1.25rem !important; /* 20px reales */
-    height: 1.25rem !important;
-    margin-top: -0.625rem !important;
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2364748b' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 8l5 5 5-5'/%3e%3c/svg%3e") !important;
+    width: 16px !important; /* Tamaño exacto de tus otros dropdowns */
+    height: 16px !important;
+    margin-top: -8px !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2364748b' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e") !important;
     background-size: contain !important;
     background-repeat: no-repeat !important;
-    transition: transform 0.2s ease !important;
+    transition: transform 0.3s ease !important; /* EFECTO DE ROTACIÓN */
     border: none !important;
 }
 
-/* 3. EFECTO AL ABRIR: Rotación y cambio a azul corporativo (#22226B) */
+/* 3. EFECTO AL ABRIR: La flecha gira y cambia a azul corporativo */
 #badgesSelect + .ts-wrapper.dropdown-opened .ts-control::after {
     transform: rotate(180deg) !important;
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2322226B' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 8l5 5 5-5'/%3e%3c/svg%3e") !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2322226B' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e") !important;
 }
 
-/* 4. ESTADO FOCUS/HOVER */
-#badgesSelect + .ts-wrapper.focus .ts-control,
-#badgesSelect + .ts-wrapper .ts-control:hover {
-    border-color: #22226B !important;
-    box-shadow: 0 0 0 1px #22226B !important;
-}
-
-/* 5. CHIPS: Azul corporativo sin bordes celestes */
+/* 4. CHIPS: Azul corporativo #22226B (Sin celestes) */
 #badgesSelect + .ts-wrapper .ts-control .item {
     background: #22226B !important; 
     color: white !important;
     border-radius: 6px !important;
     padding: 2px 10px !important;
-    font-weight: 500 !important;
     font-size: 13px !important;
+    font-weight: 500 !important;
     border: none !important;
     margin: 2px 0 !important;
-    display: inline-flex !important;
-    align-items: center !important;
 }
 
-/* 6. BOTÓN ELIMINAR (X) */
-#badgesSelect + .ts-wrapper .ts-control .item .remove {
-    border-left: 1px solid rgba(255,255,255,0.3) !important;
-    margin-left: 8px !important;
-    padding-left: 4px !important;
+/* 5. LISTA DESPLEGABLE: Checkboxes y selección */
+.ts-dropdown .active {
+    background-color: #22226B !important; /* Azul corporativo en la lista */
     color: white !important;
+}
+
+.ts-dropdown .option:hover {
+    background-color: #f1f5f9 !important;
 }
