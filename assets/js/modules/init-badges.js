@@ -82,8 +82,9 @@ class BadgesModule {
       render: {
         option: (data, escape) => {
           // Versión limpia solo con texto y color de marca
+          const capitalizedText = data.text.charAt(0).toUpperCase() + data.text.slice(1).toLowerCase();
           return `<div class="badge-option">
-                    <span class="badge-option-text">${escape(data.text)}</span>
+                    <span class="badge-option-text">${escape(capitalizedText)}</span>
                   </div>`;
 
           /* Versión con imágenes (comentada si no se ve limpio)

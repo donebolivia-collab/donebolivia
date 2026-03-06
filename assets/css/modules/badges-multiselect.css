@@ -108,7 +108,11 @@
     align-items: center !important;
     gap: 10px !important;
     font-size: 14px !important;
-    text-transform: capitalize !important; /* "Delivery", "Garantía" - Enterprise */
+    text-transform: lowercase !important; /* Primero forzar minúsculas */
+}
+
+#badgesSelect + .ts-wrapper .ts-option:first-letter {
+    text-transform: capitalize !important; /* Luego primera mayúscula */
 }
 
 #badgesSelect + .ts-wrapper .ts-option.selected {
