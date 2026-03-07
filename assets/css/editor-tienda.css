@@ -691,6 +691,11 @@ textarea.sidebar-input { resize: vertical; min-height: 80px; }
     .sidebar-header .btn-eye-link {
         margin-left: auto; /* Mover el ojo a la derecha */
     }
+
+    /* Ocultar los botones de toggle de dispositivo en móvil, ya no son necesarios */
+    .sidebar-header .device-toggles {
+        display: none;
+    }
 }
 
 /* ESTILOS DEL FOOTER DEL SIDEBAR */
