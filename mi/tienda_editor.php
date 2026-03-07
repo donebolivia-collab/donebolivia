@@ -646,8 +646,10 @@ $titulo = "Editor: " . $tienda['nombre'];
 
         <!-- FOOTER -->
         <div class="sidebar-footer">
-            <span class="powered-by-text">Powered by</span>
-            <img src="/assets/img/done.png" alt="Done! Bolivia" class="powered-by-logo">
+            <a href="https://www.donebolivia.com" target="_blank" rel="noopener noreferrer" class="footer-link">
+                <span class="powered-by-text">Powered by</span>
+                <img src="/assets/img/done.png" alt="Done! Bolivia" class="powered-by-logo">
+            </a>
         </div>
         
         <!-- DRAWER INICIO (CORREGIDO) -->

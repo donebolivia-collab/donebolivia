@@ -695,21 +695,31 @@ textarea.sidebar-input { resize: vertical; min-height: 80px; }
     background: #f8fafc;
     margin-top: auto; /* Empuja el footer hacia abajo */
     flex-shrink: 0;
-    display: flex;
+    text-align: center;
+}
+
+.footer-link {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.footer-link:hover {
+    opacity: 0.7;
 }
 
 .powered-by-text {
     font-size: 12px;
-    font-weight: 500;
-    color: #94a3b8; /* Un gris sutil y profesional */
+    font-weight: 600;
+    color: #000000; /* Negro, como se solicitó */
 }
 
 .powered-by-logo {
-    height: 18px; /* Un tamaño discreto y elegante */
-    opacity: 0.7;
+    height: 18px;
+    opacity: 1; /* Sin opacidad para que se vea nítido */
 }
 
 
