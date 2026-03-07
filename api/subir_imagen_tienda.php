@@ -42,6 +42,7 @@ $column_map = [
     'banner_2' => 'banner_imagen_2',
     'banner_3' => 'banner_imagen_3',
     'banner_4' => 'banner_imagen_4',
+    'logo' => 'logo',
     'logo_principal' => 'logo_principal'
 ];
 $columna_bd = $column_map[$tipo];
