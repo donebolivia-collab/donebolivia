@@ -1012,15 +1012,11 @@ $titulo = "Editor: " . $tienda['nombre'];
                         <span style="display:flex; align-items:center;"><span style="width:8px; height:8px; background:#e2e8f0; border:1px dashed #cbd5e1; border-radius:2px; margin-right:4px;"></span> Libre</span>
                         <span style="display:flex; align-items:center;"><span style="width:8px; height:8px; background:#cbd5e1; border-radius:2px; margin-right:4px;"></span> Ocupado</span>
                     </div>
-                </div>
 
                 <div id="feriaStatus" style="font-size:11px; margin-top:10px; text-align:center; min-height:15px;"></div>
             </div>
             
             <div class="drawer-footer" style="justify-content: flex-end;">
-                 <span style="font-size: 11px; color: #10b981; font-weight: 600; display:flex; align-items:center; gap:5px;">
-                    <i class="fas fa-check"></i> Guardado automático
-                 </span>
             </div>
         </div>
 
