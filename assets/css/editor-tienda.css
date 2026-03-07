@@ -687,19 +687,9 @@ textarea.sidebar-input { resize: vertical; min-height: 80px; }
         display: none; /* Ocultar completamente el visor en móvil */
     }
 
-    /* Ocultar los botones de cambio de dispositivo (desktop/mobile) que ya no son necesarios */
-    .sidebar-header .device-btn {
-        display: none;
-    }
-
     /* Ajustar el botón del ojo para que quede bien */
     .sidebar-header .btn-eye-link {
         margin-left: auto; /* Mover el ojo a la derecha */
-    }
-
-    /* Quitar el botón de expandir/colapsar que no aplica en móvil */
-    #expandBtn {
-        display: none !important;
     }
 }
 

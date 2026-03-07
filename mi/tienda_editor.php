@@ -161,9 +161,6 @@ $titulo = "Editor: " . $tienda['nombre'];
     <aside class="editor-sidebar" id="editorSidebar">
         
         <div class="sidebar-header" style="position:relative; z-index:50;">
-            <button class="btn-icon-mini" onclick="toggleSidebar()" title="Ocultar Panel" style="background:transparent; border:none; font-size:16px;">
-                <i class="fas fa-bars"></i>
-            </button>
             <h2 style="margin-left:10px;">Editor</h2>
             
             <div class="device-toggles-mini" style="margin-left: auto; display:flex; gap:5px;">
@@ -1158,9 +1155,6 @@ $titulo = "Editor: " . $tienda['nombre'];
 
     <!-- LIVE CANVAS -->
     <main class="editor-canvas-container">
-        <button id="expandBtn" onclick="toggleSidebar()" style="position:absolute; top:20px; left:20px; z-index:100; background:white; border:1px solid #ccc; padding:10px; border-radius:50%; box-shadow:0 4px 12px rgba(0,0,0,0.1); cursor:pointer; display:none;">
-            <i class="fas fa-pen"></i>
-        </button>
         <div class="canvas-wrapper">
             <iframe id="storeFrame" src="/tienda/<?php echo htmlspecialchars($tienda['slug']); ?>?editor_mode=1" class="store-iframe desktop"></iframe>
         </div>
