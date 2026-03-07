@@ -827,6 +827,13 @@ $titulo = "Editor: " . $tienda['nombre'];
                     </div>
                 </div>
             </div>
+            
+            <div class="drawer-footer" style="justify-content: space-between; align-items: center; padding: 0 20px;">
+                <span style="font-size: 10px; color: #94a3b8; font-weight: 500;">
+                    Powered by
+                </span>
+                <img src="/assets/img/done.png" alt="Done! Bolivia" style="height: 20px; opacity: 0.6;">
+            </div>
         </div>
 
         <!-- DRAWER INVENTARIO (NUEVO) -->
