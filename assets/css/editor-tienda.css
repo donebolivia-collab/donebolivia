@@ -693,7 +693,7 @@ textarea.sidebar-input { resize: vertical; min-height: 80px; }
     }
 
     /* Ocultar los botones de toggle de dispositivo en móvil, ya no son necesarios */
-    .sidebar-header .device-toggles {
+    .sidebar-header .device-toggles-mini {
         display: none;
     }
 }
