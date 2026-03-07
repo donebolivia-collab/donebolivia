@@ -643,6 +643,12 @@ $titulo = "Editor: " . $tienda['nombre'];
             </div>
 
         </div>
+
+        <!-- FOOTER -->
+        <div class="sidebar-footer">
+            <span class="powered-by-text">Powered by</span>
+            <img src="/assets/img/done.png" alt="Done! Bolivia" class="powered-by-logo">
+        </div>
         
         <!-- DRAWER INICIO (CORREGIDO) -->
         <div id="homeDrawer" class="product-drawer">
@@ -1024,11 +1030,7 @@ $titulo = "Editor: " . $tienda['nombre'];
                 <div id="feriaStatus" style="font-size:11px; margin-top:10px; text-align:center; min-height:15px;"></div>
             </div>
             
-            <div class="drawer-footer" style="justify-content: space-between; align-items: center; padding: 0 20px;">
-                <span style="font-size: 10px; color: #94a3b8; font-weight: 500;">
-                    Powered by
-                </span>
-            </div>
+
         </div>
 
         <!-- PRODUCT DRAWER (MOVIDO DENTRO DE SIDEBAR) -->

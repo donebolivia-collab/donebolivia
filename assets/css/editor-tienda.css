@@ -693,6 +693,31 @@ textarea.sidebar-input { resize: vertical; min-height: 80px; }
     }
 }
 
+/* ESTILOS DEL FOOTER DEL SIDEBAR */
+.sidebar-footer {
+    padding: 16px 20px;
+    border-top: 1px solid var(--border-color);
+    background: #f8fafc;
+    margin-top: auto; /* Empuja el footer hacia abajo */
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.powered-by-text {
+    font-size: 12px;
+    font-weight: 500;
+    color: #94a3b8; /* Un gris sutil y profesional */
+}
+
+.powered-by-logo {
+    height: 18px; /* Un tamaño discreto y elegante */
+    opacity: 0.7;
+}
+
+
 /* MODAL OVERRIDES */
 .modal-content { border-radius: 12px; border: none; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); }
 .modern-input-group { margin-bottom: 16px; }
