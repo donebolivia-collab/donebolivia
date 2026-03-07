@@ -667,34 +667,24 @@ textarea.sidebar-input { resize: vertical; min-height: 80px; }
 
 @media (max-width: 768px) {
     body {
-        overflow: hidden; /* Prevenir el scroll del body, el sidebar lo manejará */
+        overflow: hidden;
     }
-
     .editor-split-container {
-        display: block; /* Cambiar a block para que el sidebar sea el único elemento principal */
+        display: block;
     }
-
     .editor-sidebar {
         width: 100%;
         height: 100%;
         border-right: none;
-        position: relative; /* Asegurarse que esté en el flujo normal del documento */
-        transform: none; /* Anular cualquier transformación de colapso */
-        z-index: 100; /* Ponerlo por encima de todo */
+        position: relative;
+        transform: none;
+        z-index: 100;
     }
-
     .editor-canvas-container {
-        display: none; /* Ocultar completamente el visor en móvil */
+        display: none;
     }
-
-    /* Ajustar el botón del ojo para que quede bien */
-    .sidebar-header .btn-eye-link {
-        margin-left: auto; /* Mover el ojo a la derecha */
-    }
-
-    /* Ocultar los botones de toggle de dispositivo en móvil, ya no son necesarios */
-    .sidebar-header .device-toggles-mini {
-        display: none !important;
+    .sidebar-header .device-toggles-mini .device-btn {
+        display: none;
     }
 }
 
