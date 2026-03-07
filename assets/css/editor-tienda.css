@@ -666,10 +666,41 @@ textarea.sidebar-input { resize: vertical; min-height: 80px; }
 }
 
 @media (max-width: 768px) {
-    .editor-split-container { flex-direction: column; height: auto; }
-    .editor-sidebar { width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border-color); }
-    .canvas-wrapper { padding: 20px; height: 500px; }
-    body { overflow: auto; }
+    body {
+        overflow: hidden; /* Prevenir el scroll del body, el sidebar lo manejará */
+    }
+
+    .editor-split-container {
+        display: block; /* Cambiar a block para que el sidebar sea el único elemento principal */
+    }
+
+    .editor-sidebar {
+        width: 100%;
+        height: 100%;
+        border-right: none;
+        position: relative; /* Asegurarse que esté en el flujo normal del documento */
+        transform: none; /* Anular cualquier transformación de colapso */
+        z-index: 100; /* Ponerlo por encima de todo */
+    }
+
+    .editor-canvas-container {
+        display: none; /* Ocultar completamente el visor en móvil */
+    }
+
+    /* Ocultar los botones de cambio de dispositivo (desktop/mobile) que ya no son necesarios */
+    .sidebar-header .device-btn {
+        display: none;
+    }
+
+    /* Ajustar el botón del ojo para que quede bien */
+    .sidebar-header .btn-eye-link {
+        margin-left: auto; /* Mover el ojo a la derecha */
+    }
+
+    /* Quitar el botón de expandir/colapsar que no aplica en móvil */
+    #expandBtn {
+        display: none !important;
+    }
 }
 
 /* MODAL OVERRIDES */
