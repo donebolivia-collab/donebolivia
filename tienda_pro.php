@@ -649,7 +649,24 @@ if (!empty($tienda['menu_items'])) {
 </head>
 <body class="<?php echo $tamano_texto !== 'normal' ? 'size-'.htmlspecialchars($tamano_texto) : ''; ?>">
 
-    <nav class="store-navbar">
+    <?php
+    // Determinar la clase de la barra de navegación en el servidor para evitar FOUC
+    $navbar_class = 'store-navbar';
+    $navbar_style = $tienda['navbar_style'] ?? 'blanco';
+    if ($navbar_style === 'marca') {
+        $navbar_class .= ' navbar-marca';
+
+        // Determinar el color del texto basado en el contraste del color de la marca
+        $hex_color = str_replace('#', '', $tienda['color_primario']);
+        $r = hexdec(substr($hex_color, 0, 2));
+        $g = hexdec(substr($hex_color, 2, 2));
+        $b = hexdec(substr($hex_color, 4, 2));
+        $yiq = (($r * 299) + ($g * 587) + ($b * 114)) / 1000;
+        $text_color_class = ($yiq >= 128) ? 'navbar-text-dark' : 'navbar-text-light';
+        $navbar_class .= ' ' . $text_color_class;
+    }
+    ?>
+    <nav class="<?php echo $navbar_class; ?>">
         <div class="navbar-container">
             <a href="/tienda/<?php echo htmlspecialchars($slug); ?>" class="store-header">
                 <div id="principalLogoContainer" class="logo-container-principal <?php if (empty($tienda['mostrar_logo'])) echo 'hidden-by-logic'; ?>">
@@ -1202,26 +1219,20 @@ if (!empty($tienda['menu_items'])) {
     <!-- <script src="/assets/bundle.min.js?v=<?php echo time(); ?>" defer></script> -->
 
     <script>
-        // --- LÓGICA DE NAVBAR STYLE (PÚBLICA Y EDITOR) ---
+        // La lógica de la barra de navegación ahora se maneja 100% en el servidor (PHP) para prevenir FOUC.
+        // El siguiente código se mantiene por si el modo editor necesita forzar una actualización visual sin recargar la página.
         function applyNavbarStyle(style) {
             const navbar = document.querySelector('.store-navbar');
             if (!navbar) return;
 
-            // Limpiar clases previas
-            navbar.classList.remove('navbar-marca', 'navbar-text-light', 'navbar-text-dark');
+            // Limpiar clases previas y aplicar la nueva
+            navbar.className = 'store-navbar'; // Resetea a la clase base
 
             if (style === 'marca') {
                 navbar.classList.add('navbar-marca');
-                
-                // Decidir color de texto basado en contraste
                 const bgColor = getComputedStyle(document.documentElement).getPropertyValue('--color-widget');
                 const textColor = getContrastYIQ(bgColor);
-                
-                if (textColor === 'white') {
-                    navbar.classList.add('navbar-text-light');
-                } else {
-                    navbar.classList.add('navbar-text-dark');
-                }
+                navbar.classList.add(textColor === 'white' ? 'navbar-text-light' : 'navbar-text-dark');
             }
         }
 
@@ -1234,11 +1245,7 @@ if (!empty($tienda['menu_items'])) {
             return (yiq >= 128) ? 'black' : 'white';
         }
 
-        // Aplicar estilo inicial al cargar la página (para todos los visitantes)
-        document.addEventListener('DOMContentLoaded', () => {
-            const initialNavbarStyle = <?php echo json_encode($tienda['navbar_style'] ?? 'blanco'); ?>;
-            applyNavbarStyle(initialNavbarStyle);
-        });
+        // El bloque 'DOMContentLoaded' que aplicaba el estilo inicial ha sido eliminado.
     </script>
 
     <?php if (isset($_GET['editor_mode'])): ?>
