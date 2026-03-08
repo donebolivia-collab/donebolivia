@@ -357,6 +357,28 @@ $titulo = "Editor: " . $tienda['nombre'];
                 </div>
             </div>
 
+            <!-- SECCIONES -->
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span><i class="fas fa-th-large"></i> Secciones</span>
+                    <i class="fas fa-chevron-down arrow"></i>
+                </div>
+                <div class="accordion-body">
+                    <!-- Preferencias -->
+                    <label class="preferencias-title">Preferencias</label>
+                    <div class="panel-toggles-row" style="display: flex; gap: 10px; margin-bottom: 20px;">
+                        <!-- 1. Inicio -->
+                        <button class="btn-panel-toggle" onclick="openHomeDrawer()" title="Inicio">
+                            <i class="fas fa-home"></i>
+                        </button>
+                        <!-- 2. Secciones -->
+                        <button class="btn-panel-toggle" onclick="openSectionsDrawer()" title="Secciones">
+                            <i class="fas fa-cog"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
             <!-- PERSONALIZACIÓN -->
             <div class="accordion-item">
                 <div class="accordion-header" onclick="toggleAccordion(this)">
@@ -567,28 +589,6 @@ $titulo = "Editor: " . $tienda['nombre'];
                         </div>
                     </div>
                     
-                </div>
-            </div>
-
-            <!-- SECCIONES -->
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <span><i class="fas fa-th-large"></i> Secciones</span>
-                    <i class="fas fa-chevron-down arrow"></i>
-                </div>
-                <div class="accordion-body">
-                    <!-- Preferencias -->
-                    <label class="preferencias-title">Preferencias</label>
-                    <div class="panel-toggles-row" style="display: flex; gap: 10px; margin-bottom: 20px;">
-                        <!-- 1. Inicio -->
-                        <button class="btn-panel-toggle" onclick="openHomeDrawer()" title="Inicio">
-                            <i class="fas fa-home"></i>
-                        </button>
-                        <!-- 2. Secciones -->
-                        <button class="btn-panel-toggle" onclick="openSectionsDrawer()" title="Secciones">
-                            <i class="fas fa-cog"></i>
-                        </button>
-                    </div>
                 </div>
             </div>
 
