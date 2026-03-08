@@ -783,9 +783,8 @@ $titulo = "Editor: " . $tienda['nombre'];
                             <span class="slider round"></span>
                         </label>
                     </div>
-                    <div class="control-group-content" id="featuredSectionsContent" style="padding-top: 15px; <?php echo (empty($tienda['secciones_destacadas_activo']) || $tienda['secciones_destacadas_activo'] == 0) ? 'display:none;' : '' ?>">
+                    <div class="control-group-content" id="featuredSectionsContent" style="padding-top: 15px;">
                         <div class="control-group" style="margin-top:0;">
-                            <div style="font-size:11px; color:#64748b; margin-bottom:10px;">Todas las secciones son visibles. Elige el estilo de visualización para tus clientes.</div>
                             <div class="ui-dropdown" id="featuredStyleDropdown">
                                 <div class="ui-trigger" onclick="toggleUI('featuredStyleDropdown')">
                                     <span class="trigger-label" id="featuredStyleLabel">
