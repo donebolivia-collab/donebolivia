@@ -30,30 +30,38 @@ document.addEventListener('DOMContentLoaded', () => {
 // --- NUEVO: FUNCIÓN CENTRAL DE RECARGA DEL PREVISUALIZADOR ---
 function reloadPreviewFrame() {
   const storeFrame = safeGetById('storeFrame');
-  const loader = document.getElementById('previewLoader'); // Asumimos que existe un div con este id
+  const loader = document.getElementById('previewLoader'); 
 
   if (!storeFrame) return;
 
-  console.log('Reloading preview frame...');
+  console.log('Reloading preview frame with cache-busting...');
 
-  // Mostrar indicador de carga
+  // The loader is now shown by saveChanges(), but we ensure it's visible here too.
   if (loader) {
     loader.style.display = 'flex';
   }
 
-  // Quitar listener para evitar leaks si se recarga múltiples veces
+  // The 'load' event will hide the loader.
   const onFrameLoad = () => {
     if (loader) {
       loader.style.display = 'none';
     }
     storeFrame.removeEventListener('load', onFrameLoad);
-    console.log('Preview frame reloaded.');
+    console.log('Preview frame reloaded successfully.');
   };
 
   storeFrame.addEventListener('load', onFrameLoad);
 
-  // Recargar el iframe
-  storeFrame.src = storeFrame.src;
+  // Add a cache-busting parameter to the URL to force a full reload.
+  try {
+    const currentSrc = storeFrame.src;
+    const newSrc = new URL(currentSrc, window.location.origin);
+    newSrc.searchParams.set('v', Date.now());
+    storeFrame.src = newSrc.toString();
+  } catch (e) {
+    console.error("Failed to create URL for reloading, falling back to simple reload.", e);
+    storeFrame.src = storeFrame.src; // Fallback
+  }
 }
 
 // --- MANEJADOR DE EVENTOS DELEGADO ---
@@ -169,23 +177,16 @@ window.toggleAccordion = function(header) {
 let saveTimeout;
 let hasUnsavedChanges = false;
 
+let isSaving = false; // Flag to prevent concurrent saves
+
 function markUnsaved() {
-  hasUnsavedChanges = true;
-  const indicator = safeGetById('autoSaveStatus');
-  const bar = safeGetById('statusBar');
-
-  if (indicator) {
-    indicator.innerHTML = '<i class="fas fa-sync fa-spin"></i> Guardando...';
-    indicator.classList.add('visible');
+  // Instead of waiting, we call save immediately.
+  // The isSaving flag prevents multiple calls if the user clicks very quickly.
+  if (isSaving) {
+    console.log("Save already in progress. Skipping.");
+    return;
   }
-
-  if (bar) {
-    bar.style.backgroundColor = '#ff9800';
-    bar.style.color = '#ffffff';
-  }
-
-  clearTimeout(saveTimeout);
-  saveTimeout = setTimeout(saveChanges, 1500);
+  saveChanges();
 }
 
 function updateSaveIndicator(saved) {
@@ -193,22 +194,35 @@ function updateSaveIndicator(saved) {
   const bar = safeGetById('statusBar');
   if (!indicator) return;
 
+  // We only use the status bar for errors now. Success is handled by the loader.
   if (saved) {
-    indicator.innerHTML = '<i class="fas fa-check"></i> Guardado';
-    indicator.style.color = '#ffffff';
+    // The successful "Guardado" is no longer displayed in the bar.
+    // The disappearance of the loader is the confirmation.
     if (bar) {
-      bar.style.backgroundColor = '#00a650';
+      bar.style.backgroundColor = '#00a650'; // Momentary green if desired
+    }
+    // Quickly hide any previous state
+    setTimeout(() => {
+        indicator.classList.remove('visible');
+    }, 500);
+  } else {
+    indicator.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error al guardar';
+    if (bar) {
+      bar.style.backgroundColor = '#d9534f'; // Red
       bar.style.color = '#ffffff';
     }
     indicator.classList.add('visible');
-    setTimeout(() => indicator.classList.remove('visible'), 2000);
-  } else {
-    indicator.classList.remove('visible');
   }
 }
 
 async function saveChanges() {
-  if (!hasUnsavedChanges) return;
+  isSaving = true;
+  hasUnsavedChanges = true; // Mark as having changes to save
+
+  const loader = document.getElementById('previewLoader');
+  if (loader) {
+    loader.style.display = 'flex'; // 1. Show loader IMMEDIATELY
+  }
 
   const data = {
     nombre: safeGetById('storeName')?.value || '',
@@ -251,17 +265,27 @@ async function saveChanges() {
     });
     const resData = await res.json();
     if (resData.success) {
+      console.log('Save successful, reloading preview.');
       hasUnsavedChanges = false;
-      updateSaveIndicator(true);
-      reloadPreviewFrame(); // <-- ¡AQUÍ ESTÁ LA MAGIA! Recargamos el preview al guardar.
+      // updateSaveIndicator(true); // No longer needed, loader is the feedback
+      reloadPreviewFrame(); // 2. If save is successful, reload the frame.
+                             // The iframe's 'load' event will hide the loader.
     } else {
       console.error('Save failed', resData);
       updateSaveIndicator(false);
+      if (loader) {
+        loader.style.display = 'none'; // Hide loader on failure
+      }
       showNotif('Error al guardar', 'error');
     }
   } catch (e) {
     console.error('Save error', e);
     updateSaveIndicator(false);
+    if (loader) {
+        loader.style.display = 'none'; // Hide loader on failure
+    }
+  } finally {
+    isSaving = false; // Allow the next save
   }
 }
 
