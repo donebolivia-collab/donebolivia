@@ -518,7 +518,6 @@ window.toggleFeaturedSections = function(isActive) {
   const content = safeGetById('featuredSectionsContent');
   if (!content) return;
   window.tiendaState.seccionesDestacadas.activo = isActive ? 1 : 0;
-  content.style.display = isActive ? 'block' : 'none';
   markUnsaved();
 };
 
