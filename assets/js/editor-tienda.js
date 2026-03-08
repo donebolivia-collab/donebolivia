@@ -585,9 +585,9 @@ async function populateDrawerForEdit(p) {
   const catLabel = $('#prodCatIdLabel');
 
   if (catSelect) {
-    catSelect.value = p.categori-id;
+    catSelect.value = p.categoria_id;
     let catName = 'Categoría';
-    const menuOption = $(`#prodCatIdDropdown .ui-option[onclick*="'${p.categori-id}'"]`);
+    const menuOption = $(`#prodCatIdDropdown .ui-option[onclick*="'${p.categoria_id}'"]`);
     if (menuOption) {
       catName = menuOption.innerText.trim();
     }
@@ -597,7 +597,7 @@ async function populateDrawerForEdit(p) {
       catTrigger.onclick = null;
       catTrigger.style.pointerEvents = 'none';
     }
-    await cargarSubcategorias(p.categori-id, p.subcategori-id);
+    await cargarSubcategorias(p.categoria_id, p.subcategoria_id);
   }
 
   if (window.badgesModule && p.badges) {
@@ -787,7 +787,7 @@ window.cargarSubcategorias = async function(catId, selectedId = null) {
       if (subLabel) subLabel.innerText = 'Categoría inválida';
       return;
     }
-    const res = await fetch(`/api/subcategorias.php?categori-id=${cleanCatId}`);
+    const res = await fetch(`/api/subcategorias.php?categoria_id=${cleanCatId}`);
     const data = await res.json();
 
     if (!data.success) {
@@ -906,8 +906,8 @@ window.guardarProducto = async function() {
   }
   formData.append('badges', JSON.stringify(badges));
   formData.append('categoria_tienda', currentCategoryTienda);
-  formData.append('categori-id', document.getElementById('prodCategoriaId').value);
-  formData.append('subcategori-id', document.getElementById('prodSubcategoriaId').value);
+  formData.append('categoria_id', document.getElementById('prodCategoriaId').value);
+  formData.append('subcategoria_id', document.getElementById('prodSubcategoriaId').value);
   formData.append('departamento', window.tiendaState.deptCode || 'SCZ');
   formData.append('municipio', window.tiendaState.munCode || 'SCZ-001');
 
