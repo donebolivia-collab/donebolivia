@@ -994,7 +994,10 @@ if (!empty($tienda['menu_items'])) {
                 </div>
                 <?php endif; ?>
 
-                <!-- Card 4: Síguenos (siempre renderizado para permitir actualización en vivo) -->
+                <?php 
+                // Condición para mostrar la tarjeta de redes sociales solo si al menos una red está configurada
+                if (!empty($tienda['facebook_url']) || !empty($tienda['instagram_url']) || !empty($tienda['tiktok_url']) || !empty($tienda['telegram_user']) || !empty($tienda['youtube_url'])):
+                ?>
                 <div class="info-card" id="socialCard">
                     <div class="info-icon-wrapper">
                         <i class="fas fa-share-alt"></i>
@@ -1020,6 +1023,7 @@ if (!empty($tienda['menu_items'])) {
                         </a>
                     </div>
                 </div>
+                <?php endif; ?>
             </div>
 
             <!-- CTA Eliminado según solicitud (Captura 2) -->
