@@ -299,6 +299,64 @@ $titulo = "Editor: " . $tienda['nombre'];
                 </div>
             </div>
 
+            <!-- CONTACTO -->
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span><i class="fas fa-address-card"></i> Canales de Contacto</span>
+                    <i class="fas fa-chevron-down arrow"></i>
+                </div>
+                <div class="accordion-body">
+                    <div class="control-group">
+                        <label>WhatsApp</label>
+                        <input type="text" id="inputWhatsapp" class="sidebar-input" value="<?php echo htmlspecialchars($tienda['whatsapp'] ?? ''); ?>">
+                    </div>
+                    <div class="control-group">
+                        <label>Correo Electrónico</label>
+                        <input type="email" id="inputEmail" class="sidebar-input" value="<?php echo htmlspecialchars($tienda['email_contacto'] ?? ''); ?>">
+                    </div>
+                    <div class="control-group">
+                        <label>Dirección</label>
+                        <input type="text" id="inputDireccion" class="sidebar-input" value="<?php echo htmlspecialchars($tienda['direccion'] ?? ''); ?>">
+                    </div>
+                    <div class="control-group">
+                        <label>Ubicación y Redes Sociales</label>
+                        <input type="hidden" id="inputFacebook" value="<?php echo htmlspecialchars($tienda['facebook_url'] ?? ''); ?>">
+                        <input type="hidden" id="inputInstagram" value="<?php echo htmlspecialchars($tienda['instagram_url'] ?? ''); ?>">
+                        <input type="hidden" id="inputTiktok" value="<?php echo htmlspecialchars($tienda['tiktok_url'] ?? ''); ?>">
+                        <input type="hidden" id="inputTelegram" value="<?php echo htmlspecialchars($tienda['telegram_user'] ?? ''); ?>">
+                        <input type="hidden" id="inputYoutube" value="<?php echo htmlspecialchars($tienda['youtube_url'] ?? ''); ?>">
+                        <input type="hidden" id="inputMaps" value="<?php echo htmlspecialchars($tienda['google_maps_url'] ?? ''); ?>">
+                        <div class="social-icons-row">
+                            <button class="btn-social-icon maps <?php echo !empty($tienda['google_maps_url']) ? 'active' : ''; ?>" data-action="handle-location" title="Ubicación en Google Maps">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span class="check-badge"><i class="fas fa-check"></i></span>
+                            </button>
+                            <button class="btn-social-icon tiktok <?php echo !empty($tienda['tiktok_url']) ? 'active' : ''; ?>" data-action="edit-social" data-social="tiktok" title="TikTok">
+                                <i class="fab fa-tiktok"></i>
+                                <span class="check-badge"><i class="fas fa-check"></i></span>
+                            </button>
+                            <button class="btn-social-icon instagram <?php echo !empty($tienda['instagram_url']) ? 'active' : ''; ?>" data-action="edit-social" data-social="instagram" title="Instagram">
+                                <i class="fab fa-instagram"></i>
+                                <span class="check-badge"><i class="fas fa-check"></i></span>
+                            </button>
+                            <button class="btn-social-icon facebook <?php echo !empty($tienda['facebook_url']) ? 'active' : ''; ?>" data-action="edit-social" data-social="facebook" title="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                                <span class="check-badge"><i class="fas fa-check"></i></span>
+                            </button>
+                            <button class="btn-social-icon youtube <?php echo !empty($tienda['youtube_url']) ? 'active' : ''; ?>" data-action="edit-social" data-social="youtube" title="YouTube">
+                                <i class="fab fa-youtube"></i>
+                                <span class="check-badge"><i class="fas fa-check"></i></span>
+                            </button>
+                            <button class="btn-social-icon telegram <?php echo !empty($tienda['telegram_user']) ? 'active' : ''; ?>" data-action="edit-social" data-social="telegram" title="Telegram">
+                                <i class="fab fa-telegram-plane"></i>
+                                <span class="check-badge"><i class="fas fa-check"></i></span>
+                            </button>
+                        </div>
+                        <div id="locationStatus" style="font-size:11px; color:#64748b; margin-top:6px; display:none;"></div>
+                    </div>
+                </div>
+            </div>
+
             <!-- PERSONALIZACIÓN -->
             <div class="accordion-item">
                 <div class="accordion-header" onclick="toggleAccordion(this)">
@@ -509,64 +567,6 @@ $titulo = "Editor: " . $tienda['nombre'];
                         </div>
                     </div>
                     
-                </div>
-            </div>
-
-            <!-- CONTACTO -->
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <span><i class="fas fa-address-card"></i> Canales de Contacto</span>
-                    <i class="fas fa-chevron-down arrow"></i>
-                </div>
-                <div class="accordion-body">
-                    <div class="control-group">
-                        <label>WhatsApp</label>
-                        <input type="text" id="inputWhatsapp" class="sidebar-input" value="<?php echo htmlspecialchars($tienda['whatsapp'] ?? ''); ?>">
-                    </div>
-                    <div class="control-group">
-                        <label>Correo Electrónico</label>
-                        <input type="email" id="inputEmail" class="sidebar-input" value="<?php echo htmlspecialchars($tienda['email_contacto'] ?? ''); ?>">
-                    </div>
-                    <div class="control-group">
-                        <label>Dirección</label>
-                        <input type="text" id="inputDireccion" class="sidebar-input" value="<?php echo htmlspecialchars($tienda['direccion'] ?? ''); ?>">
-                    </div>
-                    <div class="control-group">
-                        <label>Ubicación y Redes Sociales</label>
-                        <input type="hidden" id="inputFacebook" value="<?php echo htmlspecialchars($tienda['facebook_url'] ?? ''); ?>">
-                        <input type="hidden" id="inputInstagram" value="<?php echo htmlspecialchars($tienda['instagram_url'] ?? ''); ?>">
-                        <input type="hidden" id="inputTiktok" value="<?php echo htmlspecialchars($tienda['tiktok_url'] ?? ''); ?>">
-                        <input type="hidden" id="inputTelegram" value="<?php echo htmlspecialchars($tienda['telegram_user'] ?? ''); ?>">
-                        <input type="hidden" id="inputYoutube" value="<?php echo htmlspecialchars($tienda['youtube_url'] ?? ''); ?>">
-                        <input type="hidden" id="inputMaps" value="<?php echo htmlspecialchars($tienda['google_maps_url'] ?? ''); ?>">
-                        <div class="social-icons-row">
-                            <button class="btn-social-icon maps <?php echo !empty($tienda['google_maps_url']) ? 'active' : ''; ?>" data-action="handle-location" title="Ubicación en Google Maps">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span class="check-badge"><i class="fas fa-check"></i></span>
-                            </button>
-                            <button class="btn-social-icon tiktok <?php echo !empty($tienda['tiktok_url']) ? 'active' : ''; ?>" data-action="edit-social" data-social="tiktok" title="TikTok">
-                                <i class="fab fa-tiktok"></i>
-                                <span class="check-badge"><i class="fas fa-check"></i></span>
-                            </button>
-                            <button class="btn-social-icon instagram <?php echo !empty($tienda['instagram_url']) ? 'active' : ''; ?>" data-action="edit-social" data-social="instagram" title="Instagram">
-                                <i class="fab fa-instagram"></i>
-                                <span class="check-badge"><i class="fas fa-check"></i></span>
-                            </button>
-                            <button class="btn-social-icon facebook <?php echo !empty($tienda['facebook_url']) ? 'active' : ''; ?>" data-action="edit-social" data-social="facebook" title="Facebook">
-                                <i class="fab fa-facebook-f"></i>
-                                <span class="check-badge"><i class="fas fa-check"></i></span>
-                            </button>
-                            <button class="btn-social-icon youtube <?php echo !empty($tienda['youtube_url']) ? 'active' : ''; ?>" data-action="edit-social" data-social="youtube" title="YouTube">
-                                <i class="fab fa-youtube"></i>
-                                <span class="check-badge"><i class="fas fa-check"></i></span>
-                            </button>
-                            <button class="btn-social-icon telegram <?php echo !empty($tienda['telegram_user']) ? 'active' : ''; ?>" data-action="edit-social" data-social="telegram" title="Telegram">
-                                <i class="fab fa-telegram-plane"></i>
-                                <span class="check-badge"><i class="fas fa-check"></i></span>
-                            </button>
-                        </div>
-                        <div id="locationStatus" style="font-size:11px; color:#64748b; margin-top:6px; display:none;"></div>
-                    </div>
                 </div>
             </div>
 
