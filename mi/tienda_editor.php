@@ -671,7 +671,7 @@ $titulo = "Editor: " . $tienda['nombre'];
                     <div class="control-group-header">
                         <label>Carrusel</label>
                         <label class="switch" title="Activar/Desactivar">
-                            <input type="checkbox" id="bannerActive" onchange="updateBannerState()" {{ (!empty($tienda['mostrar_banner']) && $tienda['mostrar_banner'] == 1) ? 'checked' : '' }}>
+                            <input type="checkbox" id="bannerActive" onchange="updateBannerState()" <?php echo (!empty($tienda['mostrar_banner']) && $tienda['mostrar_banner'] == 1) ? 'checked' : ''; ?>>
                             <span class="slider round"></span>
                         </label>
                     </div>
@@ -1212,7 +1212,7 @@ $titulo = "Editor: " . $tienda['nombre'];
             'estilo' => !empty($tienda['secciones_destacadas_estilo']) ? $tienda['secciones_destacadas_estilo'] : 'grid'
         ],
         'banner' => [
-            'activo' => !empty($tienda['mostrar_banner']),
+            'activo' => !empty($tienda['mostrar_banner']) && $tienda['mostrar_banner'] == 1,
             'imagenes' => [
                 !empty($tienda['banner_imagen']) ? '/uploads/'.$tienda['banner_imagen'].'?v='.time() : null,
                 !empty($tienda['banner_imagen_2']) ? '/uploads/'.$tienda['banner_imagen_2'].'?v='.time() : null,
