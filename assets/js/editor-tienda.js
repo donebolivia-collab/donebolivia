@@ -642,23 +642,7 @@ async function setupDrawerForNew(sectionContext = null) {
     }
   }
 
-  if (sectionContext) {
-    currentCategoryTienda = sectionContext;
-    const hiddenInput = $('#prodCategoriaTienda');
-    if (hiddenInput) hiddenInput.value = sectionContext;
-    const label = $('#prodCatTiendaLabel');
-    const item = window.menuItems.find(i => i.label === sectionContext);
-    if (label && item) {
-      label.innerText = toTitleCase(item.label);
-    }
-    const trigger = $('#prodCatTiendaDropdown .ui-trigger');
-    if (trigger) {
-      trigger.classList.add('disabled');
-      trigger.style.pointerEvents = 'none';
-      trigger.style.opacity = '0.7';
-      trigger.onclick = null;
-    }
-  }
+
 }
 
 let selectedProductImages = [];
@@ -690,7 +674,7 @@ window.openProductDrawer = async function(id = null) {
       closeProductDrawer();
     }
   } else {
-    await setupDrawerForNew(currentSectionFilter);
+    await setupDrawerForNew(null);
   }
 };
 

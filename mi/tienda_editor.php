@@ -601,26 +601,10 @@ $titulo = "Editor: " . $tienda['nombre'];
                 <div class="accordion-body">
 
                     <!-- ACCIÓN PRINCIPAL: AÑADIR A TIENDA -->
-                    <label style="display: block; font-size: 11px; font-weight: 700; color: #000000; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">AÑADIR PRODUCTO</label>
-                                        <p style="font-size: 12px; color: #000000; margin-top: 0; margin-bottom: 12px;">Elige la sección donde quieres añadir tu producto.</p>
                     <div class="products-action-row" style="display: flex; gap: 8px; align-items: center; margin-bottom: 24px;">
-                        <!-- Dropdown Filtro (Ocupa espacio restante) -->
-                        <div style="flex: 1;">
-                            <div class="ui-dropdown" id="sectionFilterDropdown">
-                                <input type="hidden" id="masterSectionFilter" onchange="applySectionFilter(this.value)">
-                                <div class="ui-trigger" onclick="toggleUI('sectionFilterDropdown')">
-                                    <span class="trigger-label" id="sectionFilterLabel">Inicio (Todos)</span>
-                                    <i class="fas fa-chevron-down chevron"></i>
-                                </div>
-                                <div class="ui-menu" id="sectionFilterMenu">
-                                    <!-- Opciones dinámicas -->
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Botón Añadir (+) -->
-                        <button id="btnNewProductContext" class="btn-add-square" onclick="openProductDrawer()" title="Nuevo Producto">
+                        <button id="btnNewProductContext" class="btn-modern primary" onclick="openProductDrawer()" title="Nuevo Producto" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;">
                             <i class="fas fa-plus"></i>
+                            Añadir Producto
                         </button>
                     </div>
 
