@@ -888,7 +888,7 @@ window.guardarProducto = async function() {
     badges.push(...badgesInput.value.split(',').filter(b => b.trim()));
   }
   formData.append('badges', JSON.stringify(badges));
-  formData.append('categoria_tienda', currentCategoryTienda);
+  formData.append('categoria_tienda', document.getElementById('prodCategoriaTienda').value);
   formData.append('categoria_id', document.getElementById('prodCategoriaId').value);
   formData.append('subcategoria_id', document.getElementById('prodSubcategoriaId').value);
   formData.append('departamento', window.tiendaState.deptCode || 'SCZ');
